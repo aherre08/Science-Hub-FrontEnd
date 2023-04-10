@@ -1,0 +1,29 @@
+.screen{
+    background: linear-gradient(0deg, rgba(34,195,77,1) 0%, rgba(0,0,0,1) 100%);
+    position:fixed;
+    top:0%;
+    bottom: 0%;
+    left:0%;
+    right:0%;
+}
+.card{
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 0;
+    border:3px black solid;
+    border-radius: 50px;
+    background-color: white;
+}
+h4{ 
+    position: relative;
+    height:20px;
+    text-align: center;
+    color:white;
+    margin-top: 5%;
+}
+hr{
+    width: 600px;
+}
