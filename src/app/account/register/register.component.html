@@ -12,7 +12,7 @@
           </div>
   
           <div *ngIf="mostrarFormularioCientifico" id="formulario-cientifico">
-            <form>
+            <form id="formularioCientifico">
               
               <div class="form-cientifico-field">
                 <label for="nombre">Nombre:</label>
@@ -31,9 +31,70 @@
                 <input type="text" id="especialidadCientifico" name="especialidad"><br>
               </div>
         
-              <input type="submit" id="registrarseCientifico" value="Registrarse">
+              <input type="submit" id="registrarseCientifico" value="Registrarse" (click)="enviarFormularioCientifico()">
               <a routerLink="../login" class="btn btn-link" id="cancelar">Cancelar</a>
             </form>
+          </div>
+
+          <div *ngIf="mostrarRadioButtonsOrganismo" id="radio-buttons-organismo">
+            <label for="tipo">Selecciona un tipo de organismo:</label>
+            <input type="radio" id="publico" name="tipoOrganismo" value="publico" (click)="mostrarFormulario()">
+            <label for="publico" id="label-publico">Público</label>
+            <input type="radio" id="privado" name="tipoOrganismo" value="privado" (click)="mostrarFormulario()">
+            <label for="privado" id="label-privado">Privado</label>
+
+            <div *ngIf="mostrarFormularioOrganismoPublico" id="formulario-organismo-publico">
+              <form id="formularioOrganismoPublico">
+                <div class="form-organismo-field">
+                  <label for="codigoDIR3">Código DIR3:</label>
+                  <input type="text" id="codigoDIR3" name="codigoDIR3"><br>
+                </div>
+                <div class="form-organismo-field">
+                  <label for="nombre">Nombre:</label>
+                  <input type="text" id="nombreOrganismo" name="nombre"><br>
+                </div>
+                <div class="form-organismo-field">
+                  <label for="email">Email:</label>
+                  <input type="email" id="emailOrganismo" name="email"><br>
+                </div>
+
+                <div class="form-organismo-field">
+                  <label for="localidad">Localidad:</label>
+                  <input type="text" id="localidadOrganismo" name="localidad"><br>
+                </div>
+
+                <input type="submit" id="registrarseOrganismo" value="Registrarse" (click)="enviarFormularioOrganismoPublico()">
+                <a routerLink="../login" class="btn btn-link" id="cancelar">Cancelar</a>
+              </form>
+              
+            </div>
+
+            <div *ngIf="mostrarFormularioOrganismoPrivado" id="formulario-organismo-privado">
+              <form id="formularioOrganismoPrivado">
+                <div class="form-organismo-field">
+                  <label for="NIF">NIF:</label>
+                  <input type="text" id="NIF" name="NIF"><br>
+                </div>
+                <div class="form-organismo-field">
+                  <label for="nombre">Nombre:</label>
+                  <input type="text" id="nombreOrganismo" name="nombre"><br>
+                </div>
+                <div class="form-organismo-field">
+                  <label for="email">Email:</label>
+                  <input type="email" id="emailOrganismo" name="email"><br>
+                </div>
+
+                <div class="form-organismo-field">
+                  <label for="localidad">Localidad:</label>
+                  <input type="text" id="localidadOrganismo" name="localidad"><br>
+                </div>
+
+                <input type="submit" id="registrarseOrganismo" value="Registrarse" (click)="enviarFormularioOrganismoPrivado()">
+                <a routerLink="../login" class="btn btn-link" id="cancelar">Cancelar</a>
+              </form>
+            </div>
+            
+
           </div>
         </div>
       </div>

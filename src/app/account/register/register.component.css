@@ -49,7 +49,7 @@ input[type="radio"]:checked + label{
 }
 
 #cientifico{
-    margin-left: 5%;
+    margin-left: 7%;
 }
 
 #label-cientifico{
@@ -110,4 +110,66 @@ input[type="radio"]:checked + label{
 #cancelar:hover{
     color: red;
     font-weight: bolder;
+}
+
+#formulario-organismo-publico{
+    margin-left: 10%;
+}
+
+.form-organismo-field{
+    margin-top: 3%;
+}
+
+#publico{
+    margin-left: 3%;
+}
+#label-publico{
+    margin-left: 2%;
+}
+#label-privado{
+    margin-left: 2%;
+}
+#privado{
+    margin-left: 7%;
+}
+
+#codigoDIR3{
+    margin-left: 5%;
+    width: 300px;
+}
+
+#nombreOrganismo{
+    margin-left: 13%;
+    width: 295px;
+}
+
+#emailOrganismo{
+    margin-left: 16%;
+    width: 300px;
+}
+#localidadOrganismo{
+    margin-left: 10%;
+    width: 300px;
+}
+
+#registrarseOrganismo{
+    margin-top: 5%;
+    text-align: center;
+    margin-left:10%;
+    width: 100px;
+    background-color: lightgreen;
+}
+#registrarseOrganismo:hover{
+    background-color: green;
+    font-weight: bolder;
+    color:white;
+}
+
+#formulario-organismo-privado{
+    margin-left: 10%;
+}
+
+#NIF{
+    margin-left: 19%;
+    width: 300px;
 }
