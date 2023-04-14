@@ -1,1 +1,44 @@
-<p>register works!</p>
+<body>
+    <div class="screen">
+      <div class="card">
+        <h4 class="card-header">Registro de usuario</h4>
+        <div class="card-body">
+          <div class="user-selection">
+            <label for="tipo">Selecciona un tipo de usuario:</label>
+            <input type="radio" id="cientifico" name="tipoUser" value="cientifico" (click)="mostrarFormulario()">
+            <label for="cientifico" id="label-cientifico">Científico</label>
+            <input type="radio" id="organismo" name="tipoUser" value="organismo" (click)="mostrarFormulario()">
+            <label for="organismo" id="label-organismo">Organismo</label>
+          </div>
+  
+          <div *ngIf="mostrarFormularioCientifico" id="formulario-cientifico">
+            <form>
+              
+              <div class="form-cientifico-field">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombreCientifico" name="nombre"><br>
+              </div>
+              <div class="form-cientifico-field">
+                <label for="email">Email:</label>
+                <input type="email" id="emailCientifico" name="email"><br>
+              </div>
+              <div class="form-cientifico-field">
+                <label for="orcid">ORCID:</label>
+                <input type="text" id="orcidCientifico" name="orcid"><br>
+              </div>
+              <div class="form-cientifico-field">
+                <label for="especialidad">Especialidad:</label>
+                <input type="text" id="especialidadCientifico" name="especialidad"><br>
+              </div>
+        
+              <input type="submit" id="registrarseCientifico" value="Registrarse">
+              <a routerLink="../login" class="btn btn-link" id="cancelar">Cancelar</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+
+<router-outlet></router-outlet>

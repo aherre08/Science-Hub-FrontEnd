@@ -1,0 +1,113 @@
+.screen{
+    background: linear-gradient(0deg, #000000, #15b0db);
+    background-size: 400% 400%;
+
+    animation: animation 40s ease infinite;
+
+    position:fixed;
+    top:0%;
+    bottom: 0%;
+    left:0%;
+    right:0%;
+    font-family:Arial, Helvetica, sans-serif;
+    
+}
+
+@keyframes animation {
+    0%{background-position:52% 0%}
+    50%{background-position:49% 100%}
+    100%{background-position:52% 0%}
+}
+
+.card{
+    position: relative;
+    width: 575px;
+    height: 380px;
+    margin: 0 auto;
+    margin-top: 10%;
+    border:3px black solid;
+    border-radius: 50px;
+    background-color: white;
+}
+
+.card-header{ 
+    position: relative;
+    text-align: center;
+    margin-top: 1%;
+    margin-left:25%;
+    width: 300px;
+    font-weight: bold;
+    background-color: white;
+}
+.card-body{
+    margin-top: 2%;
+    margin-left: 5%;
+}
+
+input[type="radio"]:checked + label{
+    font-weight: bolder;
+}
+
+#cientifico{
+    margin-left: 5%;
+}
+
+#label-cientifico{
+    margin-left: 2%;
+}
+
+#organismo{
+    margin-left: 5%;
+}
+
+#label-organismo{
+    margin-left: 2%;
+}
+
+#formulario-cientifico{
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+.form-cientifico-field{
+    margin-top: 5%;
+}
+
+#nombreCientifico{
+    margin-left: 9%;
+    width: 300px;
+    
+}
+#emailCientifico{
+    margin-left: 13%;
+    width: 300px;
+}
+#orcidCientifico{
+    margin-left: 10%;
+    width: 302px;
+}
+#especialidadCientifico{
+    margin-left: 2%;
+    width: 300px;
+}
+#registrarseCientifico{
+    text-align: center;
+    margin-top: 5%;
+    margin-left:15%;
+    width: 100px;
+    background-color: lightgreen;
+}
+#registrarseCientifico:hover{
+    background-color: green;
+    font-weight: bolder;
+    color:white;
+}
+
+#cancelar{
+    margin-left: 20%;
+    color: darkred;
+}
+#cancelar:hover{
+    color: red;
+    font-weight: bolder;
+}

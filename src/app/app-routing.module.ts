@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
+  {path: 'login', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
   {
     path: '',
-    redirectTo: 'account',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];

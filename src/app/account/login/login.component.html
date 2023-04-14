@@ -3,9 +3,9 @@
         <h4 class="card-header">Inicio de Sesión</h4>
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="username">
-                    <label class="form-label">Nombre de usuario:</label>
-                    <input type="text" class="form-control" formControlName="username" required placeholder="Introduzca el nombre de usuario">
+                <div class="email">
+                    <label class="form-label">Correo Electrónico:</label>
+                    <input type="text" class="form-control" formControlName="email" required placeholder="Introduzca el correo electrónico">
                 </div>
                 
                 <div class="mb-3">
@@ -26,3 +26,4 @@
         </div>
     </div>
 </div>
+<router-outlet></router-outlet>

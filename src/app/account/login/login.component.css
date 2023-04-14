@@ -44,7 +44,7 @@
     margin-left: 5%;
 }
 
-.username{
+.email{
     margin-top: 0%;
     width:450px;
 }
@@ -61,6 +61,7 @@
 
 .btn-primary:hover{
     background-color: blue;
+    font-weight: bolder;
 }
 
 .btn-link{
@@ -72,6 +73,7 @@
 
 .btn-link:hover{
     color:black;
+    font-weight: bolder;
 }
 
 
