@@ -15,7 +15,7 @@
             <form id="formularioCientifico">
               
               <div class="form-cientifico-field">
-                <label for="nombre">Nombre:</label>
+                <label for="nombre">Nombre completo:</label>
                 <input type="text" id="nombreCientifico" name="nombre"><br>
               </div>
               <div class="form-cientifico-field">
@@ -37,21 +37,21 @@
           </div>
 
           <div *ngIf="mostrarRadioButtonsOrganismo" id="radio-buttons-organismo">
-            <label for="tipo">Selecciona un tipo de organismo:</label>
-            <input type="radio" id="publico" name="tipoOrganismo" value="publico" (click)="mostrarFormulario()">
-            <label for="publico" id="label-publico">Público</label>
-            <input type="radio" id="privado" name="tipoOrganismo" value="privado" (click)="mostrarFormulario()">
-            <label for="privado" id="label-privado">Privado</label>
+            <label for="tipo">Selecciona un ámbito:</label>
+            <input type="radio" id="RBpublico" name="ambitoOrganismo" value="publico" (click)="mostrarFormulario()">
+            <label for="RBpublico" id="label-publico">Público</label>
+            <input type="radio" id="RBprivado" name="ambitoOrganismo" value="privado" (click)="mostrarFormulario()">
+            <label for="RBpublico" id="label-privado">Privado</label>
 
             <div *ngIf="mostrarFormularioOrganismoPublico" id="formulario-organismo-publico">
               <form id="formularioOrganismoPublico">
                 <div class="form-organismo-field">
                   <label for="codigoDIR3">Código DIR3:</label>
-                  <input type="text" id="codigoDIR3" name="codigoDIR3"><br>
+                  <input type="text" id="codigoDIR3" name="idOrganization"><br>
                 </div>
                 <div class="form-organismo-field">
-                  <label for="nombre">Nombre:</label>
-                  <input type="text" id="nombreOrganismo" name="nombre"><br>
+                  <label for="nombre">Nombre completo:</label>
+                  <input type="text" id="nombreOrganismo" name="name"><br>
                 </div>
                 <div class="form-organismo-field">
                   <label for="email">Email:</label>
@@ -60,7 +60,7 @@
 
                 <div class="form-organismo-field">
                   <label for="localidad">Localidad:</label>
-                  <input type="text" id="localidadOrganismo" name="localidad"><br>
+                  <input type="text" id="localidadOrganismo" name="location"><br>
                 </div>
 
                 <input type="submit" id="registrarseOrganismo" value="Registrarse" (click)="enviarFormularioOrganismoPublico()">
@@ -76,7 +76,7 @@
                   <input type="text" id="NIF" name="NIF"><br>
                 </div>
                 <div class="form-organismo-field">
-                  <label for="nombre">Nombre:</label>
+                  <label for="nombre">Nombre completo:</label>
                   <input type="text" id="nombreOrganismo" name="nombre"><br>
                 </div>
                 <div class="form-organismo-field">

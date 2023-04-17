@@ -27,8 +27,8 @@ export class RegisterComponent implements OnInit {
       this.mostrarFormularioOrganismoPublico = false;
       this.mostrarFormularioOrganismoPrivado = false;
 
-      const publico = document.getElementById('publico') as HTMLInputElement;
-      const privado = document.getElementById('privado') as HTMLInputElement;
+      const publico = document.getElementById('RBpublico') as HTMLInputElement;
+      const privado = document.getElementById('RBprivado') as HTMLInputElement;
       if(publico && publico.checked){
         this.mostrarFormularioOrganismoPublico = true;
         this.mostrarFormularioOrganismoPrivado = false;
@@ -41,10 +41,10 @@ export class RegisterComponent implements OnInit {
 
   enviarFormularioCientifico(){
     //Obtener datos del formulario
-    const nombreElement = document.getElementById("nombreCientifico");
-    const emailElement = document.getElementById("emailCientifico");
-    const orcidElement = document.getElementById("orcidCientifico");
-    const especialidadElement = document.getElementById("especialidadCientifico");
+    const nombreElement = document.getElementById("nombreCientifico")as HTMLInputElement;
+    const emailElement = document.getElementById("emailCientifico")as HTMLInputElement;
+    const orcidElement = document.getElementById("orcidCientifico")as HTMLInputElement;
+    const especialidadElement = document.getElementById("especialidadCientifico")as HTMLInputElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -85,14 +85,29 @@ export class RegisterComponent implements OnInit {
     }
 
     const form = document.getElementById('formularioCientifico') as HTMLFormElement;
+    const formData ={
+      orcid: orcidElement?.value,
+      name: nombreElement?.value,
+      email: emailElement?.value,
+      speciality: especialidadElement?.value,
+      active: true
+    }
+
+    const jsonData = JSON.stringify(formData);
+
+    console.log(jsonData);
+
     if (form) {
       form.addEventListener('submit', (event) =>{
         event.preventDefault();
         const formData = new FormData(form);
-        
+        console.log(formData);
         fetch('http://localhost:8080/cientifico', {
           method: 'POST',
-          body: formData
+          body: jsonData,
+          headers: {
+            'Content-Type': 'application/json'
+          }
         })
         .then(response => response.json())
         .then(data => {
@@ -110,10 +125,12 @@ export class RegisterComponent implements OnInit {
 
   enviarFormularioOrganismoPublico(){
     //Obtener datos del formulario
-    const DIR3Element = document.getElementById("codigoDIR3");
-    const nombreElement = document.getElementById("nombreOrganismo");
-    const emailElement = document.getElementById("emailOrganismo");
-    const localidadElement = document.getElementById("localidadOrganismo");
+    const DIR3Element = document.getElementById("codigoDIR3") as HTMLInputElement;
+    const nombreElement = document.getElementById("nombreOrganismo") as HTMLInputElement;
+    const emailElement = document.getElementById("emailOrganismo") as HTMLInputElement;
+    const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
+    const areaPublicElement = document.getElementById("RBpublico") as HTMLInputElement;
+    
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -132,7 +149,7 @@ export class RegisterComponent implements OnInit {
     }
     
     if(localidadElement instanceof HTMLInputElement && localidadElement.value === ''){
-      alert('El campo "Especialidad" no puede ser vacío.');
+      alert('El campo "Localidad" no puede ser vacío.');
       return false;
     }
 
@@ -150,43 +167,62 @@ export class RegisterComponent implements OnInit {
     if(DIR3Element instanceof HTMLInputElement){
       const dir3 = DIR3Element.value;
       if(!expresionDIR3.test(dir3)){
-        alert('El campo "Código DIR3" no tiene un formato válido.\n El código DIR3 que debe comenzar con una o dos letras mayúsculas seguidas de 7 u 8 dígitos.\n P.ej: A12345678 o AB1234567');
+        alert('El campo "Código DIR3" no tiene un formato válido.\n El código DIR3 debe comenzar con una o dos letras mayúsculas seguidas de 7 u 8 dígitos.\n P.ej: A12345678 o AB1234567');
         return false;
       }
     }
 
+  
+    if(areaPublicElement.value == "publico"){
+      
+      const formDataPublic ={
+        idOrganization: DIR3Element?.value,
+        name: nombreElement?.value,
+        email: emailElement?.value,
+        location: localidadElement?.value,
+        area: "Público",
+        active: true
+      }
 
-    const form = document.getElementById('formularioOrganismoPublico') as HTMLFormElement;
-    if (form) {
-      form.addEventListener('submit', (event) =>{
-        event.preventDefault();
-        const formData = new FormData(form);
-        
-        fetch('http://localhost:8080/organismo', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Respuesta del servidor:', data);
-        })
-        .catch(error => {
-          console.error('Error al enviar los datos:', error);
+      const jsonData = JSON.stringify(formDataPublic);
+      console.log(jsonData);
+
+      const form = document.getElementById('formularioOrganismoPublico') as HTMLFormElement;
+      
+      if (form) {
+        form.addEventListener('submit', (event) =>{
+          event.preventDefault();
+          
+          fetch('http://localhost:8080/organismo', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Respuesta del servidor:', data);
+          })
+          .catch(error => {
+            console.error('Error al enviar los datos:', error);
+          });
+
         });
+      }
 
-      });
     }
-
+    
     return true;
   }
 
   enviarFormularioOrganismoPrivado(){
     //Obtener datos del formulario
-    const NIFElement = document.getElementById("NIF");
-    const nombreElement = document.getElementById("nombreOrganismo");
-    const emailElement = document.getElementById("emailOrganismo");
-    const localidadElement = document.getElementById("localidadOrganismo");
-
+    const NIFElement = document.getElementById("NIF") as HTMLInputElement;
+    const nombreElement = document.getElementById("nombreOrganismo") as HTMLInputElement;
+    const emailElement = document.getElementById("emailOrganismo") as HTMLInputElement;
+    const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
+    const areaPrivateElement = document.getElementById("RBprivado") as HTMLInputElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -228,27 +264,45 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    const form = document.getElementById('formularioOrganismoPrivado') as HTMLFormElement;
-    if (form) {
-      form.addEventListener('submit', (event) =>{
-        event.preventDefault();
-        const formData = new FormData(form);
-        
-        fetch('http://localhost:8080/organismo', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Respuesta del servidor:', data);
-        })
-        .catch(error => {
-          console.error('Error al enviar los datos:', error);
+    if(areaPrivateElement.value == "privado"){
+      
+      const formDataPrivate ={
+        idOrganization: NIFElement?.value,
+        name: nombreElement?.value,
+        email: emailElement?.value,
+        location: localidadElement?.value,
+        area: "Privado",
+        active: true
+      }
+
+      const jsonData = JSON.stringify(formDataPrivate);
+      console.log(jsonData);
+
+      const form = document.getElementById('formularioOrganismoPrivado') as HTMLFormElement;
+      
+      if (form) {
+        form.addEventListener('submit', (event) =>{
+          event.preventDefault();
+          
+          fetch('http://localhost:8080/organismo', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Respuesta del servidor:', data);
+          })
+          .catch(error => {
+            console.error('Error al enviar los datos:', error);
+          });
+
         });
+      }
 
-      });
     }
-
 
     return true;
   }
