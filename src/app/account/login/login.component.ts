@@ -11,7 +11,6 @@ import { LoginService } from './login.service';
 
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  
   loading = false;
   submitted = false;
 
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
       this.loginForm = this.fb.group({
-          username: ['', Validators.required],
+          email: ['', Validators.required],
           password: ['', Validators.required]
       });
   }
@@ -34,5 +33,31 @@ export class LoginComponent implements OnInit {
 
   onSubmit():void {
       this.submitted = true;
+
+      if(this.loginForm.invalid){ return; }
+
+      const {email, password} = this.loginForm.value;
+      this.loading = true;
+      this.loginService.login(email, password).subscribe(
+        () => {
+          this.loginService.getUserType(email).subscribe(
+            (userType: string) => {
+              if (userType === 'cientifico') {
+                this.router.navigate(['/dashboard-cientifico']);
+              } else if (userType === 'organizacion') {
+                this.router.navigate(['/dashboard-organizacion']);
+              } 
+            },
+            (error: any) => {
+              console.error(error);
+              // Manejar errores al obtener el tipo de usuario
+            }
+          );
+        },
+        (error: any) => {
+          console.error(error);
+          // Manejar errores de inicio de sesión, por ejemplo, mostrar un mensaje de error en el formulario.
+        }
+      );
   }
 }
