@@ -30,7 +30,16 @@
                 <label for="especialidad">Especialidad:</label>
                 <input type="text" id="especialidadCientifico" name="especialidad"><br>
               </div>
-        
+
+              <div class="form-cientifico-field">
+                <label for="password" style="font-weight: bold;">Contraseña:</label>
+                <input type="password" id="passwordCientifico" name="password">
+                <button id="showPasswordButtonCientifico" class="showPasswordButton" (click)="passwordVisibility('passwordCientifico', 'showPasswordButtonCientifico')">
+                  <img id="eye" src="../../../assets/images/show_eye_icon.png" alt="Mostrar contraseña">
+                </button><br>
+              </div>
+
+
               <input type="submit" id="registrarseCientifico" value="Registrarse" (click)="enviarFormularioCientifico()">
               <a routerLink="../login" class="btn btn-link" id="cancelar">Cancelar</a>
             </form>
@@ -63,6 +72,14 @@
                   <input type="text" id="localidadOrganismo" name="location"><br>
                 </div>
 
+                <div class="form-organismo-field">
+                  <label for="password" style="font-weight: bold;">Contraseña:</label>
+                  <input type="password" id="passwordOrganismo" name="password">
+                  <button id="showPasswordButtonOrganismoPublico" class="showPasswordButton" (click)="passwordVisibility('passwordOrganismo','showPasswordButtonOrganismoPublico')">
+                    <img id="eye" src="../../../assets/images/show_eye_icon.png" alt="Mostrar contraseña">
+                  </button><br>
+                </div>
+
                 <input type="submit" id="registrarseOrganismo" value="Registrarse" (click)="enviarFormularioOrganismoPublico()">
                 <a routerLink="../login" class="btn btn-link" id="cancelar">Cancelar</a>
               </form>
@@ -87,6 +104,14 @@
                 <div class="form-organismo-field">
                   <label for="localidad">Localidad:</label>
                   <input type="text" id="localidadOrganismo" name="localidad"><br>
+                </div>
+
+                <div class="form-organismo-field">
+                  <label for="password" style="font-weight: bold;">Contraseña:</label>
+                  <input type="password" id="passwordOrganismo" name="password">
+                  <button id="showPasswordButtonOrganismoPrivado" class="showPasswordButton" (click)="passwordVisibility('passwordOrganismo', 'showPasswordButtonOrganismoPrivado')">
+                    <img id="eye" src="../../../assets/images/show_eye_icon.png" alt="Mostrar contraseña">
+                  </button><br>
                 </div>
 
                 <input type="submit" id="registrarseOrganismo" value="Registrarse" (click)="enviarFormularioOrganismoPrivado()">

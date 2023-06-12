@@ -76,5 +76,12 @@
     font-weight: bolder;
 }
 
+.showPasswordButton{
+    margin-left: 2%;
+    border-radius: 50px;
+}
 
-
+#eye{
+    width: 25px;
+    height: auto;
+}

@@ -31,6 +31,19 @@ export class LoginComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
+  passwordVisibility(id:string, buttonid:string): void {
+    const passwordInput = document.getElementById(id) as HTMLInputElement;
+    const showPasswordButton = document.getElementById(buttonid) as HTMLButtonElement;
+  
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      showPasswordButton.getElementsByTagName('img')[0].setAttribute('src', 'assets/images/hidden_eye_icon.png');
+    } else {
+      passwordInput.type = 'password';
+      showPasswordButton.getElementsByTagName('img')[0].setAttribute('src', 'assets/images/show_eye_icon.png');
+    }
+  }
+
   onSubmit():void {
       this.submitted = true;
 

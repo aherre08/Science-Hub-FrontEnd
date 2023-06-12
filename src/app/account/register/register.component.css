@@ -21,8 +21,8 @@
 
 .card{
     position: relative;
-    width: 575px;
-    height: 380px;
+    width: 600px;
+    height: 450px;
     margin: 0 auto;
     margin-top: 10%;
     border:3px black solid;
@@ -66,7 +66,7 @@ input[type="radio"]:checked + label{
 
 #formulario-cientifico{
     margin-top: 2%;
-    margin-left: 10%;
+    margin-left: 6%;
 }
 
 .form-cientifico-field{
@@ -74,12 +74,12 @@ input[type="radio"]:checked + label{
 }
 
 #nombreCientifico{
-    margin-left: 5%;
+    margin-left: 6%;
     width: 250px;
     
 }
 #emailCientifico{
-    margin-left: 24%;
+    margin-left: 23%;
     width: 253px;
 }
 #orcidCientifico{
@@ -87,9 +87,26 @@ input[type="radio"]:checked + label{
     width: 253px;
 }
 #especialidadCientifico{
-    margin-left: 12%;
+    margin-left: 13%;
     width: 253px;
 }
+
+#passwordCientifico{
+    margin-left: 13%;
+    width: 253px;
+}
+.showPasswordButton{
+    margin-left: 2%;
+    border-radius: 50px;
+}
+.showPasswordButton:hover{
+    font-weight: bolder;
+}
+#eye{
+    width: 25px;
+    height: auto;
+}
+
 #registrarseCientifico{
     text-align: center;
     margin-top: 5%;
@@ -113,7 +130,7 @@ input[type="radio"]:checked + label{
 }
 
 #formulario-organismo-publico{
-    margin-left: 10%;
+    margin-left: 7%;
 }
 
 .form-organismo-field{
@@ -134,22 +151,27 @@ input[type="radio"]:checked + label{
 }
 
 #codigoDIR3{
-    margin-left: 13%;
-    width: 262px;
+    margin-left: 12%;
+    width: 253px;
 }
 
 #nombreOrganismo{
-    margin-left: 5%;
-    width: 265px;
+    margin-left: 4.5%;
+    width: 253px;
 }
 
 #emailOrganismo{
-    margin-left: 24%;
-    width: 265px;
+    margin-left: 22%;
+    width: 253px;
 }
 #localidadOrganismo{
-    margin-left: 17%;
-    width: 268px;
+    margin-left: 16%;
+    width: 253px;
+}
+
+#passwordOrganismo{
+    margin-left: 12%;
+    width: 253px;
 }
 
 #registrarseOrganismo{
@@ -166,10 +188,10 @@ input[type="radio"]:checked + label{
 }
 
 #formulario-organismo-privado{
-    margin-left: 10%;
+    margin-left: 7%;
 }
 
 #NIF{
-    margin-left: 27%;
-    width: 265px;
+    margin-left: 25%;
+    width: 253px;
 }

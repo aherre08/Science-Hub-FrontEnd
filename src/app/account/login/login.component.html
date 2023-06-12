@@ -10,7 +10,11 @@
                 
                 <div class="mb-3">
                     <label class="form-label">Contraseña:</label>
-                    <input type="password" formControlName="password" class="form-control" required placeholder="Introduzca la contraseña">
+                    <button id="showPasswordButtonLogin" class="showPasswordButton" (click)="passwordVisibility('passwordLogin', 'showPasswordButtonLogin')">
+                        <img id="eye" src="../../../assets/images/show_eye_icon.png" alt="Mostrar contraseña">
+                    </button><br>
+                    <input type="password" id="passwordLogin" formControlName="password" class="form-control" required placeholder="Introduzca la contraseña">
+                    
                 </div>
                 
                 <div class="mb-3">
@@ -19,7 +23,7 @@
                         Iniciar Sesión
                     </button>
                     <br>
-                    <a routerLink="../register" class="btn btn-link">Registro</a>
+                    <a routerLink="../register" class="btn btn-link">Regístrate</a>
                 </div>
             
             </form>

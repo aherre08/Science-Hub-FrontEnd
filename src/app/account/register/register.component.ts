@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +10,8 @@ import { RegisterService } from './register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  constructor(private afAuth: AngularFireAuth) {}
+
   mostrarFormularioCientifico = false;
   mostrarRadioButtonsOrganismo = false;
   mostrarFormularioOrganismoPublico = false;
@@ -36,6 +39,19 @@ export class RegisterComponent implements OnInit {
         this.mostrarFormularioOrganismoPrivado = true;
         this.mostrarFormularioOrganismoPublico = false;
       }
+    }
+  }
+
+  passwordVisibility(id:string, buttonid:string): void {
+    const passwordInput = document.getElementById(id) as HTMLInputElement;
+    const showPasswordButton = document.getElementById(buttonid) as HTMLButtonElement;
+  
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      showPasswordButton.getElementsByTagName('img')[0].setAttribute('src', 'assets/images/hidden_eye_icon.png');
+    } else {
+      passwordInput.type = 'password';
+      showPasswordButton.getElementsByTagName('img')[0].setAttribute('src', 'assets/images/show_eye_icon.png');
     }
   }
 
@@ -305,9 +321,6 @@ export class RegisterComponent implements OnInit {
     }
 
     return true;
-  }
-
-  constructor() {
   }
 
   ngOnInit() {}
