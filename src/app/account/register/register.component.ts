@@ -61,6 +61,7 @@ export class RegisterComponent implements OnInit {
     const emailElement = document.getElementById("emailCientifico")as HTMLInputElement;
     const orcidElement = document.getElementById("orcidCientifico")as HTMLInputElement;
     const especialidadElement = document.getElementById("especialidadCientifico")as HTMLInputElement;
+    const passwordElement = document.getElementById("passwordCientifico") as HTMLInputElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -78,6 +79,17 @@ export class RegisterComponent implements OnInit {
     }
     if(especialidadElement instanceof HTMLInputElement && especialidadElement.value === ''){
       alert('El campo "Especialidad" no puede ser vacío.');
+      return false;
+    }
+
+    if(passwordElement instanceof HTMLInputElement && passwordElement.value === ''){
+      alert('El campo "Contraseña" no puede ser vacío.');
+      return false;
+    }
+
+    //Comprobar longitud de la contraseña
+    if (passwordElement instanceof HTMLInputElement && passwordElement.value.length < 6) {
+      alert('La contraseña debe tener al menos 6 caracteres.');
       return false;
     }
 
@@ -136,6 +148,18 @@ export class RegisterComponent implements OnInit {
       });
     }
 
+    //Registrar usuario en Firebase
+    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
+    .then((userCredential) => {
+      console.log('Científico registrado:', userCredential.user);
+      alert('¡El científico ha sido registrado correctamente! \n ');
+      if(form){form.reset();}
+    })
+    .catch((error) => {
+      console.error('Error al registrar científico:', error);
+      alert('Error al registrar el científico. \n ');
+    });
+
     return true;
   }
 
@@ -146,7 +170,7 @@ export class RegisterComponent implements OnInit {
     const emailElement = document.getElementById("emailOrganismo") as HTMLInputElement;
     const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
     const areaPublicElement = document.getElementById("RBpublico") as HTMLInputElement;
-    
+    const passwordElement = document.getElementById("passwordOrganismo") as HTMLInputElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -169,6 +193,17 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
+    if(passwordElement instanceof HTMLInputElement && passwordElement.value === ''){
+      alert('El campo "Contraseña" no puede ser vacío.');
+      return false;
+    }
+
+    //Comprobar longitud de la contraseña
+    if (passwordElement instanceof HTMLInputElement && passwordElement.value.length < 6) {
+      alert('La contraseña debe tener al menos 6 caracteres.');
+      return false;
+    }
+
     // Campos rellenos, pero con formato incorrecto.
     const expresionEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if(emailElement instanceof HTMLInputElement){
@@ -188,7 +223,6 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-  
     if(areaPublicElement.value == "publico"){
       
       const formDataPublic ={
@@ -227,6 +261,18 @@ export class RegisterComponent implements OnInit {
         });
       }
 
+      //Registrar usuario en Firebase
+      this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
+      .then((userCredential) => {
+        console.log('Organismo público registrado:', userCredential.user);
+        alert('¡El organismo público ha sido registrado correctamente! \n ');
+        if(form){form.reset();}
+      })
+      .catch((error) => {
+        console.error('Error al registrar organismo público:', error);
+        alert('Error al registrar el organismo público.\n ');
+      });
+
     }
     
     return true;
@@ -239,6 +285,7 @@ export class RegisterComponent implements OnInit {
     const emailElement = document.getElementById("emailOrganismo") as HTMLInputElement;
     const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
     const areaPrivateElement = document.getElementById("RBprivado") as HTMLInputElement;
+    const passwordElement = document.getElementById("passwordOrganismo") as HTMLInputElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -258,6 +305,17 @@ export class RegisterComponent implements OnInit {
     
     if(localidadElement instanceof HTMLInputElement && localidadElement.value === ''){
       alert('El campo "Especialidad" no puede ser vacío.');
+      return false;
+    }
+
+    if(passwordElement instanceof HTMLInputElement && passwordElement.value === ''){
+      alert('El campo "Contraseña" no puede ser vacío.');
+      return false;
+    }
+
+    //Comprobar longitud de la contraseña
+    if (passwordElement instanceof HTMLInputElement && passwordElement.value.length < 6) {
+      alert('La contraseña debe tener al menos 6 caracteres.');
       return false;
     }
 
@@ -317,6 +375,18 @@ export class RegisterComponent implements OnInit {
 
         });
       }
+
+      //Registrar usuario en Firebase
+      this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
+      .then((userCredential) => {
+        console.log('Organismo privado registrado:', userCredential.user);
+        alert('¡El organismo privado ha sido registrado correctamente! \n ');
+        if(form){form.reset();}
+      })
+      .catch((error) => {
+        console.error('Error al registrar organismo privado:', error);
+        alert('Error al registrar el organismo privado.\n ');
+      });
 
     }
 

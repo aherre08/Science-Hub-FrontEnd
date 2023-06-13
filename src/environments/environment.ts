@@ -16,10 +16,6 @@ const firebaseConfig = {
   measurementId: "G-DFSB14BPB4"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 export const environment = {
     production: false,
     firebaseConfig: {
