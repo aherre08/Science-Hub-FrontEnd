@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { endWith } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -58,10 +59,14 @@ export class RegisterComponent implements OnInit {
   enviarFormularioCientifico(){
     //Obtener datos del formulario
     const nombreElement = document.getElementById("nombreCientifico")as HTMLInputElement;
+    const nombre = nombreElement.value;
     const emailElement = document.getElementById("emailCientifico")as HTMLInputElement;
     const orcidElement = document.getElementById("orcidCientifico")as HTMLInputElement;
     const especialidadElement = document.getElementById("especialidadCientifico")as HTMLInputElement;
+    const especialidad = especialidadElement.value;
     const passwordElement = document.getElementById("passwordCientifico") as HTMLInputElement;
+
+    const form = document.getElementById('formularioCientifico') as HTMLFormElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -95,8 +100,8 @@ export class RegisterComponent implements OnInit {
 
     // Campos rellenos, pero con formato incorrecto.
     const expresionEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const email = emailElement.value;
     if(emailElement instanceof HTMLInputElement){
-      const email = emailElement.value;
       if(!expresionEmail.test(email)){
         alert('El campo "Email" no tiene un formato válido.');
         return false;
@@ -104,32 +109,68 @@ export class RegisterComponent implements OnInit {
     }
 
     const expresionORCID = /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/;
+    const orcid = orcidElement.value;
     if(orcidElement instanceof HTMLInputElement){
-      const orcid = orcidElement.value;
       if(!expresionORCID.test(orcid)){
         alert('El campo "ORCID" no tiene un formato válido.\n El formato válido se compone de: 4 grupos de 4 dígitos separados cada uno por un guión. P.ej: 1234-5234-7532-9643 \n O bien, por 3 grupos de 4 digitos y un último grupo con 3 dígitos y la letra X separados por guiones. P.ej: 1234-5234-7532-964X');
         return false;
       }
     }
 
-    const form = document.getElementById('formularioCientifico') as HTMLFormElement;
-    const formData ={
-      orcid: orcidElement?.value,
-      name: nombreElement?.value,
-      email: emailElement?.value,
-      speciality: especialidadElement?.value,
-      active: true
-    }
+    
+    //1º. Registrar usuario en Firebase
+    var uid;
+    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
+    .then((userCredential) => {
+      uid = userCredential.user?.uid;
+      console.log('Científico registrado:', userCredential.user);
+      
+      if(form){form.reset();}
 
-    const jsonData = JSON.stringify(formData);
+        // 2º. UID del usuario existente, se registra usuario en la BD local
+        
+      if(uid != null){ 
+        
+        const formUser = {
+          uuId: uid,
+          uuidEmail: email,
+          active: true
+        }
 
-    console.log(jsonData);
+        const jsonUser = JSON.stringify(formUser);
 
-    if (form) {
-      form.addEventListener('submit', (event) =>{
-        event.preventDefault();
-        const formData = new FormData(form);
-        console.log(formData);
+        console.log(jsonUser);
+
+        fetch('http://localhost:8080/usuario', {
+          method: 'POST',
+          body: jsonUser,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+          console.error('Error al enviar los datos:', error);
+        });
+
+        
+        // 3º. Se inserta el cientifico en la BD local.
+        const formData ={
+          orcid: orcid,
+          userUuid: uid,
+          name: nombre,
+          email: email,
+          speciality: especialidad,
+          active: true
+        }
+
+        const jsonData = JSON.stringify(formData);
+
+        console.log(jsonData);
+
         fetch('http://localhost:8080/cientifico', {
           method: 'POST',
           body: jsonData,
@@ -145,21 +186,16 @@ export class RegisterComponent implements OnInit {
           console.error('Error al enviar los datos:', error);
         });
 
-      });
-    }
-
-    //Registrar usuario en Firebase
-    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
-    .then((userCredential) => {
-      console.log('Científico registrado:', userCredential.user);
-      alert('¡El científico ha sido registrado correctamente! \n ');
-      if(form){form.reset();}
+        alert('¡El científico ha sido registrado correctamente! \n ');
+      }    
     })
     .catch((error) => {
+      uid = null;
       console.error('Error al registrar científico:', error);
       alert('Error al registrar el científico. \n ');
     });
 
+    
     return true;
   }
 
@@ -171,6 +207,8 @@ export class RegisterComponent implements OnInit {
     const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
     const areaPublicElement = document.getElementById("RBpublico") as HTMLInputElement;
     const passwordElement = document.getElementById("passwordOrganismo") as HTMLInputElement;
+
+    const form = document.getElementById('formularioOrganismoPublico') as HTMLFormElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -223,58 +261,93 @@ export class RegisterComponent implements OnInit {
       }
     }
 
+    
+    //1º. Registrar usuario en Firebase
+    var uid;
+    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
+    .then((userCredential) => {
+      uid = userCredential.user?.uid;
+      console.log('Organismo público registrado:', userCredential.user);
+      alert('¡El organismo público ha sido registrado correctamente! \n ');
+      if(form){form.reset();}
+    })
+    .catch((error) => {
+      console.error('Error al registrar organismo público:', error);
+      alert('Error al registrar el organismo público.\n ');
+    });
+
     if(areaPublicElement.value == "publico"){
       
-      const formDataPublic ={
-        idOrganization: DIR3Element?.value,
-        name: nombreElement?.value,
-        email: emailElement?.value,
-        location: localidadElement?.value,
-        area: "Público",
-        active: true
-      }
+      // 2º. UID del usuario existente, se registra usuario en la BD local
+      if(uid != null){ 
+        const fecha = new Date();
 
-      const jsonData = JSON.stringify(formDataPublic);
-      console.log(jsonData);
+        const formUser = {
+          uuid_usuario: uid,
+          uuid_correo: emailElement?.value,
+          fec_creacion: fecha,
+          fec_baja: null,
+          activo: true
+        }
 
-      const form = document.getElementById('formularioOrganismoPublico') as HTMLFormElement;
-      
-      if (form) {
-        form.addEventListener('submit', (event) =>{
-          event.preventDefault();
-          
-          fetch('http://localhost:8080/organismo', {
-            method: 'POST',
-            body: jsonData,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Respuesta del servidor:', data);
-          })
-          .catch(error => {
-            console.error('Error al enviar los datos:', error);
-          });
+        const jsonUser = JSON.stringify(formUser);
 
+        console.log(jsonUser);
+
+        fetch('http://localhost:8080/usuario', {
+          method: 'POST',
+          body: jsonUser,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+          console.error('Error al enviar los datos:', error);
         });
+
+        // 3º. Se inserta el organismo público en la BD local.
+        const formDataPublic ={
+          idOrganismo: DIR3Element?.value,
+          uid_usuario: uid,
+          id_proyecto: null,
+          nombre: nombreElement?.value,
+          email: emailElement?.value,
+          localidad: localidadElement?.value,
+          ambito: "Público",
+          activo: true
+        }
+
+        const jsonData = JSON.stringify(formDataPublic);
+        console.log(jsonData);
+        
+        if (form) {
+          form.addEventListener('submit', (event) =>{
+            event.preventDefault();
+            
+            fetch('http://localhost:8080/organismo', {
+              method: 'POST',
+              body: jsonData,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+              console.error('Error al enviar los datos:', error);
+            });
+
+          });
+        }
+
       }
-
-      //Registrar usuario en Firebase
-      this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
-      .then((userCredential) => {
-        console.log('Organismo público registrado:', userCredential.user);
-        alert('¡El organismo público ha sido registrado correctamente! \n ');
-        if(form){form.reset();}
-      })
-      .catch((error) => {
-        console.error('Error al registrar organismo público:', error);
-        alert('Error al registrar el organismo público.\n ');
-      });
-
     }
-    
     return true;
   }
 
@@ -286,6 +359,8 @@ export class RegisterComponent implements OnInit {
     const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
     const areaPrivateElement = document.getElementById("RBprivado") as HTMLInputElement;
     const passwordElement = document.getElementById("passwordOrganismo") as HTMLInputElement;
+
+    const form = document.getElementById('formularioOrganismoPrivado') as HTMLFormElement;
 
     //Validar los datos del formulario
     // Campos del formulario vacíos
@@ -338,63 +413,94 @@ export class RegisterComponent implements OnInit {
       }
     }
 
+    //1º. Registrar usuario en Firebase
+    var uid;
+    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
+    .then((userCredential) => {
+      uid = userCredential.user?.uid;
+      console.log('Organismo privado registrado:', userCredential.user);
+      alert('¡El organismo privado ha sido registrado correctamente! \n ');
+      if(form){form.reset();}
+    })
+    .catch((error) => {
+      console.error('Error al registrar organismo privado:', error);
+      alert('Error al registrar el organismo privado.\n ');
+    });
+
     if(areaPrivateElement.value == "privado"){
-      
-      const formDataPrivate ={
-        idOrganization: NIFElement?.value,
-        name: nombreElement?.value,
-        email: emailElement?.value,
-        location: localidadElement?.value,
-        area: "Privado",
-        active: true
-      }
+      // 2º. UID del usuario existente, se registra usuario en la BD local
+      if(uid != null){ 
+        const fecha = new Date();
 
-      const jsonData = JSON.stringify(formDataPrivate);
-      console.log(jsonData);
+        const formUser = {
+          uuid_usuario: uid,
+          uuid_correo: emailElement?.value,
+          fec_creacion: fecha,
+          fec_baja: null,
+          activo: true
+        }
 
-      const form = document.getElementById('formularioOrganismoPrivado') as HTMLFormElement;
-      
-      if (form) {
-        form.addEventListener('submit', (event) =>{
-          event.preventDefault();
-          
-          fetch('http://localhost:8080/organismo', {
-            method: 'POST',
-            body: jsonData,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Respuesta del servidor:', data);
-          })
-          .catch(error => {
-            console.error('Error al enviar los datos:', error);
-          });
+        const jsonUser = JSON.stringify(formUser);
 
+        console.log(jsonUser);
+
+        fetch('http://localhost:8080/usuario', {
+          method: 'POST',
+          body: jsonUser,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+          console.error('Error al enviar los datos:', error);
         });
+
+        // 3º. Se inserta el organismo privado en la BD local.
+        const formDataPrivate ={
+          idOrganismo: NIFElement?.value,
+          uid_usuario: uid,
+          id_proyecto: null,
+          nombre: nombreElement?.value,
+          email: emailElement?.value,
+          localidad: localidadElement?.value,
+          ambito: "Privado",
+          activo: true
+        }
+
+        const jsonData = JSON.stringify(formDataPrivate);
+        console.log(jsonData);
+
+        
+        if (form) {
+          form.addEventListener('submit', (event) =>{
+            event.preventDefault();
+            
+            fetch('http://localhost:8080/organismo', {
+              method: 'POST',
+              body: jsonData,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+              console.error('Error al enviar los datos:', error);
+            });
+
+          });
+        }
       }
-
-      //Registrar usuario en Firebase
-      this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
-      .then((userCredential) => {
-        console.log('Organismo privado registrado:', userCredential.user);
-        alert('¡El organismo privado ha sido registrado correctamente! \n ');
-        if(form){form.reset();}
-      })
-      .catch((error) => {
-        console.error('Error al registrar organismo privado:', error);
-        alert('Error al registrar el organismo privado.\n ');
-      });
-
     }
-
     return true;
   }
 
   ngOnInit() {}
-
-  onSubmit():void {}
 
 }

@@ -2,30 +2,30 @@
     <div class="card">
         <h4 class="card-header">Inicio de Sesión</h4>
         <div class="card-body">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="loginForm">
                 <div class="email">
                     <label class="form-label">Email:</label>
-                    <input type="text" class="form-control" formControlName="email" required placeholder="Introduzca un email">
+                    <input type="text" class="form-control" id="emailLogin" formControlName="email" required
+                        placeholder="Introduzca un email">
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Contraseña:</label>
-                    <button id="showPasswordButtonLogin" class="showPasswordButton" (click)="passwordVisibility('passwordLogin', 'showPasswordButtonLogin')">
+                    <button id="showPasswordButtonLogin" class="showPasswordButton"
+                        (click)="passwordVisibility('passwordLogin', 'showPasswordButtonLogin')">
                         <img id="eye" src="../../../assets/images/show_eye_icon.png" alt="Mostrar contraseña">
                     </button><br>
-                    <input type="password" id="passwordLogin" formControlName="password" class="form-control" required placeholder="Introduzca la contraseña">
-                    
+                    <input type="password" id="passwordLogin" formControlName="password" class="form-control" required
+                        placeholder="Introduzca la contraseña">
+
                 </div>
-                
+
                 <div class="mb-3">
-                    <button [disabled]="loading" class="btn btn-primary">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                        Iniciar Sesión
-                    </button>
+                    <button class="btn btn-primary" (click)="iniciarSesion()">Iniciar Sesión</button>
                     <br>
                     <a routerLink="../register" class="btn btn-link">Regístrate</a>
                 </div>
-            
+
             </form>
         </div>
     </div>

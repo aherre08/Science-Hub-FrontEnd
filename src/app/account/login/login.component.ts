@@ -11,15 +11,8 @@ import { LoginService } from './login.service';
 
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  loading = false;
-  submitted = false;
 
-  constructor(
-      private fb: FormBuilder,
-      private loginService: LoginService,
-      private router: Router,
-    
-  ) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
       this.loginForm = this.fb.group({
@@ -44,33 +37,58 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit():void {
-      this.submitted = true;
+  iniciarSesion(){
+    const emailElement = document.getElementById("emailLogin") as HTMLInputElement;
+    const passwordElement = document.getElementById("passwordLogin") as HTMLInputElement;
 
-      if(this.loginForm.invalid){ return; }
+    if (emailElement instanceof HTMLInputElement && emailElement.value === '') {
+      alert('El campo "Email" no puede ser vacío.');
+      return false;
+    }
+    
+    // Campos rellenos, pero con formato incorrecto.
+    const expresionEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(emailElement instanceof HTMLInputElement){
+      const email = emailElement.value;
+      if(!expresionEmail.test(email)){
+        alert('El campo "Email" no tiene un formato válido.');
+        return false;
+      }
+    }
 
-      const {email, password} = this.loginForm.value;
-      this.loading = true;
-      this.loginService.login(email, password).subscribe(
-        () => {
-          this.loginService.getUserType(email).subscribe(
-            (userType: string) => {
-              if (userType === 'cientifico') {
-                this.router.navigate(['/dashboard-cientifico']);
-              } else if (userType === 'organizacion') {
-                this.router.navigate(['/dashboard-organizacion']);
-              } 
-            },
-            (error: any) => {
-              console.error(error);
-              // Manejar errores al obtener el tipo de usuario
-            }
-          );
-        },
-        (error: any) => {
-          console.error(error);
-          // Manejar errores de inicio de sesión, por ejemplo, mostrar un mensaje de error en el formulario.
+    if(passwordElement instanceof HTMLInputElement && passwordElement.value === ''){
+      alert('El campo "Contraseña" no puede ser vacío.');
+      return false;
+    }
+    
+    if (passwordElement instanceof HTMLInputElement && passwordElement.value.length < 6) {
+      alert('La contraseña debe tener al menos 6 caracteres.');
+      return false;
+    }
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const { email, password } = this.loginForm.value;
+
+    this.loginService.login(email, password).subscribe(
+      (userType: string) => {
+        if (userType === 'cientifico') {
+          this.router.navigate(['/dashboard-cientifico']);
+        } else if (userType === 'organizacion') {
+          this.router.navigate(['/dashboard-organizacion']);
+        } else {
+          console.error('Tipo de usuario no válido:', userType);
+          alert('Las credenciales introducidas no corresponden a un usuario existente.');
         }
-      );
+      },
+      (error: any) => {
+        console.error('Error al iniciar sesión:', error);
+        alert('Se ha producido un error al iniciar sesión.');
+      }
+    );
+    return true;
   }
+  
 }
