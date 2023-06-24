@@ -56,7 +56,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  enviarFormularioCientifico(){
+  async enviarFormularioCientifico(){
+    var ok = true;
     //Obtener datos del formulario
     const nombreElement = document.getElementById("nombreCientifico")as HTMLInputElement;
     const nombre = nombreElement.value;
@@ -117,18 +118,16 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    
-    //1º. Registrar usuario en Firebase
     var uid;
-    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
-    .then((userCredential) => {
+    try{
+      //1º. Registrar usuario en Firebase
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value);
       uid = userCredential.user?.uid;
       console.log('Científico registrado:', userCredential.user);
       
       if(form){form.reset();}
 
-        // 2º. UID del usuario existente, se registra usuario en la BD local
-        
+      // 2º. UID del usuario existente, se registra usuario en la BD local
       if(uid != null){ 
         
         const formUser = {
@@ -141,7 +140,7 @@ export class RegisterComponent implements OnInit {
 
         console.log(jsonUser);
 
-        fetch('http://localhost:8080/usuario', {
+        await fetch('http://localhost:8080/usuario', {
           method: 'POST',
           body: jsonUser,
           headers: {
@@ -153,7 +152,9 @@ export class RegisterComponent implements OnInit {
           console.log('Respuesta del servidor:', data);
         })
         .catch(error => {
+          ok=false;
           console.error('Error al enviar los datos:', error);
+          alert(error.message);
         });
 
         
@@ -171,7 +172,7 @@ export class RegisterComponent implements OnInit {
 
         console.log(jsonData);
 
-        fetch('http://localhost:8080/cientifico', {
+        await fetch('http://localhost:8080/cientifico', {
           method: 'POST',
           body: jsonData,
           headers: {
@@ -181,31 +182,40 @@ export class RegisterComponent implements OnInit {
         .then(response => response.json())
         .then(data => {
           console.log('Respuesta del servidor:', data);
+          
         })
         .catch(error => {
+          ok=false;
           console.error('Error al enviar los datos:', error);
+          alert(error.message);
         });
 
-        alert('¡El científico ha sido registrado correctamente! \n ');
-      }    
-    })
-    .catch((error) => {
+        if(ok){alert('¡El científico ha sido registrado correctamente! \n ');}
+        
+      } 
+
+    }catch(error) {
       uid = null;
       console.error('Error al registrar científico:', error);
       alert('Error al registrar el científico. \n ');
-    });
+    }
 
     
     return true;
   }
 
-  enviarFormularioOrganismoPublico(){
+  async enviarFormularioOrganismoPublico(){
+    var ok = true;
     //Obtener datos del formulario
     const DIR3Element = document.getElementById("codigoDIR3") as HTMLInputElement;
+    const dir3 = DIR3Element.value;
     const nombreElement = document.getElementById("nombreOrganismo") as HTMLInputElement;
+    const nombre = nombreElement.value;
     const emailElement = document.getElementById("emailOrganismo") as HTMLInputElement;
     const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
+    const localidad = localidadElement.value;
     const areaPublicElement = document.getElementById("RBpublico") as HTMLInputElement;
+    const area = areaPublicElement.value;
     const passwordElement = document.getElementById("passwordOrganismo") as HTMLInputElement;
 
     const form = document.getElementById('formularioOrganismoPublico') as HTMLFormElement;
@@ -244,8 +254,8 @@ export class RegisterComponent implements OnInit {
 
     // Campos rellenos, pero con formato incorrecto.
     const expresionEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const email = emailElement.value;
     if(emailElement instanceof HTMLInputElement){
-      const email = emailElement.value;
       if(!expresionEmail.test(email)){
         alert('El campo "Email" no tiene un formato válido.');
         return false;
@@ -261,103 +271,101 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    
-    //1º. Registrar usuario en Firebase
-    var uid;
-    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
-    .then((userCredential) => {
-      uid = userCredential.user?.uid;
+    try{
+      //1º. Registrar usuario en Firebase
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value);
+      var uid = userCredential.user?.uid;
       console.log('Organismo público registrado:', userCredential.user);
-      alert('¡El organismo público ha sido registrado correctamente! \n ');
+      
       if(form){form.reset();}
-    })
-    .catch((error) => {
+
+      if(area == "publico"){
+      
+        // 2º. UID del usuario existente, se registra usuario en la BD local
+        if(uid != null){ 
+  
+          const formUser = {
+            uuId: uid,
+            uuidEmail: email,
+            active: true
+          }
+  
+          const jsonUser = JSON.stringify(formUser);
+  
+          console.log(jsonUser);
+  
+          await fetch('http://localhost:8080/usuario', {
+            method: 'POST',
+            body: jsonUser,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Respuesta del servidor:', data);
+          })
+          .catch(error => {
+            ok=false;
+            console.error('Error al enviar los datos:', error);
+            alert(error.message);
+          });
+  
+          // 3º. Se inserta el organismo público en la BD local.
+          const formDataPublic ={
+            idOrganization: dir3,
+            userUuid: uid,
+            name: nombre,
+            email: email,
+            location: localidad,
+            area: "Público",
+            active: true
+          }
+  
+          const jsonData = JSON.stringify(formDataPublic);
+          console.log(jsonData);
+          
+          await fetch('http://localhost:8080/organismo', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Respuesta del servidor:', data);
+          })
+          .catch(error => {
+            ok = false;
+            console.error('Error al enviar los datos:', error);
+            alert(error.message);
+          });
+
+          if(ok){alert('¡El organismo público ha sido registrado correctamente! \n ');}  
+        }
+      }
+
+    }catch(error) {
       console.error('Error al registrar organismo público:', error);
       alert('Error al registrar el organismo público.\n ');
-    });
-
-    if(areaPublicElement.value == "publico"){
-      
-      // 2º. UID del usuario existente, se registra usuario en la BD local
-      if(uid != null){ 
-        const fecha = new Date();
-
-        const formUser = {
-          uuid_usuario: uid,
-          uuid_correo: emailElement?.value,
-          fec_creacion: fecha,
-          fec_baja: null,
-          activo: true
-        }
-
-        const jsonUser = JSON.stringify(formUser);
-
-        console.log(jsonUser);
-
-        fetch('http://localhost:8080/usuario', {
-          method: 'POST',
-          body: jsonUser,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Respuesta del servidor:', data);
-        })
-        .catch(error => {
-          console.error('Error al enviar los datos:', error);
-        });
-
-        // 3º. Se inserta el organismo público en la BD local.
-        const formDataPublic ={
-          idOrganismo: DIR3Element?.value,
-          uid_usuario: uid,
-          id_proyecto: null,
-          nombre: nombreElement?.value,
-          email: emailElement?.value,
-          localidad: localidadElement?.value,
-          ambito: "Público",
-          activo: true
-        }
-
-        const jsonData = JSON.stringify(formDataPublic);
-        console.log(jsonData);
-        
-        if (form) {
-          form.addEventListener('submit', (event) =>{
-            event.preventDefault();
-            
-            fetch('http://localhost:8080/organismo', {
-              method: 'POST',
-              body: jsonData,
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-            .then(response => response.json())
-            .then(data => {
-              console.log('Respuesta del servidor:', data);
-            })
-            .catch(error => {
-              console.error('Error al enviar los datos:', error);
-            });
-
-          });
-        }
-
-      }
     }
+    
     return true;
   }
 
-  enviarFormularioOrganismoPrivado(){
+  async enviarFormularioOrganismoPrivado(){
+    var ok = true;
     //Obtener datos del formulario
     const NIFElement = document.getElementById("NIF") as HTMLInputElement;
+    const NIF = NIFElement.value;
     const nombreElement = document.getElementById("nombreOrganismo") as HTMLInputElement;
+    const nombre = nombreElement.value;
     const emailElement = document.getElementById("emailOrganismo") as HTMLInputElement;
     const localidadElement = document.getElementById("localidadOrganismo") as HTMLInputElement;
+    const localidad = localidadElement.value;
     const areaPrivateElement = document.getElementById("RBprivado") as HTMLInputElement;
+    const area = areaPrivateElement.value;
     const passwordElement = document.getElementById("passwordOrganismo") as HTMLInputElement;
 
     const form = document.getElementById('formularioOrganismoPrivado') as HTMLFormElement;
@@ -396,8 +404,8 @@ export class RegisterComponent implements OnInit {
 
     // Campos rellenos, pero con formato incorrecto.
     const expresionEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const email = emailElement.value;
     if(emailElement instanceof HTMLInputElement){
-      const email = emailElement.value;
       if(!expresionEmail.test(email)){
         alert('El campo "Email" no tiene un formato válido.');
         return false;
@@ -413,91 +421,87 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    //1º. Registrar usuario en Firebase
-    var uid;
-    this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value)
-    .then((userCredential) => {
-      uid = userCredential.user?.uid;
+    try{
+      //1º. Registrar usuario en Firebase
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value);
+      var uid = userCredential.user?.uid;
       console.log('Organismo privado registrado:', userCredential.user);
-      alert('¡El organismo privado ha sido registrado correctamente! \n ');
+
       if(form){form.reset();}
-    })
-    .catch((error) => {
-      console.error('Error al registrar organismo privado:', error);
-      alert('Error al registrar el organismo privado.\n ');
-    });
 
-    if(areaPrivateElement.value == "privado"){
-      // 2º. UID del usuario existente, se registra usuario en la BD local
-      if(uid != null){ 
-        const fecha = new Date();
-
-        const formUser = {
-          uuid_usuario: uid,
-          uuid_correo: emailElement?.value,
-          fec_creacion: fecha,
-          fec_baja: null,
-          activo: true
-        }
-
-        const jsonUser = JSON.stringify(formUser);
-
-        console.log(jsonUser);
-
-        fetch('http://localhost:8080/usuario', {
-          method: 'POST',
-          body: jsonUser,
-          headers: {
-            'Content-Type': 'application/json'
+      if(area == "privado"){
+        // 2º. UID del usuario existente, se registra usuario en la BD local
+        if(uid != null){ 
+  
+          const formUser = {
+            uuId: uid,
+            uuidEmail: email,
+            active: true
           }
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Respuesta del servidor:', data);
-        })
-        .catch(error => {
-          console.error('Error al enviar los datos:', error);
-        });
-
-        // 3º. Se inserta el organismo privado en la BD local.
-        const formDataPrivate ={
-          idOrganismo: NIFElement?.value,
-          uid_usuario: uid,
-          id_proyecto: null,
-          nombre: nombreElement?.value,
-          email: emailElement?.value,
-          localidad: localidadElement?.value,
-          ambito: "Privado",
-          activo: true
-        }
-
-        const jsonData = JSON.stringify(formDataPrivate);
-        console.log(jsonData);
-
-        
-        if (form) {
-          form.addEventListener('submit', (event) =>{
-            event.preventDefault();
-            
-            fetch('http://localhost:8080/organismo', {
-              method: 'POST',
-              body: jsonData,
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-            .then(response => response.json())
-            .then(data => {
-              console.log('Respuesta del servidor:', data);
-            })
-            .catch(error => {
-              console.error('Error al enviar los datos:', error);
-            });
-
+  
+          const jsonUser = JSON.stringify(formUser);
+  
+          console.log(jsonUser);
+  
+          await fetch('http://localhost:8080/usuario', {
+            method: 'POST',
+            body: jsonUser,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Respuesta del servidor:', data);
+          })
+          .catch(error => {
+            ok=false;
+            console.error('Error al enviar los datos:', error);
+            alert(error.message);
           });
+  
+          // 3º. Se inserta el organismo privado en la BD local.
+          const formDataPrivate ={
+            idOrganization: NIF,
+            userUuid: uid,
+            name: nombre,
+            email: email,
+            location: localidad,
+            area: "Privado",
+            active: true
+          }
+  
+          const jsonData = JSON.stringify(formDataPrivate);
+          console.log(jsonData);
+  
+          await fetch('http://localhost:8080/organismo', {
+            method: 'POST',
+            body: jsonData,
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Respuesta del servidor:', data);
+          })
+          .catch(error => {
+            ok = false;
+            console.error('Error al enviar los datos:', error);
+            alert(error.message);
+          });
+          
+          if(ok){alert('¡El organismo privado ha sido registrado correctamente! \n ');}
         }
       }
+
+
+    }catch(error){
+      console.error('Error al registrar organismo privado:', error);
+      alert('Error al registrar el organismo privado.\n ');
     }
+
+    
     return true;
   }
 
