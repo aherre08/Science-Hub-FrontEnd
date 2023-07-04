@@ -1,87 +1,134 @@
-.screen{
+.screen {
     background: linear-gradient(0deg, #000000, #15b0db);
     background-size: 400% 400%;
 
     animation: animation 40s ease infinite;
 
-    position:fixed;
-    top:0%;
+    position: fixed;
+    top: 0%;
     bottom: 0%;
-    left:0%;
-    right:0%;
-    font-family:Arial, Helvetica, sans-serif;
-    
+    left: 0%;
+    right: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 @keyframes animation {
-    0%{background-position:52% 0%}
-    50%{background-position:49% 100%}
-    100%{background-position:52% 0%}
+    0% {
+        background-position: 52% 0%
+    }
+
+    50% {
+        background-position: 49% 100%
+    }
+
+    100% {
+        background-position: 52% 0%
+    }
 }
 
-.card{
+.card {
     position: relative;
     width: 575px;
     height: 375px;
     margin: 0 auto;
     margin-top: 10%;
-    border:3px black solid;
+    border: 3px black solid;
     border-radius: 50px;
     background-color: white;
 }
 
-.card-header{ 
+.card-header {
     position: relative;
     text-align: center;
     margin-top: 1%;
-    margin-left:25%;
+    margin-left: 25%;
     width: 300px;
     font-weight: bold;
     background-color: white;
 }
-.card-body{
+
+.card-body {
     margin-top: 2%;
     margin-left: 5%;
 }
 
-.email{
+.email {
     margin-top: 0%;
-    width:450px;
+    width: 450px;
 }
 
-.mb-3{
+.mb-3 {
     margin-top: 5%;
-    width:450px;
+    width: 450px;
 }
 
-.btn-primary{
+.btn-primary {
     width: 450px;
     text-align: center;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background-color: blue;
     font-weight: bolder;
 }
 
-.btn-link{
+.btn-link {
     margin-top: 2%;
     color: grey;
     width: 450px;
     text-align: center;
 }
 
-.btn-link:hover{
-    color:black;
+.btn-link:hover {
+    color: black;
     font-weight: bolder;
 }
 
-.showPasswordButton{
+.showPasswordButton {
     margin-left: 2%;
     border-radius: 50px;
 }
 
-#eye{
+#eye {
     width: 25px;
     height: auto;
+}
+
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 595px) {
+
+    .card {
+        width: 90%;
+        margin-top: 10%;
+        border: 3px black solid;
+        border-radius: 50px;
+    }
+
+    .card-header {
+        margin-top: 2%;
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    .card-body {
+        margin-left: 5%;
+    }
+
+    .email {
+        width: 100%;
+    }
+
+    .mb-3 {
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .btn-link {
+        width: 100%;
+    }
 }

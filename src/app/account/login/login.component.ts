@@ -21,9 +21,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
-
   passwordVisibility(id:string, buttonid:string): void {
     const passwordInput = document.getElementById(id) as HTMLInputElement;
     const showPasswordButton = document.getElementById(buttonid) as HTMLButtonElement;
@@ -74,8 +71,9 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(email, password).subscribe(
       (userType: string) => {
+        console.log("Respuesta recibida: " + userType);
         if (userType === 'cientifico') {
-          this.router.navigate(['/dashboard-cientifico']);
+          this.router.navigate(['/scientist/create-publication']);
         } else if (userType === 'organizacion') {
           this.router.navigate(['/dashboard-organizacion']);
         } else {
@@ -88,6 +86,7 @@ export class LoginComponent implements OnInit {
         alert('Se ha producido un error al iniciar sesión.');
       }
     );
+
     return true;
   }
   
