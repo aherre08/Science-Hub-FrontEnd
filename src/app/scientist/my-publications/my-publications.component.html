@@ -3,7 +3,7 @@
 
 <head>
     <title>Crear publicación</title>
-    <link rel="stylesheet" type="text/css" href="create-publication.component.css">
+    <link rel="stylesheet" type="text/css" href="my-publications.component.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
@@ -46,44 +46,39 @@
 
     <div id="contentPanel">
         <div id="centerPanel">
-            <h4>Crear publicación</h4>
+            <h4>Mis publicaciones</h4>
             <hr>
-            <div class="form">
-                <div class="form-publicacion-field">
-                    <label for="tituloPublicacion"><b><u>Título:</u></b></label>
-                    <input type="text" id="tituloPublicacion" name="titulo"
-                        placeholder="Escribe el título de tu publicación" required>
-                    <br>
-                </div>
-                <div class="form-publicacion-field">
-                    <label for="descripcionPublicacion"><b><u>Descripción:</u></b></label>
-                    <br>
-                    <textarea id="descripcionPublicacion" name="descripcion"
-                        placeholder="Escribe la descripción de tu publicación"></textarea>
-                    <br>
-                </div>
-                <div class="form-publicacion-field">
-                    <label for="especialidadPublicacion"><b><u>Especialidad:</u></b></label>
-                    <input type="text" id="especialidadPublicacion" name="especialidad">
-                    <br>
-                </div>
-                <div class="form-publicacion-field">
-                    <label><b><u>Experiencia:</u></b></label>
-                    <input type="number" id="experienciaAñosPublicacion" name="experiencia_años" value="0" min="0"
-                        max="70">
-                    <span>año(s)</span>
-                    <input type="number" id="experienciaMesesPublicacion" name="experiencia_meses" value="1" min="1"
-                        max="11">
-                    <span>mes(es)</span>
-
-                    <br>
-                </div>
-                <button class="btn btn-primary" id="crearButton">Crear</button>
+            <div *ngIf="publicaciones.length > 0; else noPublicaciones">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Índice</th>
+                            <th>ID Publicación</th>
+                            <th>Título</th>
+                            <th>Última Modificación</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let publicacion of publicaciones; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ publicacion.id_publicacion }}</td>
+                            <td>{{ publicacion.titulo }}</td>
+                            <td>{{ publicacion.ultima_modificacion }}</td>
+                            <td><button (click)="editarPublicacion(publicacion.id_publicacion)">Editar</button></td>
+                            <td><button (click)="eliminarPublicacion(publicacion.id_publicacion)">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+            <ng-template #noPublicaciones>
+                <p id="noPublications">No existen publicaciones.<br>Añade una nueva publicación en "Crear publicación".
+                </p>
+            </ng-template>
+
         </div>
-
-
-
     </div>
 </body>
 

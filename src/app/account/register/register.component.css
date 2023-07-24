@@ -1,197 +1,219 @@
-.screen{
+.screen {
     background: linear-gradient(0deg, #000000, #15b0db);
     background-size: 400% 400%;
 
     animation: animation 40s ease infinite;
 
-    position:fixed;
-    top:0%;
+    position: fixed;
+    top: 0%;
     bottom: 0%;
-    left:0%;
-    right:0%;
-    font-family:Arial, Helvetica, sans-serif;
-    
+    left: 0%;
+    right: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 @keyframes animation {
-    0%{background-position:52% 0%}
-    50%{background-position:49% 100%}
-    100%{background-position:52% 0%}
+    0% {
+        background-position: 52% 0%
+    }
+
+    50% {
+        background-position: 49% 100%
+    }
+
+    100% {
+        background-position: 52% 0%
+    }
 }
 
-.card{
+.card {
     position: relative;
     width: 600px;
     height: 450px;
     margin: 0 auto;
     margin-top: 10%;
-    border:3px black solid;
+    border: 3px black solid;
     border-radius: 50px;
     background-color: white;
 }
 
-.card-header{ 
+.card-header {
     position: relative;
     text-align: center;
     margin-top: 1%;
-    margin-left:25%;
+    margin-left: 25%;
     width: 300px;
     font-weight: bold;
     background-color: white;
 }
-.card-body{
+
+.card-body {
     margin-top: 2%;
     margin-left: 5%;
 }
 
-input[type="radio"]:checked + label{
+input[type="radio"]:checked+label {
     font-weight: bolder;
 }
 
-#cientifico{
+#cientifico {
     margin-left: 7%;
 }
 
-#label-cientifico{
+#label-cientifico {
     margin-left: 2%;
 }
 
-#organismo{
+#organismo {
     margin-left: 5%;
 }
 
-#label-organismo{
+#label-organismo {
     margin-left: 2%;
 }
 
-#formulario-cientifico{
+#formulario-cientifico {
     margin-top: 2%;
     margin-left: 6%;
 }
 
-.form-cientifico-field{
+.form-cientifico-field {
     margin-top: 5%;
 }
 
-#nombreCientifico{
+#nombreCientifico {
     margin-left: 6%;
     width: 250px;
-    
+
 }
-#emailCientifico{
+
+#emailCientifico {
     margin-left: 23%;
     width: 253px;
 }
-#orcidCientifico{
+
+#orcidCientifico {
     margin-left: 21%;
     width: 253px;
 }
-#especialidadCientifico{
+
+#profesionCientifico {
+    margin-left: 17%;
+    width: 253px;
+}
+
+#passwordCientifico {
     margin-left: 13%;
     width: 253px;
 }
 
-#passwordCientifico{
-    margin-left: 13%;
-    width: 253px;
-}
-.showPasswordButton{
+.showPasswordButton {
     margin-left: 2%;
     border-radius: 50px;
 }
-.showPasswordButton:hover{
+
+.showPasswordButton:hover {
     font-weight: bolder;
 }
-#eye{
+
+#eye {
     width: 25px;
     height: auto;
 }
 
-#registrarseCientifico{
+#registrarseCientifico {
     text-align: center;
     margin-top: 5%;
-    margin-left:15%;
+    margin-left: 15%;
     width: 100px;
     background-color: lightgreen;
 }
-#registrarseCientifico:hover{
+
+#registrarseCientifico:hover {
     background-color: green;
     font-weight: bolder;
-    color:white;
+    color: white;
 }
 
-#cancelar{
+#cancelar {
     margin-left: 20%;
     color: darkred;
 }
-#cancelar:hover{
+
+#cancelar:hover {
     color: red;
     font-weight: bolder;
 }
 
-#formulario-organismo-publico{
+#formulario-organismo-publico {
     margin-left: 7%;
 }
 
-.form-organismo-field{
+.form-organismo-field {
     margin-top: 3%;
 }
 
-#RBpublico{
+#RBpublico {
     margin-left: 18%;
 }
-#label-publico{
+
+#label-publico {
     margin-left: 2%;
 }
-#label-privado{
+
+#label-privado {
     margin-left: 2%;
 }
-#RBprivado{
+
+#RBprivado {
     margin-left: 8%;
 }
 
-#codigoDIR3{
+#codigoDIR3 {
     margin-left: 12%;
     width: 253px;
 }
 
-#nombreOrganismo{
+#nombreOrganismo {
     margin-left: 4.5%;
     width: 253px;
 }
 
-#emailOrganismo{
+#emailOrganismo {
     margin-left: 22%;
     width: 253px;
 }
-#localidadOrganismo{
+
+#localidadOrganismo {
     margin-left: 16%;
     width: 253px;
 }
 
-#passwordOrganismo{
+#passwordOrganismo {
     margin-left: 12%;
     width: 253px;
 }
 
-#registrarseOrganismo{
+#registrarseOrganismo {
     margin-top: 5%;
     text-align: center;
-    margin-left:10%;
+    margin-left: 10%;
     width: 100px;
     background-color: lightgreen;
 }
-#registrarseOrganismo:hover{
+
+#registrarseOrganismo:hover {
     background-color: green;
     font-weight: bolder;
-    color:white;
+    color: white;
 }
 
-#formulario-organismo-privado{
+#formulario-organismo-privado {
     margin-left: 7%;
 }
 
-#NIF{
+#NIF {
     margin-left: 25%;
     width: 253px;
 }

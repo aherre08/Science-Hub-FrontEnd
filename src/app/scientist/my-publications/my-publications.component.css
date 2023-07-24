@@ -148,48 +148,7 @@ hr {
     border: solid black 1px;
 }
 
-
-.form {
-    padding: 10px;
-}
-
-.form-publicacion-field {
-    margin-bottom: 3%;
-    margin-left: 20%;
-}
-
-#tituloPublicacion {
-    margin-left: 6%;
-    width: 700px;
-}
-
-#descripcionPublicacion {
-    margin-top: 1%;
-    height: 200px;
-    width: 800px;
-    resize: none;
-}
-
-#especialidadPublicacion {
-    margin-left: 2%;
-    width: 320px;
-}
-
-#experienciaAñosPublicacion {
-    margin-left: 3%;
-    margin-right: 1%;
-}
-
-#experienciaMesesPublicacion {
-    margin-left: 5%;
-    margin-right: 1%;
-}
-
-#crearButton {
-    margin-left: 45%;
-    background-color: #53B200;
-}
-
-#crearButton:hover {
-    background-color: darkgreen;
+#noPublications {
+    margin-top: 15%;
+    text-align: center;
 }

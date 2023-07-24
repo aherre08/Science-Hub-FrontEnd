@@ -63,8 +63,8 @@ export class RegisterComponent implements OnInit {
     const nombre = nombreElement.value;
     const emailElement = document.getElementById("emailCientifico")as HTMLInputElement;
     const orcidElement = document.getElementById("orcidCientifico")as HTMLInputElement;
-    const especialidadElement = document.getElementById("especialidadCientifico")as HTMLInputElement;
-    const especialidad = especialidadElement.value;
+    const profesionElement = document.getElementById("profesionCientifico")as HTMLInputElement;
+    const profesion = profesionElement.value;
     const passwordElement = document.getElementById("passwordCientifico") as HTMLInputElement;
 
     const form = document.getElementById('formularioCientifico') as HTMLFormElement;
@@ -83,8 +83,8 @@ export class RegisterComponent implements OnInit {
       alert('El campo "ORCID" no puede ser vacío.');
       return false;
     }
-    if(especialidadElement instanceof HTMLInputElement && especialidadElement.value === ''){
-      alert('El campo "Especialidad" no puede ser vacío.');
+    if(profesionElement instanceof HTMLInputElement && profesionElement.value === ''){
+      alert('El campo "Profesión" no puede ser vacío.');
       return false;
     }
 
@@ -140,7 +140,7 @@ export class RegisterComponent implements OnInit {
 
         console.log(jsonUser);
 
-        await fetch('http://localhost:8080/usuario', {
+        await fetch('http://localhost:8080/api/project/usuario', {
           method: 'POST',
           body: jsonUser,
           headers: {
@@ -164,7 +164,7 @@ export class RegisterComponent implements OnInit {
           userUuid: uid,
           name: nombre,
           email: email,
-          speciality: especialidad,
+          profession: profesion,
           active: true
         }
 
@@ -172,7 +172,7 @@ export class RegisterComponent implements OnInit {
 
         console.log(jsonData);
 
-        await fetch('http://localhost:8080/cientifico', {
+        await fetch('http://localhost:8080/api/project/cientifico', {
           method: 'POST',
           body: jsonData,
           headers: {
@@ -294,7 +294,7 @@ export class RegisterComponent implements OnInit {
   
           console.log(jsonUser);
   
-          await fetch('http://localhost:8080/usuario', {
+          await fetch('http://localhost:8080/api/project/usuario', {
             method: 'POST',
             body: jsonUser,
             headers: {
@@ -325,7 +325,7 @@ export class RegisterComponent implements OnInit {
           const jsonData = JSON.stringify(formDataPublic);
           console.log(jsonData);
           
-          await fetch('http://localhost:8080/organismo', {
+          await fetch('http://localhost:8080/api/project/organismo', {
             method: 'POST',
             body: jsonData,
             headers: {
@@ -387,7 +387,7 @@ export class RegisterComponent implements OnInit {
     }
     
     if(localidadElement instanceof HTMLInputElement && localidadElement.value === ''){
-      alert('El campo "Especialidad" no puede ser vacío.');
+      alert('El campo "Localidad" no puede ser vacío.');
       return false;
     }
 
@@ -443,7 +443,7 @@ export class RegisterComponent implements OnInit {
   
           console.log(jsonUser);
   
-          await fetch('http://localhost:8080/usuario', {
+          await fetch('http://localhost:8080/api/project/usuario', {
             method: 'POST',
             body: jsonUser,
             headers: {
@@ -474,7 +474,7 @@ export class RegisterComponent implements OnInit {
           const jsonData = JSON.stringify(formDataPrivate);
           console.log(jsonData);
   
-          await fetch('http://localhost:8080/organismo', {
+          await fetch('http://localhost:8080/api/project/organismo', {
             method: 'POST',
             body: jsonData,
             headers: {

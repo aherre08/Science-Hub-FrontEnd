@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { LoginResponse } from './loginResponse';
+import { response } from 'express';
 
 @Component({
   selector: 'app-login',
@@ -70,14 +72,17 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
 
     this.loginService.login(email, password).subscribe(
-      (userType: string) => {
-        console.log("Respuesta recibida: " + userType);
+      (response: LoginResponse) => {
+        console.log("Respuesta recibida: ", response);
+        const userType = response.userType;
+        const idUser = response.idUser;
+        
         if (userType === 'cientifico') {
           this.router.navigate(['/scientist/create-publication']);
         } else if (userType === 'organizacion') {
           this.router.navigate(['/dashboard-organizacion']);
         } else {
-          console.error('Tipo de usuario no válido:', userType);
+          console.error('Tipo de usuario no válido:', response);
           alert('Las credenciales introducidas no corresponden a un usuario existente.');
         }
       },
