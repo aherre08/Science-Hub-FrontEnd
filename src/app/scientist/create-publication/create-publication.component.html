@@ -14,7 +14,7 @@
             <ul id="features-list">
                 <li><a routerLink="../create-publication" class="menu-link">Crear publicación</a></li>
                 <li><a routerLink="../my-publications" class="menu-link">Mis publicaciones</a></li>
-                <li><a routerLink="../register" class="menu-link">Buscar publicación</a></li>
+                <li><a routerLink="../search-publication" class="menu-link">Buscar publicación</a></li>
                 <li><a routerLink="../register" class="menu-link">Buscar organismo</a></li>
                 <li><a routerLink="../register" class="menu-link">Recomendaciones proyectos</a></li>
             </ul>
@@ -27,8 +27,27 @@
             </div>
 
         </div>
+        <img src="../../../assets/images/ScienceHub Logo.png" id="ScienceHubLogo" alt="Logo de ScienceHub">
         <span class="title">Científico</span>
-        <a routerLink="../login" id="signOutLink" class="btn btn-link">Cerrar sesión</a>
+
+        <div class="user-panel" (click)="showOptions = !showOptions" [class.active]="showOptions">
+            <div class="user-panel-header">
+                <div class="name-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    <span id="nameSpan">{{ userName }}</span>
+                </div>
+                <i class="fa fa-chevron-down"></i>
+            </div>
+            <div class="user-panel-options">
+                <div class="user-option">Mi perfil</div>
+                <div class="user-option">Cerrar Sesión</div>
+            </div>
+        </div>
     </div>
 
     <div class="links">
@@ -36,7 +55,7 @@
         <div id="verticalLine">|</div>
         <a routerLink="../my-publications" class="btn btn-link">Mis publicaciones</a>
         <div id="verticalLine">|</div>
-        <a routerLink="../register" class="btn btn-link">Buscar publicación</a>
+        <a routerLink="../search-publication" class="btn btn-link">Buscar publicación</a>
         <div id="verticalLine">|</div>
         <a routerLink="../register" class="btn btn-link">Buscar organismo</a>
         <div id="verticalLine">|</div>
@@ -48,37 +67,41 @@
         <div id="centerPanel">
             <h4>Crear publicación</h4>
             <hr>
-            <div class="form">
+            <div class="form" #formularioPublicacion>
                 <div class="form-publicacion-field">
                     <label for="tituloPublicacion"><b><u>Título:</u></b></label>
                     <input type="text" id="tituloPublicacion" name="titulo"
-                        placeholder="Escribe el título de tu publicación" required>
+                        placeholder="Escribe el título de tu publicación. (Máx. 50 caracteres)" maxlength="50" required>
                     <br>
                 </div>
                 <div class="form-publicacion-field">
                     <label for="descripcionPublicacion"><b><u>Descripción:</u></b></label>
                     <br>
                     <textarea id="descripcionPublicacion" name="descripcion"
-                        placeholder="Escribe la descripción de tu publicación"></textarea>
+                        placeholder="Escribe la descripción de tu publicación" maxlength="200" required></textarea>
                     <br>
                 </div>
                 <div class="form-publicacion-field">
                     <label for="especialidadPublicacion"><b><u>Especialidad:</u></b></label>
-                    <input type="text" id="especialidadPublicacion" name="especialidad">
+                    <input type="text" id="especialidadPublicacion" name="especialidad"
+                        placeholder="Escribe la especialidad de tu profesión." required>
                     <br>
                 </div>
                 <div class="form-publicacion-field">
                     <label><b><u>Experiencia:</u></b></label>
                     <input type="number" id="experienciaAñosPublicacion" name="experiencia_años" value="0" min="0"
-                        max="70">
+                        max="70" required>
                     <span>año(s)</span>
                     <input type="number" id="experienciaMesesPublicacion" name="experiencia_meses" value="1" min="1"
-                        max="11">
+                        max="11" required>
                     <span>mes(es)</span>
 
                     <br>
                 </div>
-                <button class="btn btn-primary" id="crearButton">Crear</button>
+                <button class="btn btn-primary" id="crearButton" (click)="realizarPublicacion()">
+                    <i class="fas fa-plus"></i>
+                    Crear
+                </button>
             </div>
         </div>
 

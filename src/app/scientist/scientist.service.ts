@@ -12,7 +12,11 @@ export class ScientistService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerPublicaciones(): Observable<Publicacion[]> {
-    return this.http.get<Publicacion[]>(this.apiUrl + '/publicacion/all');
+  realizarPublicacion(publicacion: any): Observable<any>{
+    return this.http.post(this.apiUrl + '/publicacion', publicacion);
+  }
+
+  obtenerPublicaciones(orcid:string): Observable<Publicacion[]> {
+    return this.http.get<Publicacion[]>(this.apiUrl + '/publicacion/all/'+ orcid);
   }
 }

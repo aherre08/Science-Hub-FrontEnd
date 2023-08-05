@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { LoginResponse } from './loginResponse';
 import { response } from 'express';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { response } from 'express';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
       this.loginForm = this.fb.group({
@@ -72,17 +73,46 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
 
     this.loginService.login(email, password).subscribe(
-      (response: LoginResponse) => {
+      async (response: LoginResponse) => {
         console.log("Respuesta recibida: ", response);
         const userType = response.userType;
         const idUser = response.idUser;
         
         if (userType === 'cientifico') {
-          this.router.navigate(['/scientist/create-publication']);
+          console.log("LOGIN ASIGNA ID USUARIO ---> " + idUser);
+          this.userService.setUserId(idUser);
+        
+          try {
+            const response = await fetch('http://localhost:8080/api/project/cientifico/' + idUser, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+        
+            if (response.ok) {
+              const data = await response.json();
+              console.log('Respuesta del servidor:', data);
+              this.userService.setOrcid(data.orcid);
+              this.userService.setUserUuid(data.userUuid);
+              this.userService.setName(data.name);
+              this.userService.setEmail(data.email);
+              this.userService.setProfession(data.profession);
+        
+              this.router.navigate(['/scientist/create-publication']);
+            } else {
+              console.error('Error al obtener los datos:', response.status);
+              alert('Error al obtener los datos del usuario.');
+            }
+          } catch (error) {
+            console.error('Error al enviar los datos:', error);
+          }
         } else if (userType === 'organizacion') {
           this.router.navigate(['/dashboard-organizacion']);
+          this.userService.setUserId(idUser);
         } else {
           console.error('Tipo de usuario no válido:', response);
+          this.userService.setUserId(undefined);
           alert('Las credenciales introducidas no corresponden a un usuario existente.');
         }
       },

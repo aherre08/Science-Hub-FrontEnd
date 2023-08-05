@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Buscar publicación</title>
+    <link rel="stylesheet" type="text/css" href="search-publication.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+    <div class="header">
+        <button id="menuButton"><i class="fas fa-bars"></i></button>
+        <div id="menuContent">
+            <ul id="features-list">
+                <li><a routerLink="../create-publication" class="menu-link">Crear publicación</a></li>
+                <li><a routerLink="../my-publications" class="menu-link">Mis publicaciones</a></li>
+                <li><a routerLink="../search-publication" class="menu-link">Buscar publicación</a></li>
+                <li><a routerLink="../register" class="menu-link">Buscar organismo</a></li>
+                <li><a routerLink="../register" class="menu-link">Recomendaciones proyectos</a></li>
+            </ul>
+
+            <div id="help-links">
+                <a routerLink="../create-publication" class="help-link">FAQ</a>
+                <a routerLink="../create-publication" class="help-link">Opciones</a>
+                <a routerLink="../create-publication" class="help-link">Ayuda</a>
+                <a routerLink="../create-publication" class="help-link">Contacto</a>
+            </div>
+
+        </div>
+        <img src="../../../assets/images/ScienceHub Logo.png" id="ScienceHubLogo" alt="Logo de ScienceHub">
+        <span class="title">Científico</span>
+        <a routerLink="../login" id="signOutLink" class="btn btn-link">Cerrar sesión</a>
+    </div>
+
+    <div class="links">
+        <a routerLink="../create-publication" class="btn btn-link">Crear publicación </a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../my-publications" class="btn btn-link">Mis publicaciones</a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../search-publication" class="btn btn-link">Buscar publicación</a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../register" class="btn btn-link">Buscar organismo</a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../register" class="btn btn-link">Recomendaciones proyectos</a>
+
+    </div>
+
+    <div id="contentPanel">
+        <div id="centerPanel">
+            <h4>Buscar publicación</h4>
+            <hr>
+
+            <div class="form-publicacion-field">
+                <label for="idPublicacion"><b><u>ID Publicación:</u></b></label>
+                <input type="text" id="idPublicacion" name="idPublicacion"
+                    placeholder="Escribe el ID de la publicación que desea buscar: PB-XXX" required>
+
+                <button class="btn btn-primary" id="buscarButton">
+                    <i class="fas fa-search"></i>
+                    <span id="buscarSpan">Buscar</span>
+
+                </button>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

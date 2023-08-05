@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/shared/user.service';
 import { ScientistService } from './../scientist.service';
 import { ScientistModule } from './../scientist.module';
 import { Component, OnInit } from '@angular/core';
@@ -10,8 +11,10 @@ import { Publicacion } from './my-publications.model';
 })
 export class MyPublicationsComponent implements OnInit {
   publicaciones: Publicacion[] = [];
-  
-  constructor(private scientistService: ScientistService){}
+  itemsPerPage = 5;
+  currentPage = 1;
+
+  constructor(private scientistService: ScientistService, private userService: UserService){}
 
   ngOnInit() {
     const menuButton = document.getElementById("menuButton") as HTMLButtonElement;
@@ -25,7 +28,7 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   cargarPublicaciones() {
-    this.scientistService.obtenerPublicaciones().subscribe(
+    this.scientistService.obtenerPublicaciones(this.userService.getOrcid()).subscribe(
       (data: Publicacion[]) => {
         this.publicaciones = data;
       },
@@ -33,6 +36,23 @@ export class MyPublicationsComponent implements OnInit {
         console.error('Error al obtener las publicaciones:', error);
       }
     );
+  }
+
+  onPageChange(pageNumber: number): void {
+    this.currentPage = pageNumber;
+  }
+
+  get paginatedPublicaciones(): Publicacion[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.publicaciones.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  get isPreviousDisabled(): boolean {
+    return this.currentPage === 1;
+  }
+
+  get isNextDisabled(): boolean {
+    return this.currentPage === Math.ceil(this.publicaciones.length / this.itemsPerPage);
   }
 
   editarPublicacion(idPublicacion: number) {

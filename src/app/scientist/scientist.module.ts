@@ -5,20 +5,23 @@ import { CreatePublicationComponent } from './create-publication/create-publicat
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyPublicationsComponent } from './my-publications/my-publications.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { SearchPublicationComponent } from './search-publication/search-publication.component';
+import { NgxPaginationModule } from 'ngx-pagination'; 
 
 
 @NgModule({
   declarations: [
     CreatePublicationComponent,
-    MyPublicationsComponent
+    MyPublicationsComponent,
+    SearchPublicationComponent
   ],
   imports: [
     CommonModule,
     ScientistRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    NgxPaginationModule
+  ],
 })
 export class ScientistModule { }
