@@ -8,11 +8,9 @@ import { AppComponent } from './app.component';
 import { AccountModule } from './account/account.module';
 import { ScientistModule } from './scientist/scientist.module';
 
+// Importa los módulos necesarios de AngularFire
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -26,10 +24,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AccountModule,
     ScientistModule,
     HttpClientModule,
+    // Agrega AngularFireModule al arreglo de imports y realiza la inicialización de Firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFireStorageModule,
-    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { endWith } from 'rxjs';
 
 @Component({
   selector: 'app-register',

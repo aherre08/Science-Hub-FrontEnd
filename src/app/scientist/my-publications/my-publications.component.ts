@@ -11,8 +11,10 @@ import { Publicacion } from './my-publications.model';
 })
 export class MyPublicationsComponent implements OnInit {
   publicaciones: Publicacion[] = [];
-  itemsPerPage = 5;
-  currentPage = 1;
+  page: number = 1;
+  itemsPerPage: number = 5;
+  isPreviousDisabled: boolean = true;
+  isNextDisabled: boolean = false;
 
   constructor(private scientistService: ScientistService, private userService: UserService){}
 
@@ -38,21 +40,20 @@ export class MyPublicationsComponent implements OnInit {
     );
   }
 
-  onPageChange(pageNumber: number): void {
-    this.currentPage = pageNumber;
+  get paginatedPublicaciones(): any[] {
+    const startIndex = (this.page - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.publicaciones.slice(startIndex, endIndex);
   }
 
-  get paginatedPublicaciones(): Publicacion[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.publicaciones.slice(startIndex, startIndex + this.itemsPerPage);
+  onPageChange(newPage: number) {
+    this.page = newPage;
+    this.updatePaginationStatus();
   }
 
-  get isPreviousDisabled(): boolean {
-    return this.currentPage === 1;
-  }
-
-  get isNextDisabled(): boolean {
-    return this.currentPage === Math.ceil(this.publicaciones.length / this.itemsPerPage);
+  updatePaginationStatus() {
+    this.isPreviousDisabled = this.page === 1;
+    this.isNextDisabled = this.page === Math.ceil(this.publicaciones.length / this.itemsPerPage);
   }
 
   editarPublicacion(idPublicacion: number) {
