@@ -16,8 +16,8 @@
                 <li><a routerLink="../create-publication" class="menu-link">Crear publicación</a></li>
                 <li><a routerLink="../my-publications" class="menu-link">Mis publicaciones</a></li>
                 <li><a routerLink="../search-publication" class="menu-link">Buscar publicación</a></li>
-                <li><a routerLink="../register" class="menu-link">Buscar organismo</a></li>
-                <li><a routerLink="../register" class="menu-link">Recomendaciones proyectos</a></li>
+                <li><a routerLink="../search-organization" class="menu-link">Buscar organismo</a></li>
+                <li><a routerLink="../suggest-projects" class="menu-link">Recomendaciones proyectos</a></li>
             </ul>
 
             <hr>
@@ -31,7 +31,37 @@
         </div>
         <img src="../../../assets/images/ScienceHub Logo.png" id="ScienceHubLogo" alt="Logo de ScienceHub">
         <span class="title">Científico</span>
-        <a routerLink="../login" id="signOutLink" class="btn btn-link">Cerrar sesión</a>
+        <div class="user-panel" (click)="showOptions = !showOptions" [class.active]="showOptions">
+            <div class="user-panel-header">
+                <div class="name-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    <span id="nameSpan">{{ userName }}</span>
+                </div>
+                <i class="fa fa-chevron-down"></i>
+            </div>
+            <div class="user-panel-options">
+                <div class="user-option">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                    </svg>
+                    <a routerLink="../register" id="profileOption">Mi Perfil</a>
+                </div>
+                <div class="user-option">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="darkred"
+                        class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+                    </svg>
+                    <a routerLink="../register" id="signOutOption">Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="links">
@@ -41,9 +71,9 @@
         <div id="verticalLine">|</div>
         <a routerLink="../search-publication" class="btn btn-link">Buscar publicación</a>
         <div id="verticalLine">|</div>
-        <a routerLink="../register" class="btn btn-link">Buscar organismo</a>
+        <a routerLink="../search-organization" class="btn btn-link">Buscar organismo</a>
         <div id="verticalLine">|</div>
-        <a routerLink="../register" class="btn btn-link">Recomendaciones proyectos</a>
+        <a routerLink="../suggest-projects" class="btn btn-link">Recomendaciones proyectos</a>
 
     </div>
 
@@ -69,10 +99,12 @@
                                 <td>{{ publicaciones.indexOf(publicacion) + 1 }}</td>
                                 <td>{{ publicacion.id }}</td>
                                 <td>{{ publicacion.title }}</td>
-                                <td>{{ (publicacion.updateLife != null) ? publicacion.updateLife :
-                                    publicacion.initLifeDate
+                                <td>{{ (publicacion.updateLife != null) ? convertirFormatoHora(publicacion.updateLife) :
+                                    convertirFormatoHora(publicacion.initLifeDate)
                                     }}</td>
-                                <td><button id="editButton" (click)="editarPublicacion(publicacion.id)">
+                                <td>
+                                    <button id="editButton" *ngIf="publicacion?.id"
+                                        [routerLink]="'../edit-publication/' + publicacion.id">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                             class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path
@@ -80,7 +112,8 @@
                                             <path fill-rule="evenodd"
                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                         </svg>
-                                    </button></td>
+                                    </button>
+                                </td>
                                 <td><button id="deleteButton" (click)="eliminarPublicacion(publicacion.id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                             class="bi bi-trash3" viewBox="0 0 16 16">
@@ -94,8 +127,15 @@
                     </table>
 
                 </div>
+                <div class="pagination-container">
+                    <div class="pagination">
+                        <button (click)="anteriorPagina()" [disabled]="paginaActual === 1">Anterior</button>
+                        <span>{{ paginaActual }} de {{ paginasTotales }}</span>
+                        <button (click)="siguientePagina()"
+                            [disabled]="paginaActual === paginasTotales">Siguiente</button>
+                    </div>
+                </div>
             </div>
-
             <ng-template #noPublicaciones>
                 <p id="noPublications">No existen publicaciones.<br>Añade una nueva publicación en "Crear publicación".
                 </p>

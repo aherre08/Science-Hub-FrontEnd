@@ -9,7 +9,8 @@
 }
 
 body {
-    background-color: #BEBEBE;
+    background: rgb(83, 178, 0);
+    background: radial-gradient(circle, rgba(83, 178, 0, 1) 0%, rgba(64, 64, 64, 1) 95%);
     height: 747px;
 }
 
@@ -96,15 +97,100 @@ body {
     text-align: center;
 }
 
-#signOutLink {
+.user-panel {
     margin-left: auto;
-    text-align: center;
-    color: white;
+    border: solid 3px black;
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
 
-#signOutLink:hover {
-    color: red;
+.user-panel-header {
+    font-weight: bold;
+    white-space: nowrap;
+    background-color: white;
+    color: black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+}
+
+.user-panel-header:hover {
+    background-color: rgb(98, 98, 98);
+    color: white;
+
+}
+
+.name-icon-container {
+    padding: 4px;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    flex: 1;
+}
+
+.name-icon-container i {
+    margin-left: 5px;
+
+    flex-shrink: 0;
+}
+
+#nameSpan {
+    margin-left: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.fa-chevron-down {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.user-panel-options {
+    position: absolute;
+    bottom: -102px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    min-width: 160px;
+    display: none;
+}
+
+.user-panel.active .user-panel-options {
+    display: block;
+}
+
+.user-option {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-option:hover {
+    background-color: lightgray;
     font-weight: bolder;
+}
+
+.user-option:last-child {
+    border-bottom: none;
+}
+
+#profileOption {
+    margin-left: 15px;
+    color: black;
+}
+
+
+#signOutOption {
+    margin-left: 15px;
+    color: black;
+}
+
+#signOutOption:hover {
+    color: red;
 }
 
 .links {
@@ -135,7 +221,7 @@ body {
 #centerPanel {
     margin-top: 1%;
     margin-left: 10%;
-    height: 630px;
+    height: 610px;
     width: 1250px;
     background-color: white;
     border: solid black 2px;
@@ -218,6 +304,22 @@ tr:hover {
 
 #deleteButton:hover {
     background-color: darkred;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.pagination button {
+    margin: 0 5px;
 }
 
 #noPublications {

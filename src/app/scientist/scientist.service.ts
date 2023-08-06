@@ -19,4 +19,17 @@ export class ScientistService {
   obtenerPublicaciones(orcid:string): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(this.apiUrl + '/publicacion/all/'+ orcid);
   }
+
+  obtenerPublicacion(idPublicacion:number):Observable<Publicacion>{
+    return this.http.get<Publicacion>(this.apiUrl+ '/publicacion/'+idPublicacion);
+  }
+
+  eliminarPublicacion(idPublicacion:number):Observable<Publicacion>{
+    return this.http.delete<Publicacion>(this.apiUrl+ '/publicacion/'+idPublicacion);
+  }
+
+  editarPublicacion(idPublicacion: number, publicacion: Publicacion): Observable<Publicacion> {
+    const url = `${this.apiUrl}/publicacion/${idPublicacion}`;
+    return this.http.put<Publicacion>(url, publicacion);
+  }
 }

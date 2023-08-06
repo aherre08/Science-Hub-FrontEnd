@@ -245,73 +245,194 @@ hr {
 }
 
 .form-publicacion-field {
-    margin-top: 2%;
-    text-align: center;
+    margin-bottom: 3%;
+    margin-left: 20%;
 }
 
-#idPublicacion {
+#tituloPublicacion {
+    margin-left: 6%;
+    width: 700px;
+}
+
+#descripcionPublicacion {
+    margin-top: 1%;
+    height: 200px;
+    width: 800px;
+    resize: none;
+}
+
+#especialidadPublicacion {
     margin-left: 2%;
-    width: 450px;
+    width: 320px;
 }
 
-#buscarButton {
+#experienciaAñosPublicacion {
+    margin-left: 3%;
+    margin-right: 1%;
+}
+
+#experienciaMesesPublicacion {
     margin-left: 5%;
-    height: 30px;
-    width: 120px;
-    padding-top: 0%;
+    margin-right: 1%;
+}
+
+#editarButton {
+    margin-left: 45%;
+    width: 85px;
     background-color: #53B200;
 }
 
-#buscarButton:hover {
-    font-weight: bold;
-    background-color: darkgreen;
-}
-
-#buscarButton i {
+#editarButton i {
     font-size: 13px;
 }
 
-#buscarSpan {
-    margin-left: 5px;
+#crearButton:hover {
+    font-weight: bolder;
+    background-color: darkgreen;
 }
 
-#publicacionInfo {
-    display: none;
-    margin-top: 2%;
-    margin-left: 18%;
-    height: 440px;
-    width: 780px;
-    border-style: inset;
-}
 
-.infoLine {
-    margin-top: 3%;
-    margin-left: 5%;
-    margin-right: 5%;
-}
+/* Estilos para móvil S */
+@media (max-width: 320px) {
+    .header {
+        padding: 5px;
+        width: 380px;
+    }
 
-#idPublicacionSpan {
-    margin-left: 5%;
-}
+    body {
+        height: 800px;
+        width: 380px;
+    }
 
-#tituloSpan {
-    margin-left: 5%;
-}
+    #links {
+        width: 500px;
+        align-items: flex-start;
+    }
 
-#descripcionSpan {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    max-width: 300px;
-}
+    #contentPanel {
+        margin-top: 5%;
+        margin-left: 0%;
+        margin-right: 0%;
+        width: 380px;
+        height: 400px;
+    }
 
-#especialidadSpan {
-    margin-left: 5%;
-}
+    #menuButton {
+        left: 5px;
+    }
 
-#experienciaSpan {
-    margin-left: 5%;
-}
+    #menuContent {
+        top: 48px;
+        width: 175px;
+        z-index: 9999;
+    }
 
-#ultimaModificacionSpan {
-    margin-left: 5%;
+    #features-list li {
+        margin-bottom: 10px;
+    }
+
+    .menu-link {
+        width: 60px;
+    }
+
+    #help-links {
+        margin-top: 180px;
+    }
+
+    .help-link {
+        margin-left: 15%;
+        width: 80px;
+    }
+
+    #ScienceHubLogo {
+        display: none;
+    }
+
+    .title {
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .user-panel {
+        margin-left: 250px;
+        border-width: 2px;
+    }
+
+    .user-panel-header {
+        font-size: 12px;
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .user-panel-options {
+        height: 80px;
+        top: 40px;
+    }
+
+    .name-icon-container svg {
+        font-size: 20px;
+        margin-left: 0;
+    }
+
+    #nameSpan {
+        display: none;
+    }
+
+    .user-option {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .links {
+        height: auto;
+        width: 364px;
+    }
+
+    #verticalLine {
+        display: none;
+    }
+
+    .btn-link {
+        align-items: start;
+        width: 20%;
+        font-size: 8px;
+    }
+
+    #centerPanel {
+        margin-top: 10%;
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    hr {
+        margin-left: 35%;
+        width: 30%;
+    }
+
+    .form-publicacion-field {
+        margin-left: 5%;
+    }
+
+    #tituloPublicacion,
+    #descripcionPublicacion,
+    #especialidadPublicacion {
+        width: 90%;
+    }
+
+    #experienciaAñosPublicacion,
+    #experienciaMesesPublicacion {
+        white-space: pre-wrap;
+        width: 30%;
+        margin-left: 5%;
+    }
+
+    #editarButton {
+        margin-top: 10%;
+        margin-left: 30%;
+        width: 40%;
+    }
 }

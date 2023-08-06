@@ -244,12 +244,12 @@ hr {
     padding: 10px;
 }
 
-.form-publicacion-field {
+.form-organismo-field {
     margin-top: 2%;
     text-align: center;
 }
 
-#idPublicacion {
+#nombreOrganismo {
     margin-left: 2%;
     width: 450px;
 }
@@ -275,7 +275,7 @@ hr {
     margin-left: 5px;
 }
 
-#publicacionInfo {
+#organismoInfo {
     display: none;
     margin-top: 2%;
     margin-left: 18%;
@@ -290,28 +290,6 @@ hr {
     margin-right: 5%;
 }
 
-#idPublicacionSpan {
-    margin-left: 5%;
-}
-
-#tituloSpan {
-    margin-left: 5%;
-}
-
-#descripcionSpan {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    max-width: 300px;
-}
-
-#especialidadSpan {
-    margin-left: 5%;
-}
-
-#experienciaSpan {
-    margin-left: 5%;
-}
-
-#ultimaModificacionSpan {
+#nombreOrganismoSpan {
     margin-left: 5%;
 }

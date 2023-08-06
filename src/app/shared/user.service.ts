@@ -29,6 +29,7 @@ export class UserService {
   // Scientist
   private orcid: string;
   private profession: string;
+  private publicationId: string | undefined;
 
   // Organization 
   private orgId: string;
@@ -88,6 +89,15 @@ export class UserService {
 
   getProfession(): string {
     return this.profession;
+  }
+
+  setPublicationId(id: number | undefined) {
+    this.publicationId = id?.toString();
+    this.saveToSessionStorage();
+  }
+
+  getPublicationId(): string | undefined{
+    return this.publicationId;
   }
 
   setOrgId(orgId: string) {

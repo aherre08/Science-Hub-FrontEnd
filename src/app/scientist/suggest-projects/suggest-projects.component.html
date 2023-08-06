@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>Crear publicación</title>
-    <link rel="stylesheet" type="text/css" href="create-publication.component.css">
+    <title>Recomendaciones de proyectos</title>
+    <link rel="stylesheet" type="text/css" href="suggest-projects.component.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
@@ -29,7 +29,6 @@
         </div>
         <img src="../../../assets/images/ScienceHub Logo.png" id="ScienceHubLogo" alt="Logo de ScienceHub">
         <span class="title">Científico</span>
-
         <div class="user-panel" (click)="showOptions = !showOptions" [class.active]="showOptions">
             <div class="user-panel-header">
                 <div class="name-icon-container">
@@ -78,49 +77,16 @@
 
     <div id="contentPanel">
         <div id="centerPanel">
-            <h4>Crear publicación</h4>
+            <h4>Recomendaciones de proyectos</h4>
             <hr>
-            <div class="form" #formularioPublicacion>
-                <div class="form-publicacion-field">
-                    <label for="tituloPublicacion"><b><u>Título:</u></b></label>
-                    <input type="text" id="tituloPublicacion" name="titulo"
-                        placeholder="Escribe el título de tu publicación. (Máx. 50 caracteres)" maxlength="50" required>
-                    <br>
-                </div>
-                <div class="form-publicacion-field">
-                    <label for="descripcionPublicacion"><b><u>Descripción:</u></b></label>
-                    <br>
-                    <textarea id="descripcionPublicacion" name="descripcion"
-                        placeholder="Escribe la descripción de tu publicación" maxlength="200" required></textarea>
-                    <br>
-                </div>
-                <div class="form-publicacion-field">
-                    <label for="especialidadPublicacion"><b><u>Especialidad:</u></b></label>
-                    <input type="text" id="especialidadPublicacion" name="especialidad"
-                        placeholder="Escribe la especialidad de tu profesión." required>
-                    <br>
-                </div>
-                <div class="form-publicacion-field">
-                    <label><b><u>Experiencia:</u></b></label>
-                    <input type="number" id="experienciaAñosPublicacion" name="experiencia_años" value="0" min="0"
-                        max="70" required>
-                    <span>año(s)</span>
-                    <input type="number" id="experienciaMesesPublicacion" name="experiencia_meses" value="0" min="0"
-                        max="11" required>
-                    <span>mes(es)</span>
 
-                    <br>
-                </div>
-                <button class="btn btn-primary" id="crearButton" (click)="realizarPublicacion()">
-                    <i class="fas fa-plus"></i>
-                    Crear
-                </button>
-            </div>
+
+
         </div>
-
-
-
     </div>
+
+
+
 </body>
 
 </html>
