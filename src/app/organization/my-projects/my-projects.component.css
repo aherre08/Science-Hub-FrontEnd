@@ -1,17 +1,15 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
-
 .header {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-color: #53B200;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(83, 178, 0, 1) 50%, rgba(2, 0, 36, 1) 100%);
+    background-color: #00A2FF;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(0, 162, 255, 1) 50%, rgba(2, 0, 36, 1) 100%);
 }
 
 body {
     background: rgb(2, 0, 36);
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(83, 178, 0, 1) 50%, rgba(2, 0, 36, 1) 100%);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(0, 162, 255, 1) 50%, rgba(2, 0, 36, 1) 100%);
     height: 747px;
 }
 
@@ -37,10 +35,9 @@ body {
     bottom: 0;
     width: 200px;
     height: 690px;
-    background-color: #53B200;
+    background-color: rgb(2, 0, 36);
     padding: 10px;
-    border: 1px solid black;
-    border-radius: 3%;
+    border: 2px outset white;
 }
 
 #menuContent a {
@@ -48,7 +45,7 @@ body {
 }
 
 .accordion {
-    background-color: #53B200;
+    background-color: #00A2FF;
     color: white;
     font-size: 15px;
     font-weight: bold;
@@ -64,12 +61,12 @@ body {
 
 .active,
 .accordion:hover {
-    background-color: darkgreen;
+    background-color: darkblue;
 }
 
 .panel {
     padding: 0 18px;
-    background-color: darkgreen;
+    background-color: darkblue;
 
     display: none;
     overflow: hidden;
@@ -83,6 +80,7 @@ body {
 #hrSubMenu {
     width: 170px;
     right: 70px;
+    background-color: white;
 }
 
 .submenu-link {
@@ -98,14 +96,14 @@ body {
 }
 
 .submenu-link:hover {
-    background-color: #53B200;
+    background-color: #00A2FF;
     text-decoration: underline;
     font-weight: bold;
 }
 
 #optionsSubMenu,
 #signOutSubMenu {
-    background-color: #53B200;
+    background-color: #00A2FF;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -119,11 +117,11 @@ body {
 }
 
 #optionsSubMenu:hover {
-    background-color: darkgreen;
+    background-color: darkblue;
 }
 
 #signOutSubMenu:hover {
-    background-color: darkgreen;
+    background-color: darkblue;
 }
 
 #ScienceHubLogo {
@@ -139,6 +137,13 @@ body {
     font-size: 40px;
     font-weight: bold;
     text-align: center;
+}
+
+#OrganizationIcon {
+    margin-left: 550px;
+    height: 45px;
+    width: 45px;
+    color: white;
 }
 
 .user-panel {
@@ -243,7 +248,7 @@ body {
     align-items: center;
     justify-content: center;
     font-family: 'Nunito', sans-serif;
-    background-color: #141612
+    background-color: #2E3329;
 }
 
 #verticalLine {
@@ -310,8 +315,6 @@ td {
     width: 180px;
     text-align: center;
     border: 1px solid #ddd collapse;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: medium;
 }
 
 
@@ -331,16 +334,6 @@ tr {
 
 tr:hover {
     background-color: #ddd;
-}
-
-.inactive-publication {
-    background-color: lightcoral;
-    transition: background-color 0.3s;
-}
-
-.inactive-publication:hover {
-    background-color: darkred;
-    color: white;
 }
 
 #editButton {
@@ -424,7 +417,7 @@ tr:hover {
     width: 130px;
 }
 
-#noPublications {
+#noProyects {
     margin-top: 15%;
     text-align: center;
 }

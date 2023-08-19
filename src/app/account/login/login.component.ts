@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
         const idUser = response.idUser;
         
         if (userType === 'cientifico') {
-          console.log("LOGIN ASIGNA ID USUARIO ---> " + idUser);
+          
           this.userService.setUserId(idUser);
         
           try {
@@ -91,6 +91,7 @@ export class LoginComponent implements OnInit {
             });
         
             if (response.ok) {
+
               const data = await response.json();
               console.log('Respuesta del servidor:', data);
               this.userService.setOrcid(data.orcid);
@@ -100,6 +101,7 @@ export class LoginComponent implements OnInit {
               this.userService.setProfession(data.profession);
         
               this.router.navigate(['/scientist/create-publication']);
+
             } else {
               console.error('Error al obtener los datos:', response.status);
               alert('Error al obtener los datos del usuario.');
@@ -107,13 +109,44 @@ export class LoginComponent implements OnInit {
           } catch (error) {
             console.error('Error al enviar los datos:', error);
           }
-        } else if (userType === 'organizacion') {
-          this.router.navigate(['/dashboard-organizacion']);
+        } else if (userType === 'organismo') {
+
           this.userService.setUserId(idUser);
+
+          try {
+            const response = await fetch('http://localhost:8080/api/project/organismo/' + idUser, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+        
+            if (response.ok) {
+              
+              const data = await response.json();
+              console.log('Respuesta del servidor:', data);
+              this.userService.setOrgId(data.idOrganization);
+              this.userService.setUserUuid(data.userUuid);
+              this.userService.setName(data.name);
+              this.userService.setEmail(data.email);
+              this.userService.setLocation(data.location);
+              this.userService.setArea(data.area);
+        
+              this.router.navigate(['/organization/publish-project']);
+
+            } else {
+              console.error('Error al obtener los datos:', response.status);
+              alert('Error al obtener los datos del usuario.');
+            }
+          } catch (error) {
+            console.error('Error al enviar los datos:', error);
+          }
+
         } else {
           console.error('Tipo de usuario no válido:', response);
           this.userService.setUserId(undefined);
           alert('Las credenciales introducidas no corresponden a un usuario existente.');
+          
         }
       },
       (error: any) => {

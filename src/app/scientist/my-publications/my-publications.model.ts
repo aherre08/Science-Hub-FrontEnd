@@ -6,4 +6,5 @@ export interface Publicacion {
     profExperience: string;
     initLifeDate: string;
     updateLife: string;
+    active:boolean;
   }

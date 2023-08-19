@@ -13,8 +13,10 @@ export class UserService {
     this.userUuid = storedData.userUuid || '';
     this.name = storedData.name || '';
     this.email = storedData.email || '';
+    
     this.orcid = storedData.orcid || '';
     this.profession = storedData.profession || '';
+    
     this.orgId = storedData.orgId || '';
     this.location = storedData.location || '';
     this.area = storedData.area || '';

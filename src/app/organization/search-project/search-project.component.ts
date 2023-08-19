@@ -1,26 +1,19 @@
+import { Component } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
-import { ScientistService } from './../scientist.service';
-import { ScientistModule } from './../scientist.module';
-import { Component, OnInit } from '@angular/core';
-import { Publicacion } from './my-publications.model';
+import { OrganizationService } from '../organization.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-my-publications',
-  templateUrl: './my-publications.component.html',
-  styleUrls: ['./my-publications.component.css']
+  selector: 'app-search-project',
+  templateUrl: './search-project.component.html',
+  styleUrls: ['./search-project.component.css']
 })
-export class MyPublicationsComponent implements OnInit {
+export class SearchProjectComponent {
   showOptions = false;
   userName: string = '';
-  
-  publicaciones: Publicacion[] = [];
-  itemsPorPagina: number = 5;
-  paginaActual: number = 1;
+  suboptions: string | null = null;
 
-
-  constructor(private scientistService: ScientistService, private userService: UserService, private router: Router,){}
+  constructor(private organizationService: OrganizationService, private userService: UserService) {}
 
   ngOnInit() {
     this.userName = this.userService.getName();
@@ -29,8 +22,6 @@ export class MyPublicationsComponent implements OnInit {
     this.setupOperationsAccordionButton();
     
     this.setupAccordionListeners();
-
-    this.cargarPublicaciones();
   }
 
   private setupMenuButton() {
@@ -101,20 +92,107 @@ export class MyPublicationsComponent implements OnInit {
     });
   }
 
-  cargarPublicaciones() {
-    this.scientistService.obtenerPublicaciones(this.userService.getOrcid()).subscribe(
-      (data: Publicacion[]) => {
-        this.publicaciones = data;
+  buscarProyecto(){
+    const idProyectoStr = (document.getElementById("idProyecto") as HTMLInputElement).value;
+    
+    if (idProyectoStr.trim().length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'Por favor, completa el campo requerido.',
+        confirmButtonText: 'Entendido'
+      });
+
+      // Ocultar el contenedor 
+      const proyectoInfo = document.getElementById('proyectoInfo');
+      if (proyectoInfo) { proyectoInfo.style.display = 'none';}
+
+      return;
+    }
+    
+    const idProyecto = parseInt(idProyectoStr);
+
+    if (isNaN(idProyecto)) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'Por favor, ingresa un número válido en el campo requerido.',
+        confirmButtonText: 'Entendido'
+      });
+
+      // Ocultar el contenedor 
+        const proyectoInfo = document.getElementById('proyectoInfo');
+        if (proyectoInfo) { proyectoInfo.style.display = 'none';}
+
+      return;
+    }
+
+    this.organizationService.obtenerProyecto(idProyecto).subscribe(
+      (response)=> {
+        console.log('Proyecto encontrado con éxito:', response);
+        (document.getElementById('idProyecto') as HTMLInputElement).value = '';
+
+        // Actualizar los elementos <span> con la información del proyecto
+      const idProyectoSpan = document.getElementById('idProyectoSpan');
+      if (idProyectoSpan) {
+        idProyectoSpan.innerText = (response.id).toString();
+      }
+
+      const ultimaModificacionSpan = document.getElementById('ultimaModificacionSpan');
+      if (ultimaModificacionSpan) {
+        if(response.updateLife != null){
+          ultimaModificacionSpan.innerText = this.convertirFormatoHora(response.updateLife);
+        }else{
+          ultimaModificacionSpan.innerText = this.convertirFormatoHora(response.initLifeDate);
+        }
+      }
+
+      const tituloSpan = document.getElementById('tituloSpan');
+      if (tituloSpan) {
+        tituloSpan.innerText = response.title;
+      }
+
+      const descripcionSpan = document.getElementById('descripcionSpan');
+      if (descripcionSpan) {
+        descripcionSpan.innerText = response.description;
+      }
+
+      const tamanioSpan = document.getElementById('tamanioSpan');
+      if (tamanioSpan) {
+        tamanioSpan.innerText = (response.capacity).toString();
+      }
+
+      const duracionSpan = document.getElementById('duracionSpan');
+      if (duracionSpan) {
+        duracionSpan.innerText = response.duration;
+      }
+
+      
+
+      // Mostrar el contenedor solo si se encuentra el proyecto
+      const proyectoInfo = document.getElementById('proyectoInfo');
+      if (proyectoInfo) {
+        proyectoInfo.style.display = 'block';
+      }
+
       },
-      error => {
-        console.error('Error al obtener las publicaciones:', error);
+      (error) => {
+        console.error('Error al encontrar el proyecto:', error);
+        Swal.fire({
+          icon: 'error',
+          title: '¡Error!',
+          html: 'No se ha podido encontrar un proyecto con el ID proporcionado.<br><br>Introduce el ID de un proyecto existente.',
+          confirmButtonText: 'Entendido'
+        });
+
+        // Ocultar el contenedor si no se encuentra el proyecto
+        const proyectoInfo = document.getElementById('proyectoInfo');
+        if (proyectoInfo) {
+          proyectoInfo.style.display = 'none';
+        }
+
       }
     );
-  }
-
-  get paginatedPublicaciones() {
-    const startIndex = (this.paginaActual - 1) * this.itemsPorPagina;
-    return this.publicaciones.slice(startIndex, startIndex + this.itemsPorPagina);
   }
 
   convertirFormatoHora(initLifeDate: string | number | Date) {
@@ -144,60 +222,5 @@ export class MyPublicationsComponent implements OnInit {
     const formatoNuevo = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${anio} - ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
   
     return formatoNuevo;
-  }
-
-  siguientePagina() {
-    if (this.paginaActual < this.paginasTotales) {
-      this.paginaActual++;
-    }
-  }
-
-  anteriorPagina() {
-    if (this.paginaActual > 1) {
-      this.paginaActual--;
-    }
-  }
-
-  get paginasTotales() {
-    return Math.ceil(this.publicaciones.length / this.itemsPorPagina);
-  }
-
-  eliminarPublicacion(idPublicacion: number) {
-    Swal.fire({
-      title: '¿Seguro que quieres eliminar esta publicación?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#dc3545', 
-      cancelButtonColor: '#6c757d',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.scientistService.eliminarPublicacion(idPublicacion).subscribe(
-          () => {
-            Swal.fire({
-              icon: 'success',
-              title: '¡Publicación eliminada con éxito!',
-              text: 'La publicación se ha eliminado satisfactoriamente.',
-              confirmButtonText: 'Vale'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                console.log('Publicación eliminada con éxito.');
-                window.location.reload();
-              }
-            });
-          },
-          error => {
-            console.error('Error al eliminar la publicación:', error);
-            Swal.fire({
-              icon: 'error',
-              title: '¡Error!',
-              text: 'Ha ocurrido un error al eliminar la publicación',
-              confirmButtonText: 'Entendido'
-            });
-          }
-        );
-      }
-    });    
   }
 }

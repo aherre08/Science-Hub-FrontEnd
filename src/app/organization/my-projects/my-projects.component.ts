@@ -1,27 +1,25 @@
+import { Component } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
-import { ScientistService } from './../scientist.service';
-import { ScientistModule } from './../scientist.module';
-import { Component, OnInit } from '@angular/core';
-import { Publicacion } from './my-publications.model';
+import { OrganizationService } from '../organization.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { Proyecto } from './my-projects.model';
 
 @Component({
-  selector: 'app-my-publications',
-  templateUrl: './my-publications.component.html',
-  styleUrls: ['./my-publications.component.css']
+  selector: 'app-my-projects',
+  templateUrl: './my-projects.component.html',
+  styleUrls: ['./my-projects.component.css']
 })
-export class MyPublicationsComponent implements OnInit {
+export class MyProjectsComponent {
   showOptions = false;
   userName: string = '';
+  suboptions: string | null = null;
   
-  publicaciones: Publicacion[] = [];
+  proyectos: Proyecto[] = [];
   itemsPorPagina: number = 5;
   paginaActual: number = 1;
 
-
-  constructor(private scientistService: ScientistService, private userService: UserService, private router: Router,){}
-
+  constructor(private organizationService: OrganizationService, private userService: UserService) {}
+  
   ngOnInit() {
     this.userName = this.userService.getName();
     this.setupMenuButton();
@@ -30,7 +28,7 @@ export class MyPublicationsComponent implements OnInit {
     
     this.setupAccordionListeners();
 
-    this.cargarPublicaciones();
+    this.cargarProyectos();
   }
 
   private setupMenuButton() {
@@ -101,10 +99,11 @@ export class MyPublicationsComponent implements OnInit {
     });
   }
 
-  cargarPublicaciones() {
-    this.scientistService.obtenerPublicaciones(this.userService.getOrcid()).subscribe(
-      (data: Publicacion[]) => {
-        this.publicaciones = data;
+  cargarProyectos() {
+    
+    this.organizationService.obtenerProyectos(this.userService.getOrgId()).subscribe(
+      (data: Proyecto[]) => {
+        this.proyectos = data;
       },
       error => {
         console.error('Error al obtener las publicaciones:', error);
@@ -112,9 +111,9 @@ export class MyPublicationsComponent implements OnInit {
     );
   }
 
-  get paginatedPublicaciones() {
+  get paginatedProyectos() {
     const startIndex = (this.paginaActual - 1) * this.itemsPorPagina;
-    return this.publicaciones.slice(startIndex, startIndex + this.itemsPorPagina);
+    return this.proyectos.slice(startIndex, startIndex + this.itemsPorPagina);
   }
 
   convertirFormatoHora(initLifeDate: string | number | Date) {
@@ -159,13 +158,13 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   get paginasTotales() {
-    return Math.ceil(this.publicaciones.length / this.itemsPorPagina);
+    return Math.ceil(this.proyectos.length / this.itemsPorPagina);
   }
 
-  eliminarPublicacion(idPublicacion: number) {
+  eliminarProyecto(idPublicacion: number) {
     Swal.fire({
       title: '¿Seguro que quieres eliminar esta publicación?',
-      icon: 'question',
+      icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar',
@@ -173,30 +172,29 @@ export class MyPublicationsComponent implements OnInit {
       cancelButtonColor: '#6c757d',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.scientistService.eliminarPublicacion(idPublicacion).subscribe(
+        /*
+        this.organizationService.eliminarProyecto(idPublicacion).subscribe(
           () => {
             Swal.fire({
               icon: 'success',
-              title: '¡Publicación eliminada con éxito!',
-              text: 'La publicación se ha eliminado satisfactoriamente.',
+              title: '¡Proyecto eliminada con éxito!',
+              text: 'El proyecto se ha eliminado satisfactoriamente.',
               confirmButtonText: 'Vale'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                console.log('Publicación eliminada con éxito.');
-                window.location.reload();
-              }
             });
+            console.log('Proyecto eliminado con éxito.');
+            window.location.reload();
           },
           error => {
-            console.error('Error al eliminar la publicación:', error);
+            console.error('Error al eliminar el proyecto:', error);
             Swal.fire({
               icon: 'error',
               title: '¡Error!',
-              text: 'Ha ocurrido un error al eliminar la publicación',
+              text: 'Ha ocurrido un error al eliminar el proyecto',
               confirmButtonText: 'Entendido'
             });
           }
         );
+        */
       }
     });    
   }

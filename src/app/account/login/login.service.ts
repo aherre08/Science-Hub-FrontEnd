@@ -20,7 +20,6 @@ export class LoginService {
           const uid = userCredential.user.uid;
           console.log("UID: " + uid);
           
-          /*http://localhost:8080/api/project/login/f9BjtXqmIZX1W7xKybw8POES6uw2*/
           const url = `${this.apiUrl}/login/${uid}`;
           console.log("URL --------> " + url);
           return this.http.get(url).pipe(

@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>Crear publicación</title>
-    <link rel="stylesheet" type="text/css" href="my-publications.component.css">
+    <title>Mis Proyectos</title>
+    <link rel="stylesheet" type="text/css" href="my-projects.component.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
@@ -80,7 +80,8 @@
             </button>
         </div>
         <img src="../../../assets/images/ScienceHub Logo.png" id="ScienceHubLogo" alt="Logo de ScienceHub">
-        <span class="title">C i e n t í f i c o</span>
+        <span class="title">O r g a n i s m o</span>
+        <img src="../../../assets/images/organization-icon-white.png" id="OrganizationIcon" alt="Icono de un organismo">
         <div class="user-panel" (click)="showOptions = !showOptions" [class.active]="showOptions">
             <div class="user-panel-header">
                 <div class="name-icon-container">
@@ -115,29 +116,29 @@
     </div>
 
     <div class="links">
-        <a routerLink="../create-publication" class="btn btn-link">Crear publicación </a>
+        <a routerLink="../publish-project" class="btn btn-link">Publicar proyecto </a>
         <div id="verticalLine">|</div>
-        <a routerLink="../my-publications" class="btn btn-link">Mis publicaciones</a>
+        <a routerLink="../my-projects" class="btn btn-link">Mis proyectos</a>
         <div id="verticalLine">|</div>
-        <a routerLink="../search-publication" class="btn btn-link">Buscar publicación</a>
+        <a routerLink="../search-project" class="btn btn-link">Buscar proyecto</a>
         <div id="verticalLine">|</div>
-        <a routerLink="../search-organization" class="btn btn-link">Buscar organismo</a>
+        <a routerLink="../search-scientist" class="btn btn-link">Buscar científico</a>
         <div id="verticalLine">|</div>
-        <a routerLink="../suggest-projects" class="btn btn-link">Recomendaciones proyectos</a>
+        <a routerLink="../suggest-scientists" class="btn btn-link">Recomendaciones cientificos</a>
 
     </div>
 
     <div id="contentPanel">
         <div id="centerPanel">
-            <h4>Mis publicaciones</h4>
+            <h4><b>Mis proyectos</b> </h4>
             <hr>
-            <div *ngIf="publicaciones.length > 0; else noPublicaciones">
+            <div *ngIf="proyectos.length > 0; else noProyectos">
                 <div class="table-container">
                     <table>
                         <thead>
                             <tr>
                                 <th>Índice</th>
-                                <th>ID Publicacion</th>
+                                <th>ID Proyecto</th>
                                 <th>Título</th>
                                 <th>Última Modificación</th>
                                 <th>Editar</th>
@@ -145,17 +146,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let publicacion of paginatedPublicaciones"
-                                [ngClass]="{ 'inactive-publication': !publicacion.active }">
-                                <td>{{ publicaciones.indexOf(publicacion) + 1 }}</td>
-                                <td>{{ publicacion.id }}</td>
-                                <td>{{ publicacion.title }}</td>
-                                <td>{{ (publicacion.updateLife != null) ? convertirFormatoHora(publicacion.updateLife) :
-                                    convertirFormatoHora(publicacion.initLifeDate)
+                            <tr *ngFor="let proyecto of paginatedProyectos">
+                                <td>{{ proyectos.indexOf(proyecto) + 1 }}</td>
+
+                                <td>{{ proyecto.id }}</td>
+                                <td>{{ proyecto.title }}</td>
+                                <td>{{ (proyecto.updateLife != null) ? convertirFormatoHora(proyecto.updateLife) :
+                                    convertirFormatoHora(proyecto.initLifeDate)
                                     }}</td>
                                 <td>
-                                    <button id="editButton" *ngIf="publicacion.active"
-                                        [routerLink]="'../edit-publication/' + publicacion.id">
+                                    <button id="editButton" *ngIf="proyecto?.id"
+                                        [routerLink]="'../edit-publication/' + proyecto.id">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                             class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path
@@ -165,9 +166,7 @@
                                         </svg>
                                     </button>
                                 </td>
-                                <td>
-                                    <button id="deleteButton" (click)="eliminarPublicacion(publicacion.id)"
-                                        *ngIf="publicacion.active">
+                                <td><button id="deleteButton" (click)="eliminarProyecto(proyecto.id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                             class="bi bi-trash3" viewBox="0 0 16 16">
                                             <path
@@ -203,13 +202,15 @@
                     </div>
                 </div>
             </div>
-            <ng-template #noPublicaciones>
-                <p id="noPublications"><em>No existen publicaciones.<br>Añade una nueva publicación en "Crear
-                        publicación".</em>
+            <ng-template #noProyectos>
+                <p id="noProyects"><em>No existen proyectos.<br>Añade un nuevo proyecto en "Publicar proyecto".</em>
                 </p>
             </ng-template>
 
+
+
         </div>
+
     </div>
 </body>
 

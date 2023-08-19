@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { ScientistService } from '../scientist.service';
 import { UserService } from 'src/app/shared/user.service';
+import { OrganizationService } from '../organization.service';
 
 @Component({
-  selector: 'app-suggest-projects',
-  templateUrl: './suggest-projects.component.html',
-  styleUrls: ['./suggest-projects.component.css']
+  selector: 'app-search-scientist',
+  templateUrl: './search-scientist.component.html',
+  styleUrls: ['./search-scientist.component.css']
 })
-export class SuggestProjectsComponent {
+export class SearchScientistComponent {
   showOptions = false;
   userName: string = '';
-  
+  suboptions: string | null = null;
 
-  constructor(private scientistService: ScientistService, private userService: UserService){}
+  constructor(private organizationService: OrganizationService, private userService: UserService) {}
 
   ngOnInit() {
     this.userName = this.userService.getName();
@@ -70,8 +70,6 @@ export class SuggestProjectsComponent {
     });
   }
 
-
-
   setupHelpAccordionButton(): void {
     const button = document.getElementById("helpSubMenu");
     const icon = document.getElementById("accordion-icon");
@@ -91,5 +89,9 @@ export class SuggestProjectsComponent {
         `;
       }
     });
+  }
+  
+  buscarCientifico(){
+
   }
 }

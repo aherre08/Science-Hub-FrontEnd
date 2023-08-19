@@ -1,26 +1,19 @@
+import { Component, ElementRef } from '@angular/core';
+import { OrganizationService } from '../organization.service';
 import { UserService } from 'src/app/shared/user.service';
-import { ScientistService } from './../scientist.service';
-import { ScientistModule } from './../scientist.module';
-import { Component, OnInit } from '@angular/core';
-import { Publicacion } from './my-publications.model';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-my-publications',
-  templateUrl: './my-publications.component.html',
-  styleUrls: ['./my-publications.component.css']
+  selector: 'app-publish-project',
+  templateUrl: './publish-project.component.html',
+  styleUrls: ['./publish-project.component.css']
 })
-export class MyPublicationsComponent implements OnInit {
+export class PublishProjectComponent {
   showOptions = false;
   userName: string = '';
-  
-  publicaciones: Publicacion[] = [];
-  itemsPorPagina: number = 5;
-  paginaActual: number = 1;
+  suboptions: string | null = null;
 
-
-  constructor(private scientistService: ScientistService, private userService: UserService, private router: Router,){}
+  constructor(private organizationService: OrganizationService, private userService: UserService) {}
 
   ngOnInit() {
     this.userName = this.userService.getName();
@@ -29,8 +22,6 @@ export class MyPublicationsComponent implements OnInit {
     this.setupOperationsAccordionButton();
     
     this.setupAccordionListeners();
-
-    this.cargarPublicaciones();
   }
 
   private setupMenuButton() {
@@ -101,103 +92,68 @@ export class MyPublicationsComponent implements OnInit {
     });
   }
 
-  cargarPublicaciones() {
-    this.scientistService.obtenerPublicaciones(this.userService.getOrcid()).subscribe(
-      (data: Publicacion[]) => {
-        this.publicaciones = data;
-      },
-      error => {
-        console.error('Error al obtener las publicaciones:', error);
-      }
-    );
-  }
+  publicarProyecto() {
+    const titulo = (document.getElementById('tituloProyecto') as HTMLInputElement).value;
+    const descripcion = (document.getElementById('descripcionProyecto') as HTMLTextAreaElement).value;
+    const tamanio = (document.getElementById('tamañoProyecto') as HTMLInputElement).value;
+    const duracionAños = (document.getElementById('duracionAñosProyecto') as HTMLInputElement).value;
+    const duracionMeses = (document.getElementById('duracionMesesProyecto') as HTMLInputElement).value;
 
-  get paginatedPublicaciones() {
-    const startIndex = (this.paginaActual - 1) * this.itemsPorPagina;
-    return this.publicaciones.slice(startIndex, startIndex + this.itemsPorPagina);
-  }
-
-  convertirFormatoHora(initLifeDate: string | number | Date) {
-    let fechaHora;
-  
-    if (typeof initLifeDate === 'string') {
-      fechaHora = new Date(initLifeDate);
-    } else if (initLifeDate instanceof Date) {
-      fechaHora = initLifeDate;
-    } else {
-      fechaHora = new Date(initLifeDate);
+    if (titulo.trim().length === 0 || descripcion.trim().length === 0 || tamanio.trim().length === 0 || duracionAños.trim().length === 0 || duracionMeses.trim().length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'Por favor, completa todos los campos requeridos.',
+        confirmButtonText: 'Entendido'
+      });
+      return;
     }
-  
-    // Verificar si fechaHora es una fecha válida
-    if (isNaN(fechaHora.getTime())) {
-      return ''; 
-    }
-  
-    const dia = fechaHora.getDate();
-    const mes = fechaHora.getMonth() + 1;
-    const anio = fechaHora.getFullYear();
-    const horas = fechaHora.getHours();
-    const minutos = fechaHora.getMinutes();
-    const segundos = fechaHora.getSeconds();
-  
-    // Formatear en el nuevo formato
-    const formatoNuevo = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${anio} - ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-  
-    return formatoNuevo;
-  }
 
-  siguientePagina() {
-    if (this.paginaActual < this.paginasTotales) {
-      this.paginaActual++;
-    }
-  }
+    const duration = duracionAños + " años y " + duracionMeses + " meses";
+    console.log("DURACION ----->" + duration);
+    const idOrganization = this.userService.getOrgId();
+    
 
-  anteriorPagina() {
-    if (this.paginaActual > 1) {
-      this.paginaActual--;
-    }
-  }
+    const nuevoProyecto = {
+      "idOrganization": idOrganization,
+      "title": titulo,
+      "description": descripcion,
+      "capacity": tamanio,
+      "duration": duration,
+      "active": true
+    };
 
-  get paginasTotales() {
-    return Math.ceil(this.publicaciones.length / this.itemsPorPagina);
-  }
+    console.log(nuevoProyecto);
 
-  eliminarPublicacion(idPublicacion: number) {
     Swal.fire({
-      title: '¿Seguro que quieres eliminar esta publicación?',
       icon: 'question',
+      title: '¿Seguro que quieres publicar un proyecto?',
       showCancelButton: true,
-      confirmButtonText: 'Eliminar',
+      confirmButtonText: 'Publicar',
       cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#dc3545', 
-      cancelButtonColor: '#6c757d',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.scientistService.eliminarPublicacion(idPublicacion).subscribe(
-          () => {
+        this.organizationService.publicarProyecto(nuevoProyecto).subscribe(
+          (response) => {
+            console.log('Proyecto publicado con éxito:', response);
             Swal.fire({
               icon: 'success',
-              title: '¡Publicación eliminada con éxito!',
-              text: 'La publicación se ha eliminado satisfactoriamente.',
+              title: '¡Proyecto publicado con éxito!',
+              text: 'El proyecto se ha publicado correctamente.',
               confirmButtonText: 'Vale'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                console.log('Publicación eliminada con éxito.');
-                window.location.reload();
-              }
             });
+  
+            (document.getElementById('tituloProyecto') as HTMLInputElement).value = '';
+            (document.getElementById('descripcionProyecto') as HTMLTextAreaElement).value = '';
+            (document.getElementById('tamañoProyecto') as HTMLInputElement).value = '2';
+            (document.getElementById('duracionAñosProyecto') as HTMLInputElement).value = '0';
+            (document.getElementById('duracionMesesProyecto') as HTMLInputElement).value = '1';
           },
-          error => {
-            console.error('Error al eliminar la publicación:', error);
-            Swal.fire({
-              icon: 'error',
-              title: '¡Error!',
-              text: 'Ha ocurrido un error al eliminar la publicación',
-              confirmButtonText: 'Entendido'
-            });
+          (error) => {
+            console.error('Error al publicar el proyecto:', error);
           }
         );
       }
-    });    
+    });
   }
 }

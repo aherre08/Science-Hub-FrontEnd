@@ -1,3 +1,4 @@
+<router-outlet></router-outlet>
 <!DOCTYPE html>
 <html>
 
@@ -5,30 +6,85 @@
     <title>Recomendaciones de proyectos</title>
     <link rel="stylesheet" type="text/css" href="suggest-projects.component.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap">
+
 </head>
 
 <body>
     <div class="header">
         <button id="menuButton"><i class="fas fa-bars"></i></button>
         <div id="menuContent">
-            <ul id="features-list">
-                <li><a routerLink="../create-publication" class="menu-link">Crear publicación</a></li>
-                <li><a routerLink="../my-publications" class="menu-link">Mis publicaciones</a></li>
-                <li><a routerLink="../search-publication" class="menu-link">Buscar publicación</a></li>
-                <li><a routerLink="../search-organization" class="menu-link">Buscar organismo</a></li>
-                <li><a routerLink="../suggest-projects" class="menu-link">Recomendaciones proyectos</a></li>
-            </ul>
-
-            <div id="help-links">
-                <a routerLink="../create-publication" class="help-link">FAQ</a>
-                <a routerLink="../create-publication" class="help-link">Opciones</a>
-                <a routerLink="../create-publication" class="help-link">Ayuda</a>
-                <a routerLink="../create-publication" class="help-link">Contacto</a>
+            <img src="../../../assets/images/ScienceHub Logo.png" id="SHLogoSubMenu" alt="Logo de ScienceHub">
+            <hr id="hrSubMenu">
+            <button id="operationsSubMenu" class="accordion">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z" />
+                </svg>
+                Operaciones
+                <span id="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </span>
+            </button>
+            <div class="panel">
+                <a routerLink="../create-publication" class="submenu-link">Crear publicación</a>
+                <a routerLink="../my-publications" class="submenu-link">Mis publicaciones</a>
+                <a routerLink="../search-publication" class="submenu-link">Buscar publicación</a>
+                <a routerLink="../search-organization" class="submenu-link">Buscar organismo</a>
+                <a routerLink="../suggest-projects" class="submenu-link">Recomendaciones proyectos</a>
             </div>
 
+            <button id="optionsSubMenu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-gear-fill"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                </svg>
+                Opciones
+            </button>
+
+
+            <button id="helpSubMenu" class="accordion">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                    class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+                </svg>
+                Ayuda
+                <span id="accordion-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </span>
+            </button>
+            <div class="panel">
+                <a routerLink="../create-publication" class="submenu-link">FAQ</a>
+                <a routerLink="../create-publication" class="submenu-link">Contacto</a>
+            </div>
+
+            <button id="signOutSubMenu" routerLink="../register">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                    class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+                </svg>
+                Cerrar Sesión
+            </button>
         </div>
+
+
         <img src="../../../assets/images/ScienceHub Logo.png" id="ScienceHubLogo" alt="Logo de ScienceHub">
-        <span class="title">Científico</span>
+        <span class="title">C i e n t í f i c o</span>
         <div class="user-panel" (click)="showOptions = !showOptions" [class.active]="showOptions">
             <div class="user-panel-header">
                 <div class="name-icon-container">
@@ -60,8 +116,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
     <div class="links">
         <a routerLink="../create-publication" class="btn btn-link">Crear publicación </a>
         <div id="verticalLine">|</div>

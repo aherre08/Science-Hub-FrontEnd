@@ -16,14 +16,82 @@ export class SearchPublicationComponent {
   
   ngOnInit() {
     this.userName = this.userService.getName();
+    this.setupMenuButton();
+    this.setupHelpAccordionButton();
+    this.setupOperationsAccordionButton();
+    
+    this.setupAccordionListeners();
+  }
+
+  private setupMenuButton() {
     const menuButton = document.getElementById("menuButton") as HTMLButtonElement;
     const menuContent = document.getElementById("menuContent") as HTMLDivElement;
 
     menuButton.addEventListener("click", () => {
       menuContent.style.display = menuContent.style.display === "block" ? "none" : "block";
     });
-
   }
+
+  private setupAccordionListeners() {
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function(this: HTMLElement) {
+        this.classList.toggle("active");
+
+        const panel = this.nextElementSibling as HTMLElement;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+  }
+
+
+  setupOperationsAccordionButton(): void {
+    const button = document.getElementById("operationsSubMenu");
+    const icon = document.getElementById("icon");
+
+    button?.addEventListener("click", () => {
+      if (icon && icon.innerHTML.includes("bi-chevron-down")) {
+        icon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+          </svg>
+        `;
+      } else if (icon) {
+        icon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        `;
+      }
+    });
+  }
+
+  setupHelpAccordionButton(): void {
+    const button = document.getElementById("helpSubMenu");
+    const icon = document.getElementById("accordion-icon");
+
+    button?.addEventListener("click", () => {
+      if (icon && icon.innerHTML.includes("bi-chevron-down")) {
+        icon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+          </svg>
+        `;
+      } else if (icon) {
+        icon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        `;
+      }
+    });
+  }
+  
+
 
   buscarPublicacion(){
     const idPublicacionStr = (document.getElementById("idPublicacion") as HTMLInputElement).value;
@@ -49,7 +117,7 @@ export class SearchPublicationComponent {
       Swal.fire({
         icon: 'error',
         title: '¡Error!',
-        text: 'Por favor, ingresa un número válido en el campo requerido.',
+        text: 'Por favor, ingresa un número de identificador válido en el campo requerido.',
         confirmButtonText: 'Entendido'
       });
 
@@ -71,6 +139,15 @@ export class SearchPublicationComponent {
         idPublicacionSpan.innerText = (response.id).toString();
       }
 
+      const ultimaModificacionSpan = document.getElementById('ultimaModificacionSpan');
+      if (ultimaModificacionSpan) {
+        if(response.updateLife != null){
+          ultimaModificacionSpan.innerText = this.convertirFormatoHora(response.updateLife);
+        }else{
+          ultimaModificacionSpan.innerText = this.convertirFormatoHora(response.initLifeDate);
+        }
+      }
+
       const tituloSpan = document.getElementById('tituloSpan');
       if (tituloSpan) {
         tituloSpan.innerText = response.title;
@@ -90,15 +167,7 @@ export class SearchPublicationComponent {
       if (experienciaSpan) {
         experienciaSpan.innerText = response.profExperience;
       }
-
-      const ultimaModificacionSpan = document.getElementById('ultimaModificacionSpan');
-      if (ultimaModificacionSpan) {
-        if(response.updateLife != null){
-          ultimaModificacionSpan.innerText = this.convertirFormatoHora(response.updateLife);
-        }else{
-          ultimaModificacionSpan.innerText = this.convertirFormatoHora(response.initLifeDate);
-        }
-      }
+      
 
       // Mostrar el contenedor solo si se encuentra la publicación
       const publicacionInfo = document.getElementById('publicacionInfo');
@@ -112,7 +181,7 @@ export class SearchPublicationComponent {
         Swal.fire({
           icon: 'error',
           title: '¡Error!',
-          text: 'No se ha podido encontrar una publicacion con el ID proporcionado./n Introduce el ID de una publicación existente.',
+          html: 'No se ha podido encontrar una publicación con el ID proporcionado.<br><br>Introduce el ID de una publicación existente y activa.',
           confirmButtonText: 'Entendido'
         });
 
@@ -153,5 +222,5 @@ export class SearchPublicationComponent {
     const formatoNuevo = `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${anio} - ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
   
     return formatoNuevo;
-  }
+  }  
 }

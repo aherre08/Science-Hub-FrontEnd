@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Publicacion } from './my-publications/my-publications.model';
+import { Organismo } from './search-organization/search-organization.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class ScientistService {
   editarPublicacion(idPublicacion: number, publicacion: Publicacion): Observable<Publicacion> {
     const url = `${this.apiUrl}/publicacion/${idPublicacion}`;
     return this.http.put<Publicacion>(url, publicacion);
+  }
+
+  buscarOrganismo(nombreOrg: string): Observable<Organismo[]>{
+    return this.http.get<Organismo[]>(this.apiUrl + '/organismo/findBy/' + nombreOrg);
   }
 }
