@@ -3,6 +3,7 @@ import { ScientistService } from '../scientist.service';
 import { UserService } from 'src/app/shared/user.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-publication',
@@ -13,7 +14,7 @@ export class CreatePublicationComponent implements OnInit{
   showOptions = false;
   userName: string = '';
 
-  constructor(private scientistService: ScientistService, private userService: UserService) {}
+  constructor(private scientistService: ScientistService, private userService: UserService, private router: Router) {}
   
   ngOnInit() {
     this.userName = this.userService.getName();

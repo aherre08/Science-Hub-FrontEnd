@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ScientistService } from '../scientist.service';
 import { UserService } from 'src/app/shared/user.service';
+import { Proyecto } from '../search-organization/search-organization.model';
+
 
 @Component({
   selector: 'app-suggest-projects',
@@ -11,6 +13,8 @@ export class SuggestProjectsComponent {
   showOptions = false;
   userName: string = '';
   
+  proyectos: Proyecto[]=[];
+  encontrados: boolean = false;
 
   constructor(private scientistService: ScientistService, private userService: UserService){}
 
@@ -19,8 +23,9 @@ export class SuggestProjectsComponent {
     this.setupMenuButton();
     this.setupHelpAccordionButton();
     this.setupOperationsAccordionButton();
-    
     this.setupAccordionListeners();
+
+    this.recomendarProyectos();
   }
 
   private setupMenuButton() {
@@ -92,4 +97,22 @@ export class SuggestProjectsComponent {
       }
     });
   }
+
+
+  recomendarProyectos(){
+
+    this.scientistService.recomendarProyectos(this.userService.getOrcid()).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.encontrados = true;
+        this.proyectos = response.content;
+        
+      },
+      (error) => {
+        this.encontrados = false;
+        console.error('Error al recomendar proyectos:', error);
+      }
+    );
+  }
+
 }

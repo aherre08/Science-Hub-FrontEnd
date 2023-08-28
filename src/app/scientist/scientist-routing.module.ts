@@ -7,15 +7,21 @@ import { SearchPublicationComponent } from './search-publication/search-publicat
 import { SearchOrganizationComponent } from './search-organization/search-organization.component';
 import { SuggestProjectsComponent } from './suggest-projects/suggest-projects.component';
 import { EditPublicationComponent } from './edit-publication/edit-publication.component';
+import { ShowProjectComponent } from './show-project/show-project.component';
+import { MyProjectComponent } from './my-project/my-project.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+  {path:'home', component:HomeComponent},
   { path: 'create-publication', component: CreatePublicationComponent },
   { path:'my-publications', component: MyPublicationsComponent },
   { path: 'edit-publication/:publicationId', component: EditPublicationComponent },
-  { path:'search-publication', component: SearchPublicationComponent},
-  {path:'search-organization', component: SearchOrganizationComponent},
-  {path:'suggest-projects', component: SuggestProjectsComponent},
-  { path: '', redirectTo: 'create-publication', pathMatch: 'full' },
+  { path:'search-publication', component: SearchPublicationComponent },
+  { path:'search-organization', component: SearchOrganizationComponent },
+  { path:'show-project/:projectId', component:ShowProjectComponent },
+  { path:'suggest-projects', component: SuggestProjectsComponent },
+  {path:'my-project', component:MyProjectComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

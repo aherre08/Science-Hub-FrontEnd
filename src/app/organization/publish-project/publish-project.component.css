@@ -101,7 +101,6 @@ body {
     font-weight: bold;
 }
 
-#optionsSubMenu,
 #signOutSubMenu {
     background-color: #00A2FF;
     color: white;
@@ -116,9 +115,6 @@ body {
     margin-bottom: 3%;
 }
 
-#optionsSubMenu:hover {
-    background-color: darkblue;
-}
 
 #signOutSubMenu:hover {
     background-color: darkblue;
@@ -242,6 +238,18 @@ body {
     color: red;
 }
 
+#home-button {
+    margin-right: 2%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+#home-button:hover {
+    font-size: 22px;
+}
+
 .links {
     display: flex;
     height: 40px;
@@ -307,7 +315,7 @@ hr {
 
 #tituloProyecto {
     margin-left: 6%;
-    width: 700px;
+    width: 570px;
 }
 
 #descripcionProyecto {
@@ -317,7 +325,7 @@ hr {
     resize: none;
 }
 
-#tamañoProyecto {
+#capacidadProyecto {
     margin-left: 2%;
     margin-right: 1%;
     width: 65px;
@@ -331,9 +339,27 @@ hr {
 }
 
 #duracionMesesProyecto {
-    margin-left: 5%;
+    margin-left: 3%;
     margin-right: 1%;
     text-align: center;
+}
+
+#ambitoLabel {
+    margin-left: 8%;
+}
+
+#ambitoProyecto {
+    margin-left: 2%;
+    width: 300px;
+}
+
+#subambitoLabel {
+    margin-left: 4%;
+}
+
+#subambitoProyecto {
+    margin-left: 2%;
+    width: 275px;
 }
 
 #publicarButton {

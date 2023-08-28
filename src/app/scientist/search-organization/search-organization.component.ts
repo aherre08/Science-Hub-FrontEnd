@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ScientistService } from '../scientist.service';
 import { UserService } from 'src/app/shared/user.service';
-import { Organismo } from './search-organization.model';
+import { Organismo, Proyecto } from './search-organization.model';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-organization',
@@ -15,18 +16,28 @@ export class SearchOrganizationComponent {
 
   mostrarResultados=false;
   noResultados = false;
+  listaProyectos = false;
+  noProyectos = false;
   
   organismos: Organismo[] = [];
+  proyectos: Proyecto[] = [];
 
-  constructor(private scientistService: ScientistService, private userService: UserService){}
+  constructor(private scientistService: ScientistService, private userService: UserService, private router: Router, private route: ActivatedRoute){}
 
   ngOnInit() {
     this.userName = this.userService.getName();
     this.setupMenuButton();
     this.setupHelpAccordionButton();
     this.setupOperationsAccordionButton();
-    
     this.setupAccordionListeners();
+
+    this.route.queryParams.subscribe(params => {
+      const searchTerm = params['search'];
+      if (searchTerm) {
+        this.realizarBusqueda(searchTerm);
+      } 
+    });
+
   }
 
   private setupMenuButton() {
@@ -108,6 +119,7 @@ export class SearchOrganizationComponent {
       });
 
       this.mostrarResultados = false;
+      this.listaProyectos = false;
 
       return;
     }
@@ -116,6 +128,7 @@ export class SearchOrganizationComponent {
       (data: Organismo[]) => {
         
         this.mostrarResultados = true;
+        this.listaProyectos = false;
 
         if(data.length == 0){
           this.noResultados = true;
@@ -123,18 +136,75 @@ export class SearchOrganizationComponent {
           this.noResultados = false;
           this.organismos = data;
         }
+
+        if (nombreOrg.trim().length > 0) {
+          this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: { search: nombreOrg },
+            queryParamsHandling: 'merge'
+          });
+        }
         
 
       },
       error => {
-        this.mostrarResultados = true;
-        this.noResultados = true;
         console.error('Error al obtener los resultados:', error);
       }
     );
   }
 
-  seleccionarOrganismo(organismo: Organismo){
+  listarProyectos(orgId: number){
     
+    this.scientistService.obtenerProyectos(orgId.toString()).subscribe(
+      (data: Proyecto[]) => {
+        
+        this.listaProyectos = true;
+    
+        if(data.length == 0){
+          this.noProyectos = true;
+        }else{
+          this.noProyectos = false;
+          this.proyectos = data;
+        }
+
+      },
+      error => {
+        console.error('Error al obtener los resultados:', error);
+        this.listaProyectos = false;
+      }
+    );
+
+  }
+
+  realizarBusqueda(searchTerm: string) {
+    const nombreOrganismo = document.getElementById('nombreOrganismo') as HTMLInputElement;
+    if (nombreOrganismo) {
+      nombreOrganismo.value = searchTerm;
+    }
+
+    this.scientistService.buscarOrganismo(searchTerm).subscribe(
+      (data: Organismo[]) => {
+        this.mostrarResultados = true;
+        this.listaProyectos = false;
+  
+        if (data.length == 0) {
+          this.noResultados = true;
+        } else {
+          this.noResultados = false;
+          this.organismos = data;
+        }
+      },
+      error => {
+        console.error('Error al obtener los resultados:', error);
+      }
+    );
+  }
+
+  mostrarProyectoEnDetalle(projectId: number) {
+    const nombreOrg = (document.getElementById('nombreOrganismo') as HTMLInputElement).value;
+    this.router.navigate(['../show-project', projectId], {
+      relativeTo: this.route,
+      queryParams: { search: nombreOrg }
+    });
   }
 }

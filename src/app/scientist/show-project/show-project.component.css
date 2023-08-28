@@ -1,0 +1,600 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #53B200;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(83, 178, 0, 1) 50%, rgba(2, 0, 36, 1) 100%);
+}
+
+body {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(83, 178, 0, 1) 50%, rgba(2, 0, 36, 1) 100%);
+    height: 747px;
+}
+
+#menuButton {
+    position: fixed;
+    left: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: white;
+}
+
+#menuButton i {
+    font-size: 24px;
+}
+
+#menuContent {
+    display: none;
+    position: fixed;
+    top: 58px;
+    left: 0;
+    bottom: 0;
+    max-width: 200px;
+    height: 690px;
+    background-color: #53B200;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 3%;
+}
+
+#menuContent a {
+    display: block;
+}
+
+.accordion {
+    background-color: #53B200;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+    background-color: darkgreen;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: darkgreen;
+
+    display: none;
+    overflow: hidden;
+}
+
+#SHLogoSubMenu {
+    height: 42px;
+    margin-left: 15%;
+}
+
+#hrSubMenu {
+    width: 170px;
+    right: 70px;
+}
+
+.submenu-link {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    background-color: #2E3329;
+    color: white;
+    outline: 2px solid black;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    padding: 2px;
+}
+
+.submenu-link:hover {
+    background-color: #53B200;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#signOutSubMenu {
+    background-color: #53B200;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin-bottom: 3%;
+}
+
+#signOutSubMenu:hover {
+    background-color: darkgreen;
+}
+
+#ScienceHubLogo {
+    height: 42px;
+    margin-left: 15%;
+}
+
+.title {
+    position: fixed;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    font-family: 'Staatliches', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.user-panel {
+    margin-left: auto;
+    border: solid 3px black;
+
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.user-panel-header {
+    font-weight: bold;
+    white-space: nowrap;
+    background-color: white;
+    color: black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+}
+
+.user-panel-header:hover {
+    background-color: rgb(98, 98, 98);
+    color: white;
+
+}
+
+.name-icon-container {
+    padding: 4px;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    flex: 1;
+}
+
+.name-icon-container i {
+    margin-left: 5px;
+
+    flex-shrink: 0;
+}
+
+#nameSpan {
+    margin-left: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.fa-chevron-down {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.user-panel-options {
+    position: absolute;
+    bottom: -147px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    min-width: 160px;
+    display: none;
+    border: 1px solid black;
+}
+
+.user-panel.active .user-panel-options {
+    display: block;
+}
+
+.user-option {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-option:hover {
+    background-color: lightgray;
+    font-weight: bolder;
+}
+
+.user-option:last-child {
+    border-bottom: none;
+}
+
+#profileOption {
+    margin-left: 15px;
+    color: black;
+}
+
+
+#signOutOption {
+    margin-left: 15px;
+    color: black;
+}
+
+#signOutOption:hover {
+    color: red;
+}
+
+#home-button {
+    margin-right: 2%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+#home-button:hover {
+    font-size: 22px;
+}
+
+.links {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    background-color: #141612
+}
+
+.links-box {
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+#verticalLine {
+    border-left: 2px solid white;
+    height: fit-content;
+}
+
+.btn-link {
+    width: 180px;
+    color: white;
+    white-space: nowrap;
+}
+
+.btn-link:hover {
+    width: 185px;
+    color: white;
+    font-weight: bolder;
+}
+
+#centerPanel {
+    margin-top: 1%;
+    margin-left: 13%;
+    height: 610px;
+    max-width: 1150px;
+    background-color: white;
+    border: solid black 2px;
+    border-radius: 2%;
+}
+
+h4 {
+    position: sticky;
+    margin-top: 1%;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 21px;
+    text-align: center;
+}
+
+hr {
+    margin-left: 40%;
+    width: 20%;
+    border: solid black 1px;
+}
+
+#proyectoInfo {
+    margin-top: -1%;
+    margin-left: 14%;
+    height: 460px;
+    width: 980px;
+    padding-top: 1%;
+}
+
+.form-proyecto-field {
+    margin-bottom: 3%;
+    margin-left: 5%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: medium;
+}
+
+#tituloProyecto {
+    margin-left: 3%;
+    width: 590px;
+    background: none;
+    border: none;
+}
+
+#descripcionProyecto {
+    margin-top: 1%;
+    height: 200px;
+    width: 800px;
+    resize: none;
+    border: none;
+    background: none;
+}
+
+
+
+#ambitoProyecto {
+    margin-left: 1%;
+    width: 195px;
+    border: none;
+    background: none;
+}
+
+
+
+#subambitoProyecto {
+    margin-left: 1%;
+    width: 275px;
+    border: none;
+    background: none;
+}
+
+#duracionAñosProyecto {
+    margin-left: 1%;
+
+    border: none;
+    background: none;
+}
+
+
+#integrantesSpan {
+    margin-left: 1%;
+    margin-right: 5%;
+}
+
+#participoButton {
+    background-color: darkgreen;
+    color: white;
+}
+
+#participoButton:hover:not([disabled]) {
+    background-color: #53B200;
+    font-weight: bold;
+}
+
+#participoButton[disabled] {
+    background-color: black;
+    cursor: not-allowed;
+}
+
+#noparticipoButton {
+    margin-left: 55%;
+    background-color: red;
+    color: white;
+}
+
+#noparticipoButton:hover {
+    background-color: darkred;
+}
+
+#volverLink {
+    margin-left: 32%;
+}
+
+#volverLink:hover {
+    font-weight: bold;
+}
+
+
+
+/* Estilos para móvil S */
+@media (max-width: 320px) {
+    .header {
+        min-height: 90px;
+    }
+
+    .links {
+        min-height: 90px;
+    }
+
+    .btn-link {
+        font-size: 25px;
+    }
+
+    h4 {
+        margin-top: 10%;
+        font-size: 30px;
+    }
+
+    hr {
+        margin-bottom: 10%;
+        ;
+    }
+
+    #contentPanel {
+        margin-top: 10%;
+    }
+
+    #centerPanel {
+        min-height: 1800px;
+    }
+
+    .form-publicacion-field {
+        margin-left: 5%;
+        margin-bottom: 10%;
+        font-size: 30px;
+    }
+
+    #crearButton {
+        margin-left: 40%;
+        min-width: 200px;
+        font-size: 25px;
+    }
+}
+
+/*Estilos para Móvil L*/
+@media (max-width: 426px) {
+
+    .header {
+        min-height: 90px;
+    }
+
+    .links {
+        min-height: 90px;
+    }
+
+    .btn-link {
+        font-size: 25px;
+    }
+
+    h4 {
+        margin-top: 10%;
+        font-size: 30px;
+    }
+
+    hr {
+        margin-bottom: 10%;
+        ;
+    }
+
+    #contentPanel {
+        margin-top: 10%;
+    }
+
+    #centerPanel {
+        min-height: 1150px;
+    }
+
+    .form-publicacion-field {
+        margin-left: 5%;
+        margin-bottom: 10%;
+        font-size: 30px;
+    }
+
+    #crearButton {
+        margin-left: 40%;
+        min-width: 200px;
+        font-size: 25px;
+    }
+}
+
+/*Estilos para Tablets (772px X 776px, Zoom: 75%)*/
+@media (max-width: 772px) and (max-height:776px) {
+    .header {
+        max-height: 100px;
+    }
+
+    body {
+        width: 850px;
+        min-height: 2300px;
+    }
+
+
+}
+
+
+/*Estilos para Portátiles estándar (1024px X 776px, Zoom: 75%)*/
+@media (max-width: 1024px) and (max-height:776px) {
+    #menuContent {
+        position: solid;
+        max-width: 150px;
+        height: 710px;
+
+    }
+
+    #SHLogoSubMenu {
+        max-width: 120px;
+        margin-left: 3%;
+    }
+
+    .accordion {
+        max-width: 100%;
+    }
+
+    .panel {
+        max-width: 100%;
+    }
+
+    .submenu-link {
+        max-width: 90%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .links {
+        justify-content: start;
+
+    }
+
+    .btn-link {
+        width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: white;
+
+    }
+
+    .btn-link:hover {
+        width: 155px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+
+
+/*Estilos para Portátiles L (1440px X 776px, Zoom: 75%)*/
+@media (max-width: 1440px) and (max-height:776px) {
+    body {
+        height: 776px;
+    }
+
+    .user-panel {
+        margin-right: 2%;
+    }
+
+    #menuContent {
+        width: 1250px;
+        height: 710px;
+    }
+
+    #hrSubMenu {
+        width: 50px;
+
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    #centerPanel {
+        height: 600px;
+        max-width: 1150px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+
+    #tituloPublicacion {
+        max-width: 500px;
+    }
+
+    #descripcionPublicacion {
+        max-width: 500px;
+    }
+}

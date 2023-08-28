@@ -14,8 +14,10 @@ export class UserService {
     this.name = storedData.name || '';
     this.email = storedData.email || '';
     
+    this.idProject = storedData.idProject || 0;
     this.orcid = storedData.orcid || '';
     this.profession = storedData.profession || '';
+    this.available = storedData.available;
     
     this.orgId = storedData.orgId || '';
     this.location = storedData.location || '';
@@ -29,9 +31,11 @@ export class UserService {
   private email: string;
 
   // Scientist
+  private idProject:number;
   private orcid: string;
   private profession: string;
   private publicationId: string | undefined;
+  private available:boolean;
 
   // Organization 
   private orgId: string;
@@ -75,6 +79,17 @@ export class UserService {
     return this.email;
   }
 
+
+  setIdProject(id: number) {
+    this.idProject = id;
+    this.saveToSessionStorage();
+  }
+
+  getIdProject(): number | undefined {
+    return this.idProject;
+  }
+
+
   setOrcid(orcid: string) {
     this.orcid = orcid;
     this.saveToSessionStorage();
@@ -100,6 +115,15 @@ export class UserService {
 
   getPublicationId(): string | undefined{
     return this.publicationId;
+  }
+
+  setAvailable(available:boolean){
+    this.available = available;
+    this.saveToSessionStorage();
+  }
+
+  getAvailable():boolean{
+    return this.available;
   }
 
   setOrgId(orgId: string) {
@@ -135,6 +159,8 @@ export class UserService {
       userUuid: this.userUuid,
       name: this.name,
       email: this.email,
+      idProject: this.idProject,
+      available: this.available,
       orcid: this.orcid,
       profession: this.profession,
       orgId: this.orgId,

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Editar Proyecto</title>
+    <link rel="stylesheet" type="text/css" href="edit-project.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap">
+</head>
+
+<body>
+    <div class="header">
+        <button id="menuButton"><i class="fas fa-bars"></i></button>
+        <div id="menuContent">
+            <img src="../../../assets/images/ScienceHub Logo.png" id="SHLogoSubMenu" alt="Logo de ScienceHub">
+            <hr id="hrSubMenu">
+            <button id="operationsSubMenu" class="accordion">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z" />
+                </svg>
+                Operaciones
+                <span id="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </span>
+            </button>
+            <div class="panel">
+                <a routerLink="../../publish-project" class="submenu-link">Publicar proyecto</a>
+                <a routerLink="../../my-projects" class="submenu-link">Mis proyectos</a>
+                <a routerLink="../../search-project" class="submenu-link">Buscar proyecto</a>
+                <a routerLink="../../search-scientist" class="submenu-link">Buscar científico</a>
+                <a routerLink="../../suggest-scientists" class="submenu-link">Recomendaciones científicos</a>
+            </div>
+
+            <button id="helpSubMenu" class="accordion">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                    class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+                </svg>
+                Ayuda
+                <span id="accordion-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </span>
+            </button>
+            <div class="panel">
+                <a routerLink="../../../help-faq" class="submenu-link">FAQ</a>
+                <a routerLink="../create-publication" class="submenu-link">Contacto</a>
+            </div>
+
+            <button id="signOutSubMenu" routerLink="../register">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                    class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+                </svg>
+                Cerrar Sesión
+            </button>
+        </div>
+        <img src="../../../assets/images/ScienceHub Logo.png" id="ScienceHubLogo" alt="Logo de ScienceHub">
+        <span class="title">O r g a n i s m o</span>
+        <img src="../../../assets/images/organization-icon-white.png" id="OrganizationIcon" alt="Icono de un organismo">
+        <div class="user-panel" (click)="showOptions = !showOptions" [class.active]="showOptions">
+            <div class="user-panel-header">
+                <div class="name-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    <span id="nameSpan">{{ userName }}</span>
+                </div>
+                <i class="fa fa-chevron-down"></i>
+            </div>
+            <div class="user-panel-options">
+                <div class="user-option">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                    </svg>
+                    <a routerLink="../../view-profile" id="profileOption">Mi Perfil</a>
+                </div>
+                <div class="user-option">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="darkred"
+                        class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+                    </svg>
+                    <a routerLink="../../login" id="signOutOption">Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="links">
+        <button id="home-button" routerLink="../../home">
+            <i class="fas fa-home"></i>
+        </button>
+        <div id="verticalLine">|</div>
+        <a routerLink="../../publish-project" class="btn btn-link">Publicar proyecto </a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../../my-projects" class="btn btn-link">Mis proyectos</a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../../search-project" class="btn btn-link">Buscar proyecto</a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../../search-scientist" class="btn btn-link">Buscar científico</a>
+        <div id="verticalLine">|</div>
+        <a routerLink="../../suggest-scientists" class="btn btn-link">Recomendaciones cientificos</a>
+
+    </div>
+
+    <div id="contentPanel">
+        <div id="centerPanel">
+            <h4><b>Editar Proyecto</b> </h4>
+            <hr>
+            <div class="form" #formularioProyecto>
+                <div class="form-proyecto-field">
+                    <label for="tituloProyecto"><b><u>Título:</u></b></label>
+                    <input type="text" id="tituloProyecto" name="titulo" [(ngModel)]="tituloProyecto"
+                        placeholder="Escribe el título del proyecto." maxlength="85" required>
+                    <br>
+                </div>
+                <div class="form-proyecto-field">
+                    <label for="descripcionProyecto"><b><u>Descripción:</u></b></label>
+                    <br>
+                    <textarea id="descripcionProyecto" name="descripcion" [(ngModel)]="descripcionProyecto"
+                        placeholder="Escribe la descripción del proyecto. (Máx. 800 caracteres)" maxlength="800"
+                        required></textarea>
+                    <br>
+                </div>
+                <div class="form-proyecto-field">
+                    <label for="capacidadProyecto"><b><u>Capacidad de integrantes:</u></b></label>
+                    <input type="number" id="capacidadProyecto" name="capacidad" [(ngModel)]="capacidadProyecto"
+                        value="2" min="2" required>
+                    <span>científicos</span>
+
+                    <label for="ambitoProyecto" id="ambitoLabel"><b><u>Ámbito:</u></b></label>
+                    <input type="text" id="ambitoProyecto" name="ambito" [(ngModel)]="ambitoProyecto"
+                        placeholder="Escribe el ámbito del proyecto." maxlength="40" required>
+                    <br>
+                </div>
+                <div class="form-proyecto-field">
+                    <label><b><u>Duración:</u></b></label>
+                    <input type="number" id="duracionAñosProyecto" name="duracion_años" [(ngModel)]="durAnosProyecto"
+                        value="0" min="0" max="70" required>
+                    <span>año(s)</span>
+                    <input type="number" id="duracionMesesProyecto" name="duracion_meses" [(ngModel)]="durMesesProyecto"
+                        value="1" min="0" max="11" required>
+                    <span>mes(es)</span>
+
+                    <label for="subambitoProyecto" id="subambitoLabel"><b><u>Subámbito:</u></b></label>
+                    <input type="text" id="subambitoProyecto" name="subambito" [(ngModel)]="subambitoProyecto"
+                        placeholder="Escribe el subámbito del proyecto." maxlength="40" required>
+                    <br>
+                </div>
+                <button class="btn btn-primary" id="editarButton" (click)="editarProyecto()">
+                    <i class="fas fa-plus"></i>
+                    Editar
+                </button>
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

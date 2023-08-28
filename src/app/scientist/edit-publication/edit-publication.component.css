@@ -101,7 +101,6 @@ body {
     font-weight: bold;
 }
 
-#optionsSubMenu,
 #signOutSubMenu {
     background-color: #53B200;
     color: white;
@@ -114,10 +113,6 @@ body {
     outline: none;
     transition: 0.4s;
     margin-bottom: 3%;
-}
-
-#optionsSubMenu:hover {
-    background-color: darkgreen;
 }
 
 #signOutSubMenu:hover {
@@ -193,13 +188,14 @@ body {
 
 .user-panel-options {
     position: absolute;
-    bottom: -102px;
+    bottom: -147px;
     right: 0;
     background-color: #fff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     padding: 5px 0;
     min-width: 160px;
     display: none;
+    border: 1px solid black;
 }
 
 .user-panel.active .user-panel-options {
@@ -233,6 +229,18 @@ body {
 
 #signOutOption:hover {
     color: red;
+}
+
+#home-button {
+    margin-right: 2%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+#home-button:hover {
+    font-size: 22px;
 }
 
 .links {

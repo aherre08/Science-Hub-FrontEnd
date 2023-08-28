@@ -10,7 +10,10 @@ import { MyPublicationsComponent } from './my-publications/my-publications.compo
 import { SearchPublicationComponent } from './search-publication/search-publication.component';
 import { SearchOrganizationComponent } from './search-organization/search-organization.component';
 import { SuggestProjectsComponent } from './suggest-projects/suggest-projects.component';
-import { EditPublicationComponent } from './edit-publication/edit-publication.component'; 
+import { EditPublicationComponent } from './edit-publication/edit-publication.component';
+import { ShowProjectComponent } from './show-project/show-project.component';
+import { MyProjectComponent } from './my-project/my-project.component';
+import { HomeComponent } from './home/home.component'; 
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { EditPublicationComponent } from './edit-publication/edit-publication.co
     SearchPublicationComponent,
     SearchOrganizationComponent,
     SuggestProjectsComponent,
-    EditPublicationComponent
+    EditPublicationComponent,
+    ShowProjectComponent,
+    MyProjectComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

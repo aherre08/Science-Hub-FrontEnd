@@ -101,7 +101,6 @@ body {
     font-weight: bold;
 }
 
-#optionsSubMenu,
 #signOutSubMenu {
     background-color: #53B200;
     color: white;
@@ -114,10 +113,6 @@ body {
     outline: none;
     transition: 0.4s;
     margin-bottom: 3%;
-}
-
-#optionsSubMenu:hover {
-    background-color: darkgreen;
 }
 
 #signOutSubMenu:hover {
@@ -193,13 +188,14 @@ body {
 
 .user-panel-options {
     position: absolute;
-    bottom: -102px;
+    bottom: -147px;
     right: 0;
     background-color: #fff;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     padding: 5px 0;
     min-width: 160px;
     display: none;
+    border: 1px solid black;
 }
 
 .user-panel.active .user-panel-options {
@@ -233,6 +229,18 @@ body {
 
 #signOutOption:hover {
     color: red;
+}
+
+#home-button {
+    margin-right: 2%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+#home-button:hover {
+    font-size: 22px;
 }
 
 .links {
@@ -325,15 +333,109 @@ hr {
 }
 
 #results {
-    margin-left: 2%;
+    margin-left: 9%;
     max-width: 600px;
     max-height: 450px;
     white-space: normal;
     word-wrap: break-word;
     overflow: auto;
-
+    float: left;
 }
 
 #noResultsSpan {
+    text-align: left;
+    white-space: nowrap;
+    width: 500px;
+}
+
+#resultsTable {
+    margin-top: 3%;
+    border-collapse: collapse;
+    border: inset;
+    border-width: 3px;
     text-align: center;
+    max-width: 400px;
+
+}
+
+.scrollable {
+    max-height: calc(5 * (70px));
+    overflow-y: auto;
+    display: block;
+}
+
+td {
+    border: 2px inset;
+    padding: 8px;
+}
+
+td#orgName {
+    width: 250px;
+    margin-right: 35%;
+}
+
+#listProjectsButton {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    white-space: nowrap;
+    color: black;
+    width: 150px;
+}
+
+#listProjectsButton:hover {
+    text-decoration: underline;
+    color: green;
+    font-weight: bold;
+    width: 150px;
+}
+
+#proyects {
+    position: relative;
+    width: 650px;
+    max-height: 650px;
+    float: right;
+    bottom: 2px;
+}
+
+#proyectsTable {
+    overflow-x: auto;
+    margin-right: 5%;
+    margin-top: 3%;
+    margin-bottom: 5%;
+    max-width: 575px;
+    border: 3px solid black;
+}
+
+#proyectsTable.scrollable {
+    max-height: calc(5 * (69px));
+    overflow-y: auto;
+    display: block;
+    max-width: 540px;
+}
+
+#proyectsTable td {
+    border-style: solid;
+}
+
+#proyectTitle {
+    max-width: 390px;
+    word-wrap: break-word;
+}
+
+#extraInfoProyect {
+    padding-top: 3%;
+    padding-left: 3%;
+    width: 150px;
+}
+
+#showInfoProjectButton {
+    background-color: grey;
+    color: white;
+    width: 100px;
+}
+
+#showInfoProjectButton:hover {
+    background-color: black;
 }

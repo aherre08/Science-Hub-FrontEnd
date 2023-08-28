@@ -40,16 +40,6 @@
                 <a routerLink="../suggest-projects" class="submenu-link">Recomendaciones proyectos</a>
             </div>
 
-            <button id="optionsSubMenu">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-gear-fill"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
-                </svg>
-                Opciones
-            </button>
-
-
             <button id="helpSubMenu" class="accordion">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                     class="bi bi-question-circle-fill" viewBox="0 0 16 16">
@@ -66,7 +56,7 @@
                 </span>
             </button>
             <div class="panel">
-                <a routerLink="../create-publication" class="submenu-link">FAQ</a>
+                <a routerLink="../../help-faq" class="submenu-link">FAQ</a>
                 <a routerLink="../create-publication" class="submenu-link">Contacto</a>
             </div>
 
@@ -100,7 +90,17 @@
                         class="bi bi-person-fill" viewBox="0 0 16 16">
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                     </svg>
-                    <a routerLink="../register" id="profileOption">Mi Perfil</a>
+                    <a routerLink="../../view-profile" id="profileOption">Mi Perfil</a>
+                </div>
+                <div class="user-option">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
+                        class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z" />
+                        <path
+                            d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5ZM10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7Zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1Zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1Z" />
+                    </svg>
+                    <a routerLink="../my-project" id="profileOption">Mi Proyecto</a>
                 </div>
                 <div class="user-option">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="darkred"
@@ -108,13 +108,17 @@
                         <path
                             d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
                     </svg>
-                    <a routerLink="../register" id="signOutOption">Cerrar Sesión</a>
+                    <a routerLink="../../login" id="signOutOption">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="links">
+        <button id="home-button" routerLink="../home">
+            <i class="fas fa-home"></i>
+        </button>
+        <div id="verticalLine">|</div>
         <a routerLink="../create-publication" class="btn btn-link">Crear publicación </a>
         <div id="verticalLine">|</div>
         <a routerLink="../my-publications" class="btn btn-link">Mis publicaciones</a>
@@ -129,7 +133,7 @@
 
     <div id="contentPanel">
         <div id="centerPanel">
-            <h4>Mis publicaciones</h4>
+            <h4><b>Mis publicaciones</b></h4>
             <hr>
             <div *ngIf="publicaciones.length > 0; else noPublicaciones">
                 <div class="table-container">

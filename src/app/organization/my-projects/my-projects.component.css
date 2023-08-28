@@ -101,7 +101,6 @@ body {
     font-weight: bold;
 }
 
-#optionsSubMenu,
 #signOutSubMenu {
     background-color: #00A2FF;
     color: white;
@@ -114,10 +113,6 @@ body {
     outline: none;
     transition: 0.4s;
     margin-bottom: 3%;
-}
-
-#optionsSubMenu:hover {
-    background-color: darkblue;
 }
 
 #signOutSubMenu:hover {
@@ -242,13 +237,25 @@ body {
     color: red;
 }
 
+#home-button {
+    margin-right: 2%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+#home-button:hover {
+    font-size: 22px;
+}
+
 .links {
     display: flex;
     height: 40px;
     align-items: center;
     justify-content: center;
     font-family: 'Nunito', sans-serif;
-    background-color: #2E3329;
+    background-color: #141612
 }
 
 #verticalLine {
@@ -321,6 +328,10 @@ td {
 th {
     background-color: #000000;
     color: white;
+}
+
+td {
+    word-wrap: break-word;
 }
 
 th,

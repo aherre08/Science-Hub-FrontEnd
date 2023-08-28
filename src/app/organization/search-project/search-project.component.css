@@ -101,7 +101,6 @@ body {
     font-weight: bold;
 }
 
-#optionsSubMenu,
 #signOutSubMenu {
     background-color: #00A2FF;
     color: white;
@@ -116,9 +115,6 @@ body {
     margin-bottom: 3%;
 }
 
-#optionsSubMenu:hover {
-    background-color: darkblue;
-}
 
 #signOutSubMenu:hover {
     background-color: darkblue;
@@ -242,6 +238,18 @@ body {
     color: red;
 }
 
+#home-button {
+    margin-right: 2%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+#home-button:hover {
+    font-size: 22px;
+}
+
 .links {
     display: flex;
     height: 40px;
@@ -363,7 +371,15 @@ hr {
 }
 
 #tituloSpan {
-    margin-left: 3%;
+    margin-left: 2%;
+}
+
+#descripcionContainer {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 2%;
+    max-height: 225px;
+    overflow: auto;
 }
 
 #descripcionSpan {
@@ -372,10 +388,28 @@ hr {
     max-width: 300px;
 }
 
-#tamanioSpan {
+#capacidadInfo {
+    margin-left: 5%;
+}
+
+#capacidadSpan {
     margin-left: 3%;
+}
+
+#ambitoInfo {
+    margin-left: 11%;
+    margin-right: 2%;
+}
+
+#duracionInfo {
+    margin-left: 5%;
 }
 
 #duracionSpan {
     margin-left: 3%;
+    margin-right: 9%;
+}
+
+#subambitoInfo {
+    margin-right: 2%;
 }

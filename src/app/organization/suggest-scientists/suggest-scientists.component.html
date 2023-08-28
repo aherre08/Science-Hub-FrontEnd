@@ -33,22 +33,12 @@
                 </span>
             </button>
             <div class="panel">
-                <a routerLink="../create-publication" class="submenu-link">Crear publicación</a>
-                <a routerLink="../my-publications" class="submenu-link">Mis publicaciones</a>
-                <a routerLink="../search-publication" class="submenu-link">Buscar publicación</a>
-                <a routerLink="../search-organization" class="submenu-link">Buscar organismo</a>
-                <a routerLink="../suggest-projects" class="submenu-link">Recomendaciones proyectos</a>
+                <a routerLink="../publish-project" class="submenu-link">Publicar proyecto</a>
+                <a routerLink="../my-projects" class="submenu-link">Mis proyectos</a>
+                <a routerLink="../search-project" class="submenu-link">Buscar proyecto</a>
+                <a routerLink="../search-scientist" class="submenu-link">Buscar científico</a>
+                <a routerLink="../suggest-scientists" class="submenu-link">Recomendaciones científicos</a>
             </div>
-
-            <button id="optionsSubMenu">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-gear-fill"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
-                </svg>
-                Opciones
-            </button>
-
 
             <button id="helpSubMenu" class="accordion">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
@@ -66,7 +56,7 @@
                 </span>
             </button>
             <div class="panel">
-                <a routerLink="../create-publication" class="submenu-link">FAQ</a>
+                <a routerLink="../../help-faq" class="submenu-link">FAQ</a>
                 <a routerLink="../create-publication" class="submenu-link">Contacto</a>
             </div>
 
@@ -101,7 +91,7 @@
                         class="bi bi-person-fill" viewBox="0 0 16 16">
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                     </svg>
-                    <a routerLink="../register" id="profileOption">Mi Perfil</a>
+                    <a routerLink="../../view-profile" id="profileOption">Mi Perfil</a>
                 </div>
                 <div class="user-option">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="darkred"
@@ -109,13 +99,17 @@
                         <path
                             d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
                     </svg>
-                    <a routerLink="../register" id="signOutOption">Cerrar Sesión</a>
+                    <a routerLink="../../login" id="signOutOption">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="links">
+        <button id="home-button" routerLink="../home">
+            <i class="fas fa-home"></i>
+        </button>
+        <div id="verticalLine">|</div>
         <a routerLink="../publish-project" class="btn btn-link">Publicar proyecto </a>
         <div id="verticalLine">|</div>
         <a routerLink="../my-projects" class="btn btn-link">Mis proyectos</a>
@@ -132,7 +126,37 @@
         <div id="centerPanel">
             <h4><b>Recomendaciones Científicos</b> </h4>
             <hr>
+            <div class="form-field">
+                <label for="idProyecto"><b><u>ID Proyecto:</u></b></label>
+                <input type="text" id="idProyecto" name="idProyecto"
+                    placeholder="Escribe el ID del proyecto del cual desea recibir recomendación." required>
 
+                <button class="btn btn-primary" id="recomendarButton" (click)="recomendarCientificos()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
+                        <path fill="#ffffff"
+                            d="M256 0h64c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H256c-17.7 0-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM64 64H192v48c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V64H512c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64zM176 437.3c0 5.9 4.8 10.7 10.7 10.7H389.3c5.9 0 10.7-4.8 10.7-10.7c0-29.5-23.9-53.3-53.3-53.3H229.3c-29.5 0-53.3 23.9-53.3 53.3zM288 352a64 64 0 1 0 0-128 64 64 0 1 0 0 128z" />
+                    </svg>
+                    <span id="recomendarSpan">Recomendar</span>
+                </button>
+            </div>
+            <div id="cientificosRecomendados" class="row-container" *ngIf="buscados && encontrados">
+                <div class="row">
+                    <div class="column" *ngFor="let cientifico of cientificos; let i = index">
+                        <div class="card">
+                            <h3><b><em>{{ cientifico.name }}</em></b></h3>
+                            <br>
+                            <button id="moreInfoButton" (click)="mostrarCientificoEnDetalle(cientifico.orcid)">+
+                                Información</button>
+
+                        </div>
+
+                        <div *ngIf="(i + 1) % 3 === 0 || i === cientificos.length - 1" class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="noEncontrados" *ngIf="buscados && !encontrados">
+                <p><em>No se encuentran científicos que trabajen en el ámbito del proyecto.</em></p>
+            </div>
         </div>
     </div>
 </body>

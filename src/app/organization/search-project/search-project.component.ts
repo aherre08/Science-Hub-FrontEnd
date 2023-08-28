@@ -157,9 +157,14 @@ export class SearchProjectComponent {
         descripcionSpan.innerText = response.description;
       }
 
-      const tamanioSpan = document.getElementById('tamanioSpan');
-      if (tamanioSpan) {
-        tamanioSpan.innerText = (response.capacity).toString();
+      const capacidadSpan = document.getElementById('capacidadSpan');
+      if (capacidadSpan) {
+        capacidadSpan.innerText = (response.capacity).toString();
+      }
+
+      const ambitoSpan = document.getElementById('ambitoSpan');
+      if (ambitoSpan) {
+        ambitoSpan.innerText = response.scope;
       }
 
       const duracionSpan = document.getElementById('duracionSpan');
@@ -167,6 +172,10 @@ export class SearchProjectComponent {
         duracionSpan.innerText = response.duration;
       }
 
+      const subambitoSpan = document.getElementById('subambitoSpan');
+      if (subambitoSpan) {
+        subambitoSpan.innerText = response.subscope;
+      }
       
 
       // Mostrar el contenedor solo si se encuentra el proyecto
@@ -181,7 +190,7 @@ export class SearchProjectComponent {
         Swal.fire({
           icon: 'error',
           title: '¡Error!',
-          html: 'No se ha podido encontrar un proyecto con el ID proporcionado.<br><br>Introduce el ID de un proyecto existente.',
+          html: 'No se ha podido encontrar un proyecto con el ID proporcionado.<br><br>Introduce el ID de un proyecto existente y activo.',
           confirmButtonText: 'Entendido'
         });
 

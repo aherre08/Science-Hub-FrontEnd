@@ -92,14 +92,40 @@ export class PublishProjectComponent {
     });
   }
 
+  ajustarDuracion(tiempo:string) {
+    const partes = tiempo.split(' ');
+    const anos = parseInt(partes[0]);
+    const meses = parseInt(partes[3]);
+
+    if (anos === 0 && meses >= 1) {
+        return `${meses} ${meses === 1 ? 'mes' : 'meses'}`;
+    } else if (anos >= 1 && meses === 0) {
+        return `${anos} ${anos === 1 ? 'año' : 'años'}`;
+    } else {
+        let resultado = tiempo;
+
+        if (anos === 1) {
+            resultado = resultado.replace('años', 'año');
+        }
+
+        if (meses === 1) {
+            resultado = resultado.replace('meses', 'mes');
+        }
+
+        return resultado.toString();
+    }
+  }
+
   publicarProyecto() {
     const titulo = (document.getElementById('tituloProyecto') as HTMLInputElement).value;
     const descripcion = (document.getElementById('descripcionProyecto') as HTMLTextAreaElement).value;
-    const tamanio = (document.getElementById('tamañoProyecto') as HTMLInputElement).value;
+    const capacidad = (document.getElementById('capacidadProyecto') as HTMLInputElement).value;
     const duracionAños = (document.getElementById('duracionAñosProyecto') as HTMLInputElement).value;
     const duracionMeses = (document.getElementById('duracionMesesProyecto') as HTMLInputElement).value;
+    const ambito = (document.getElementById('ambitoProyecto') as HTMLInputElement).value;
+    const subambito = (document.getElementById('subambitoProyecto') as HTMLInputElement).value;
 
-    if (titulo.trim().length === 0 || descripcion.trim().length === 0 || tamanio.trim().length === 0 || duracionAños.trim().length === 0 || duracionMeses.trim().length === 0) {
+    if (titulo.trim().length === 0 || descripcion.trim().length === 0 || capacidad.trim().length === 0 || duracionAños.trim().length === 0 || duracionMeses.trim().length === 0 || ambito.trim().length === 0|| subambito.trim().length === 0) {
       Swal.fire({
         icon: 'error',
         title: '¡Error!',
@@ -109,7 +135,7 @@ export class PublishProjectComponent {
       return;
     }
 
-    const duration = duracionAños + " años y " + duracionMeses + " meses";
+    const duration = this.ajustarDuracion(duracionAños + " años y " + duracionMeses + " meses");
     console.log("DURACION ----->" + duration);
     const idOrganization = this.userService.getOrgId();
     
@@ -118,7 +144,9 @@ export class PublishProjectComponent {
       "idOrganization": idOrganization,
       "title": titulo,
       "description": descripcion,
-      "capacity": tamanio,
+      "capacity": capacidad,
+      "scope": ambito,
+      "subscope": subambito,
       "duration": duration,
       "active": true
     };
@@ -136,6 +164,14 @@ export class PublishProjectComponent {
         this.organizationService.publicarProyecto(nuevoProyecto).subscribe(
           (response) => {
             console.log('Proyecto publicado con éxito:', response);
+            (document.getElementById('tituloProyecto') as HTMLInputElement).value = '';
+            (document.getElementById('descripcionProyecto') as HTMLTextAreaElement).value = '';
+            (document.getElementById('capacidadProyecto') as HTMLInputElement).value = '2';
+            (document.getElementById('duracionAñosProyecto') as HTMLInputElement).value = '0';
+            (document.getElementById('duracionMesesProyecto') as HTMLInputElement).value = '1';
+            (document.getElementById('ambitoProyecto') as HTMLInputElement).value = '';
+            (document.getElementById('subambitoProyecto') as HTMLInputElement).value = '';
+            
             Swal.fire({
               icon: 'success',
               title: '¡Proyecto publicado con éxito!',
@@ -143,11 +179,7 @@ export class PublishProjectComponent {
               confirmButtonText: 'Vale'
             });
   
-            (document.getElementById('tituloProyecto') as HTMLInputElement).value = '';
-            (document.getElementById('descripcionProyecto') as HTMLTextAreaElement).value = '';
-            (document.getElementById('tamañoProyecto') as HTMLInputElement).value = '2';
-            (document.getElementById('duracionAñosProyecto') as HTMLInputElement).value = '0';
-            (document.getElementById('duracionMesesProyecto') as HTMLInputElement).value = '1';
+            
           },
           (error) => {
             console.error('Error al publicar el proyecto:', error);

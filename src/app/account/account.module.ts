@@ -4,13 +4,19 @@ import { AccountRoutingModule } from './account-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { HelpFaqComponent } from './help-faq/help-faq.component';
 
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ViewProfileComponent,
+    EditProfileComponent,
+    HelpFaqComponent,
   ],
   imports: [
     CommonModule,

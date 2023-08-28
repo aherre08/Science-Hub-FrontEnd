@@ -1,10 +1,11 @@
+import { Observable } from 'rxjs';
+import { Proyecto } from './../../scientist/search-organization/search-organization.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
 import { LoginResponse } from './loginResponse';
-import { response } from 'express';
 import { UserService } from 'src/app/shared/user.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { UserService } from 'src/app/shared/user.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
       this.loginForm = this.fb.group({
@@ -37,7 +38,31 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  
+  async obtenerIdProyecto(orcid: string) {
+    try {
+      
+      this.accountService.obtenerProyectoAsociadoACientifico(orcid).subscribe(
+        (proyectoObtenido: Proyecto) => {
+          console.log("PROYECTO OBTENIDO:", proyectoObtenido);
+          this.userService.setIdProject(proyectoObtenido.id);
+          console.log("IDPROJECT GUARDADO ---->" + this.userService.getIdProject());
+        },
+        error => {
+          console.error('Error al obtener el proyecto:', error);
+        }
+      );
+      
+    } catch (error) {
+      console.log("Error al obtener el proyecto asociado al cientifico. " + error);
+    }
+  }
+  
+
+  
   iniciarSesion(){
+    
+
     const emailElement = document.getElementById("emailLogin") as HTMLInputElement;
     const passwordElement = document.getElementById("passwordLogin") as HTMLInputElement;
 
@@ -72,88 +97,128 @@ export class LoginComponent implements OnInit {
 
     const { email, password } = this.loginForm.value;
 
-    this.loginService.login(email, password).subscribe(
-      async (response: LoginResponse) => {
-        console.log("Respuesta recibida: ", response);
-        const userType = response.userType;
-        const idUser = response.idUser;
-        
-        if (userType === 'cientifico') {
-          
-          this.userService.setUserId(idUser);
-        
-          try {
-            const response = await fetch('http://localhost:8080/api/project/cientifico/' + idUser, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json'
+    if(email == "admin@correo.com"){ 
+      this.router.navigate(['/administrator/home']);
+
+    }else{
+
+      this.accountService.login(email, password).subscribe(
+        async (response: LoginResponse) => {
+          console.log("Respuesta recibida: ", response);
+  
+           // Científico u Organismo
+            const userType = response.userType;
+            const idUser = response.idUser;
+  
+            if (userType === 'cientifico') {
+            
+              this.userService.setUserId(idUser);
+            
+              try {
+                const response = await fetch('http://localhost:8080/api/project/cientifico/' + idUser, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                });
+            
+                if (response.ok) {
+                  
+                  const data = await response.json();
+                  console.log('Respuesta del servidor:', data);
+                  
+                  // Reset de atributos de Organismo
+                  this.userService.setOrgId('');
+                  this.userService.setUserUuid('');
+                  this.userService.setName('');
+                  this.userService.setEmail('');
+                  this.userService.setLocation('');
+                  this.userService.setArea('');
+    
+    
+                  // Set de los atributos de Científico
+                  this.userService.setOrcid(data.orcid);
+                  this.userService.setUserUuid(data.userUuid);
+                  this.userService.setName(data.name);
+                  this.userService.setEmail(data.email);
+                  this.userService.setProfession(data.profession);
+                  this.userService.setAvailable(data.available);
+                  
+                  this.obtenerIdProyecto(data.orcid);
+  
+                  this.router.navigate(['/scientist/home']);
+    
+                } else {
+                  console.error('Error al obtener los datos:', response.status);
+                  alert('Error al obtener los datos del usuario.');
+                }
+              } catch (error) {
+                console.error('Error al enviar los datos:', error);
               }
-            });
-        
-            if (response.ok) {
-
-              const data = await response.json();
-              console.log('Respuesta del servidor:', data);
-              this.userService.setOrcid(data.orcid);
-              this.userService.setUserUuid(data.userUuid);
-              this.userService.setName(data.name);
-              this.userService.setEmail(data.email);
-              this.userService.setProfession(data.profession);
-        
-              this.router.navigate(['/scientist/create-publication']);
-
-            } else {
-              console.error('Error al obtener los datos:', response.status);
-              alert('Error al obtener los datos del usuario.');
-            }
-          } catch (error) {
-            console.error('Error al enviar los datos:', error);
-          }
-        } else if (userType === 'organismo') {
-
-          this.userService.setUserId(idUser);
-
-          try {
-            const response = await fetch('http://localhost:8080/api/project/organismo/' + idUser, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json'
+            }else if (userType === 'organismo') {
+  
+              this.userService.setUserId(idUser);
+    
+              try {
+                const response = await fetch('http://localhost:8080/api/project/organismo/' + idUser, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                });
+            
+                if (response.ok) {
+                  
+                  const data = await response.json();
+                  console.log('Respuesta del servidor:', data);
+                  
+                  //Reset de los atributos de Científico
+                  this.userService.setOrcid('');
+                  this.userService.setUserUuid('');
+                  this.userService.setIdProject(0);
+                  this.userService.setName('');
+                  this.userService.setEmail('');
+                  this.userService.setProfession('');
+                  this.userService.setAvailable(true);
+                  
+                  
+                  //Set de los atributos de Organismo
+                  this.userService.setOrgId(data.idOrganization);
+                  this.userService.setUserUuid(data.userUuid);
+                  this.userService.setName(data.name);
+                  this.userService.setEmail(data.email);
+                  this.userService.setLocation(data.location);
+                  this.userService.setArea(data.area);
+    
+            
+                  this.router.navigate(['/organization/home']);
+    
+                } else {
+                  console.error('Error al obtener los datos:', response.status);
+                  alert('Error al obtener los datos del usuario.');
+                }
+              } catch (error) {
+                console.error('Error al enviar los datos:', error);
               }
-            });
-        
-            if (response.ok) {
-              
-              const data = await response.json();
-              console.log('Respuesta del servidor:', data);
-              this.userService.setOrgId(data.idOrganization);
-              this.userService.setUserUuid(data.userUuid);
-              this.userService.setName(data.name);
-              this.userService.setEmail(data.email);
-              this.userService.setLocation(data.location);
-              this.userService.setArea(data.area);
-        
-              this.router.navigate(['/organization/publish-project']);
-
-            } else {
-              console.error('Error al obtener los datos:', response.status);
-              alert('Error al obtener los datos del usuario.');
+    
+            }else {
+              console.error('Tipo de usuario no válido:', response);
+              this.userService.setUserId(undefined);
+              alert('Las credenciales introducidas no corresponden a un usuario existente.');
             }
-          } catch (error) {
-            console.error('Error al enviar los datos:', error);
-          }
-
-        } else {
-          console.error('Tipo de usuario no válido:', response);
-          this.userService.setUserId(undefined);
-          alert('Las credenciales introducidas no corresponden a un usuario existente.');
+  
           
+            
+        },
+        (error: any) => {
+          console.error('Error al iniciar sesión:', error);
+          alert('Se ha producido un error al iniciar sesión.');
         }
-      },
-      (error: any) => {
-        console.error('Error al iniciar sesión:', error);
-        alert('Se ha producido un error al iniciar sesión.');
-      }
-    );
+      );
+    }
+
+
+    
 
     return true;
   }

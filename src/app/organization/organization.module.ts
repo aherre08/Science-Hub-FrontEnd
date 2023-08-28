@@ -10,6 +10,9 @@ import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { SearchProjectComponent } from './search-project/search-project.component';
 import { SearchScientistComponent } from './search-scientist/search-scientist.component';
 import { SuggestScientistsComponent } from './suggest-scientists/suggest-scientists.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
+import { ShowScientistComponent } from './show-scientist/show-scientist.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -19,7 +22,10 @@ import { SuggestScientistsComponent } from './suggest-scientists/suggest-scienti
     MyProjectsComponent,
     SearchProjectComponent,
     SearchScientistComponent,
-    SuggestScientistsComponent
+    SuggestScientistsComponent,
+    EditProjectComponent,
+    ShowScientistComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

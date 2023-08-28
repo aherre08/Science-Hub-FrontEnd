@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { OrganizationService } from '../organization.service';
+import { Cientifico } from './search-scientist.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-search-scientist',
@@ -92,6 +94,98 @@ export class SearchScientistComponent {
   }
   
   buscarCientifico(){
+    const orcid = (document.getElementById("orcidCientifico") as HTMLInputElement).value;
+    
+    if (orcid.trim().length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'Por favor, completa el campo requerido.',
+        confirmButtonText: 'Entendido'
+      });
 
+      // Ocultar el contenedor 
+      const cientificoInfo = document.getElementById('cientificoInfo');
+      if (cientificoInfo) { cientificoInfo.style.display = 'none';}
+
+      return;
+    }
+    
+    const expresionORCID = /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/;
+    if(!expresionORCID.test(orcid)){
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        html: 'Por favor, ingresa un ORCID con un formato válido en el campo requerido.<br>Formato: 4 grupos de 4 números separados por guiones. Ejemplo: 1234-1234-1234-1234',
+        confirmButtonText: 'Entendido'
+      });
+
+      // Ocultar el contenedor 
+      const cientificoInfo = document.getElementById('cientificoInfo');
+      if (cientificoInfo) { cientificoInfo.style.display = 'none';}
+
+      return;
+    }
+
+    this.organizationService.obtenerCientifico(orcid).subscribe(
+      (response)=> {
+        console.log('Científico encontrado con éxito:', response);
+
+        //Resetear el ORCID escrito
+        (document.getElementById('orcidCientifico') as HTMLInputElement).value = '';
+
+        // Actualizar los elementos <span> con la información de la publicación
+      const orcidSpan = document.getElementById('orcidSpan');
+      if (orcidSpan) {
+        orcidSpan.innerText = response.orcid;
+      }
+
+
+      const nombreSpan = document.getElementById('nombreSpan');
+      if (nombreSpan) {
+        nombreSpan.innerText = response.name;
+      }
+
+      const profesionSpan = document.getElementById('profesionSpan');
+      if (profesionSpan) {
+        profesionSpan.innerText = response.profession;
+      }
+
+      const emailSpan = document.getElementById('emailSpan');
+      if (emailSpan) {
+        emailSpan.innerText = response.email;
+      }
+
+      const disponibleSpan = document.getElementById('disponibleSpan');
+      if ((response.available) && disponibleSpan) {
+        disponibleSpan.innerText = "Libre para incorporarse a un proyecto";
+      }else if ((!response.available) && disponibleSpan){
+        disponibleSpan.innerText = "Ocupado participando en un proyecto";
+      }
+
+      // Mostrar el contenedor solo si se encuentra el científico
+      const cientificoInfo = document.getElementById('cientificoInfo');
+      if (cientificoInfo) {
+        cientificoInfo.style.display = 'block';
+      }
+
+      },
+      (error) => {
+        console.error('Error al encontrar el científico:', error);
+        Swal.fire({
+          icon: 'error',
+          title: '¡Error!',
+          html: 'No se ha podido encontrar un científico con el ORCID proporcionado.<br><br>Introduce el ORCID de un científico existente.',
+          confirmButtonText: 'Entendido'
+        });
+
+        // Ocultar el contenedor si no se encuentra el científico
+        const cientificoInfo = document.getElementById('cientificoInfo');
+        if (cientificoInfo) {
+          cientificoInfo.style.display = 'none';
+        }
+
+      }
+    );
   }
 }

@@ -106,7 +106,7 @@ export class MyProjectsComponent {
         this.proyectos = data;
       },
       error => {
-        console.error('Error al obtener las publicaciones:', error);
+        console.error('Error al obtener los proyectos:', error);
       }
     );
   }
@@ -161,9 +161,9 @@ export class MyProjectsComponent {
     return Math.ceil(this.proyectos.length / this.itemsPorPagina);
   }
 
-  eliminarProyecto(idPublicacion: number) {
+  eliminarProyecto(idProyecto: number) {
     Swal.fire({
-      title: '¿Seguro que quieres eliminar esta publicación?',
+      title: '¿Seguro que quieres eliminar este proyecto?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
@@ -172,17 +172,19 @@ export class MyProjectsComponent {
       cancelButtonColor: '#6c757d',
     }).then((result) => {
       if (result.isConfirmed) {
-        /*
-        this.organizationService.eliminarProyecto(idPublicacion).subscribe(
+        this.organizationService.eliminarProyecto(idProyecto).subscribe(
           () => {
             Swal.fire({
               icon: 'success',
-              title: '¡Proyecto eliminada con éxito!',
+              title: '¡Proyecto eliminado con éxito!',
               text: 'El proyecto se ha eliminado satisfactoriamente.',
               confirmButtonText: 'Vale'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                console.log('Proyecto eliminado con éxito.');
+                window.location.reload();
+              }
             });
-            console.log('Proyecto eliminado con éxito.');
-            window.location.reload();
           },
           error => {
             console.error('Error al eliminar el proyecto:', error);
@@ -194,7 +196,6 @@ export class MyProjectsComponent {
             });
           }
         );
-        */
       }
     });    
   }

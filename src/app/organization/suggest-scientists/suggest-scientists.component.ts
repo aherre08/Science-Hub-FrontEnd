@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { OrganizationService } from '../organization.service';
+import { Cientifico } from '../search-scientist/search-scientist.model';
+import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-suggest-scientists',
@@ -12,15 +15,28 @@ export class SuggestScientistsComponent {
   userName: string = '';
   suboptions: string | null = null;
 
-  constructor(private organizationService: OrganizationService, private userService: UserService) {}
+  cientificos: Cientifico[]=[];
+  buscados: boolean = false;
+  encontrados: boolean = false;
+  idProyecto: number = 0;
+
+  constructor(private organizationService: OrganizationService, private userService: UserService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.userName = this.userService.getName();
     this.setupMenuButton();
     this.setupHelpAccordionButton();
     this.setupOperationsAccordionButton();
-    
     this.setupAccordionListeners();
+
+    this.route.queryParams.subscribe(params => {
+      const searchTerm = params['search'];
+      if (searchTerm) {
+        this.idProyecto = searchTerm;
+        this.cargarCientificos(searchTerm);
+      } 
+    });
+
   }
 
   private setupMenuButton() {
@@ -90,4 +106,90 @@ export class SuggestScientistsComponent {
       }
     });
   }
+
+  recomendarCientificos(){
+    const idProyectoStr = (document.getElementById("idProyecto") as HTMLInputElement).value;
+    
+    if (idProyectoStr.trim().length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'Por favor, completa el campo requerido.',
+        confirmButtonText: 'Entendido'
+      });
+
+       
+      // Ocultar el contenedor 
+      const cientificosRecomendados = document.getElementById('cientificosRecomendados');
+      if (cientificosRecomendados) { cientificosRecomendados.style.display = 'none';}
+      this.buscados = false;
+      
+      return;
+    }
+    
+    const idProyecto = parseInt(idProyectoStr);
+    this.idProyecto = idProyecto;
+
+    if (isNaN(idProyecto)) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'Por favor, ingresa un número válido en el campo requerido.',
+        confirmButtonText: 'Entendido'
+      });
+
+      // Ocultar el contenedor 
+        const cientificosRecomendados = document.getElementById('cientificosRecomendados');
+        if (cientificosRecomendados) { cientificosRecomendados.style.display = 'none';}
+        this.buscados = false;
+
+      return;
+    }
+    
+    this.organizationService.recomendarCientificos(idProyecto).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.encontrados = true;
+        this.buscados = true;
+        this.cientificos = response.content;
+        
+      },
+      (error) => {
+        console.error('Error al recomendar cientificos:', error);
+        this.encontrados = false;
+        this.buscados = true;
+      }
+    );
+  }
+
+  mostrarCientificoEnDetalle(orcid:string) {
+    this.router.navigate(['../show-scientist', orcid], {
+      relativeTo: this.route,
+      queryParams: { search: this.idProyecto }
+    });
+  }
+
+  cargarCientificos(searchTerm: number) {
+
+    const idProyecto = document.getElementById('idProyecto') as HTMLInputElement;
+    if (idProyecto) {
+      idProyecto.value = searchTerm.toString();
+    }
+    
+    this.organizationService.recomendarCientificos(searchTerm).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.encontrados = true;
+        this.buscados = true;
+        this.cientificos = response.content;
+        
+      },
+      (error) => {
+        console.error('Error al recomendar cientificos:', error);
+        this.encontrados = false;
+        this.buscados = true;
+      }
+    );
+  }
+
 }

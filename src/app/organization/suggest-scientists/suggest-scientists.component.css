@@ -101,7 +101,6 @@ body {
     font-weight: bold;
 }
 
-#optionsSubMenu,
 #signOutSubMenu {
     background-color: #00A2FF;
     color: white;
@@ -114,10 +113,6 @@ body {
     outline: none;
     transition: 0.4s;
     margin-bottom: 3%;
-}
-
-#optionsSubMenu:hover {
-    background-color: darkblue;
 }
 
 #signOutSubMenu:hover {
@@ -242,6 +237,18 @@ body {
     color: red;
 }
 
+#home-button {
+    margin-right: 2%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+#home-button:hover {
+    font-size: 22px;
+}
+
 .links {
     display: flex;
     height: 40px;
@@ -292,4 +299,124 @@ hr {
     margin-left: 40%;
     width: 20%;
     border: solid black 1px;
+}
+
+.form-field {
+    margin-bottom: 3%;
+    margin-left: 20%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: medium;
+}
+
+#idProyecto {
+    margin-left: 2%;
+    width: 450px;
+}
+
+#recomendarButton {
+    margin-left: 5%;
+    height: 30px;
+    width: 150px;
+    padding-top: 0%;
+    background-color: #00A2FF;
+    justify-content: center;
+}
+
+#recomendarButton:hover {
+    font-weight: bold;
+    background-color: rgb(2, 0, 36);
+}
+
+#recomendarButton i {
+    font-size: 13px;
+}
+
+#recomendarSpan {
+    margin-left: 5px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.column {
+    box-sizing: border-box;
+    float: left;
+    width: 30%;
+    padding: 0 10px;
+    padding-left: 50px;
+}
+
+
+.row-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 83%;
+    max-height: 69vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 1200px;
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#moreInfoButton {
+    margin-left: 20%;
+    margin-bottom: 10px;
+    width: 150px;
+    background-color: white;
+}
+
+#moreInfoButton:hover {
+    font-weight: bold;
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+        padding: 0 20px;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    text-align: center;
+    background-color: lightskyblue;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    width: 80%;
+    height: 100%;
+}
+
+.card h3 {
+    font-size: 16px;
+}
+
+.card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#noEncontrados {
+    margin-top: 14%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }

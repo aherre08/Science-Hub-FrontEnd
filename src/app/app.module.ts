@@ -12,6 +12,7 @@ import { ScientistModule } from './scientist/scientist.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { OrganizationModule } from './organization/organization.module';
+import { AdministratorModule } from './administrator/administrator.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { OrganizationModule } from './organization/organization.module';
     ScientistModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    OrganizationModule
+    OrganizationModule,
+    AdministratorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

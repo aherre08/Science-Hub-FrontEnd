@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Proyecto } from './my-projects/my-projects.model';
+import { Cientifico } from './search-scientist/search-scientist.model';
 
 
 
@@ -23,11 +24,24 @@ export class OrganizationService {
   }
 
   obtenerProyecto(idProyecto:number):Observable<Proyecto>{
-    return this.http.get<Proyecto>(this.apiUrl+ '/proyecto/'+idProyecto);
+    return this.http.get<Proyecto>(this.apiUrl+ '/proyecto/'+ idProyecto);
   }
 
-  eliminarProyecto(idPublicacion: number) {
-    throw new Error('Method not implemented.');
+  editarProyecto(idProyecto: number, proyecto: Proyecto): Observable<Proyecto> {
+    const url = `${this.apiUrl}/proyecto/${idProyecto}`;
+    return this.http.put<Proyecto>(url, proyecto);
+  }
+
+  eliminarProyecto(idProyecto:number):Observable<Proyecto>{
+    return this.http.delete<Proyecto>(this.apiUrl+ '/proyecto/'+ idProyecto);
+  }
+
+  obtenerCientifico(orcid:string):Observable<Cientifico>{
+    return this.http.get<Cientifico>(this.apiUrl+ '/cientifico/findBy/'+ orcid);
+  }  
+
+  recomendarCientificos(idProject:number){
+    return this.http.get<any>(this.apiUrl + '/proyecto/recommendation/'+ idProject);
   }
  
 }

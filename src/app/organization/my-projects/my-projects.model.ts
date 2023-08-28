@@ -3,7 +3,9 @@ export interface Proyecto {
     idOrganization:string;
     title: string;
     description:string;
-    capacity:number;
+    capacity:string;
+    scope:string;
+    subscope:string;
     duration: string;
     active:boolean;
     initLifeDate: string;

@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RegisterService } from './register.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
@@ -411,7 +408,7 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    const expresionNIF = /^[ABCDEFGHJNPQRSUVW]\d{7}[0-9A-J]$/;
+    const expresionNIF = /^[A-Z]\d{7}[A-Z]$/
     if(NIFElement instanceof HTMLInputElement){
       const NIF = NIFElement.value;
       if(!expresionNIF.test(NIF)){
