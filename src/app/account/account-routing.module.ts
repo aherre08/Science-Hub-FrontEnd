@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HelpFaqComponent } from './help-faq/help-faq.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [    
     {path: '', component: LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path:'view-profile', component:ViewProfileComponent},
     {path:'edit-profile', component:EditProfileComponent},
     {path:'help-faq', component:HelpFaqComponent},
+    {path:'contact', component:ContactComponent},
     {path: '**', redirectTo:'/login', pathMatch:'full'}
 ];
 

@@ -1,8 +1,8 @@
 .screen {
-    background: linear-gradient(0deg, #000000, #15b0db);
-    background-size: 400% 400%;
+    background: linear-gradient(0deg, #000000, #00A2FF, #000000, #53B200, #000000);
+    background-size: 800% 800%;
 
-    animation: animation 40s ease infinite;
+    animation: animation 350s ease infinite;
 
     position: fixed;
     top: 0%;
@@ -10,29 +10,59 @@
     left: 0%;
     right: 0%;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 
 @keyframes animation {
-    0% {
-        background-position: 52% 0%
-    }
 
-    50% {
-        background-position: 49% 100%
-    }
-
+    0%,
     100% {
-        background-position: 52% 0%
+        background-position: 50% 0%;
     }
+
+    20%,
+    80% {
+        background-position: 50% 100%;
+    }
+
+
+
+    40%,
+    60% {
+        background-position: 50% 200%;
+    }
+
+    60%,
+    40% {
+        background-position: 50% 200%;
+    }
+
+    80%,
+    20% {
+        background-position: 50% 100%;
+    }
+
+    100%,
+    0% {
+        background-position: 50% 0%;
+    }
+
+
+}
+
+#SHLogoSubMenu {
+    margin-top: 3%;
+    margin-bottom: 2%;
+    height: 10%;
+    width: 25%;
+    margin-left: 38%;
+    object-fit: contain;
 }
 
 .card {
     position: relative;
     width: 575px;
-    height: 375px;
+    height: 380px;
     margin: 0 auto;
-    margin-top: 10%;
     border: 3px black solid;
     border-radius: 50px;
     background-color: white;
@@ -88,6 +118,10 @@
 .showPasswordButton {
     margin-left: 2%;
     border-radius: 50px;
+}
+
+#passwordLogin {
+    margin-top: 1%;
 }
 
 #eye {

@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HelpFaqComponent } from './help-faq/help-faq.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -17,6 +18,7 @@ import { HelpFaqComponent } from './help-faq/help-faq.component';
     ViewProfileComponent,
     EditProfileComponent,
     HelpFaqComponent,
+    ContactComponent,
   ],
   imports: [
     CommonModule,
