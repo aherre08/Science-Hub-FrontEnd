@@ -359,206 +359,91 @@ tr:hover {
     text-align: center;
 }
 
-
-
-/* Estilos para móvil S */
-@media (max-width: 320px) {
-    .header {
-        min-height: 90px;
-    }
-
-    .links {
-        min-height: 90px;
-    }
-
-    .btn-link {
-        font-size: 25px;
-    }
-
-    h4 {
-        margin-top: 10%;
-        font-size: 30px;
-    }
-
-    hr {
-        margin-bottom: 10%;
-        ;
-    }
-
-    #contentPanel {
-        margin-top: 10%;
-    }
-
-    #centerPanel {
-        min-height: 1800px;
-    }
-
-    .form-publicacion-field {
-        margin-left: 5%;
-        margin-bottom: 10%;
-        font-size: 30px;
-    }
-
-    #crearButton {
-        margin-left: 40%;
-        min-width: 200px;
-        font-size: 25px;
-    }
-}
-
-/*Estilos para Móvil L*/
-@media (max-width: 426px) {
-
-    .header {
-        min-height: 90px;
-    }
-
-    .links {
-        min-height: 90px;
-    }
-
-    .btn-link {
-        font-size: 25px;
-    }
-
-    h4 {
-        margin-top: 10%;
-        font-size: 30px;
-    }
-
-    hr {
-        margin-bottom: 10%;
-        ;
-    }
-
-    #contentPanel {
-        margin-top: 10%;
-    }
-
-    #centerPanel {
-        min-height: 1150px;
-    }
-
-    .form-publicacion-field {
-        margin-left: 5%;
-        margin-bottom: 10%;
-        font-size: 30px;
-    }
-
-    #crearButton {
-        margin-left: 40%;
-        min-width: 200px;
-        font-size: 25px;
-    }
-}
-
-/*Estilos para Tablets (772px X 776px, Zoom: 75%)*/
-@media (max-width: 772px) and (max-height:776px) {
-    .header {
-        max-height: 100px;
-    }
-
-    body {
-        width: 850px;
-        min-height: 2300px;
-    }
-
-
-}
-
-
-/*Estilos para Portátiles estándar (1024px X 776px, Zoom: 75%)*/
-@media (max-width: 1024px) and (max-height:776px) {
-    #menuContent {
-        position: solid;
-        max-width: 150px;
-        height: 710px;
-
-    }
-
-    #SHLogoSubMenu {
-        max-width: 120px;
-        margin-left: 3%;
-    }
-
-    .accordion {
-        max-width: 100%;
-    }
-
-    .panel {
-        max-width: 100%;
-    }
-
-    .submenu-link {
-        max-width: 90%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    .links {
-        justify-content: start;
-
-    }
-
-    .btn-link {
-        width: 150px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: white;
-
-    }
-
-    .btn-link:hover {
-        width: 155px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-}
-
-
-
 /*Estilos para Portátiles L (1440px X 776px, Zoom: 75%)*/
 @media (max-width: 1440px) and (max-height:776px) {
+
+    .header {
+        width: 1440px;
+    }
+
     body {
-        height: 776px;
+        height: 1000px;
+        width: 1440px;
     }
 
-    .user-panel {
-        margin-right: 2%;
+    .links {
+        width: 100%;
+        margin-right: 10%;
     }
-
-    #menuContent {
-        width: 1250px;
-        height: 710px;
-    }
-
-    #hrSubMenu {
-        width: 50px;
-
-    }
-
-    .form {
-        display: flex;
-        flex-direction: column;
-    }
-
 
     #centerPanel {
-        height: 600px;
-        max-width: 1150px;
-        margin-left: 5%;
+        height: 550px;
+        max-width: 970px;
+        margin-left: 15%;
         margin-right: 5%;
     }
 
+    .table-container {
+        margin-left: 5%;
+        max-height: 370px;
+        max-width: 900px;
+    }
+}
 
-    #tituloPublicacion {
-        max-width: 500px;
+/*Estilos para Portátiles estándar (1024px X 776px, Zoom: 75%)*/
+@media (max-width: 1024px) and (max-height:776px) {
+
+    .header {
+        width: 1024px;
     }
 
-    #descripcionPublicacion {
-        max-width: 500px;
+    body {
+        width: 1024px;
     }
+
+    .links {
+        margin-right: 10%;
+    }
+
+    #centerPanel {
+        margin-left: 2%;
+        height: 440px;
+        max-width: 940px;
+    }
+
+    .table-container {
+        margin-left: 3%;
+        max-height: 275px;
+        max-width: 885px;
+    }
+}
+
+
+/*Estilos para Tablets y dispositivos más pequeños (772px X 776px, Zoom: 75%)*/
+@media (max-width: 772px) and (max-height:776px) {
+    .header {
+        width: 772px;
+        max-height: 100px;
+    }
+
+
+    #ScienceHubLogo {
+        width: 100px;
+    }
+
+    body {
+        width: 772px;
+        min-height: 2972px;
+    }
+
+    #centerPanel {
+        margin-left: 2%;
+        max-width: 725px;
+    }
+
+    .table-container {
+        margin-left: 4%;
+        max-width: 670px;
+    }
+
 }

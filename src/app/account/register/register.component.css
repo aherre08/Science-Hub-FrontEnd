@@ -247,3 +247,102 @@ input[type="radio"]:checked+label {
     margin-left: 25%;
     width: 253px;
 }
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 595px) {
+
+    .card {
+        width: 90%;
+        height: 85%;
+        margin-top: 1%;
+        border: 3px black solid;
+        border-radius: 50px;
+    }
+
+    .card-header {
+        margin-top: 5%;
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    .card-body {
+        margin-left: 5%;
+    }
+
+    .user-selection {
+        width: 100%;
+    }
+
+    #formulario-cientifico {
+        margin-left: 0%;
+    }
+
+    .form-cientifico-field {
+        width: 50%;
+    }
+
+    #nombreCientifico {
+        margin-left: 4%;
+        width: 180%;
+    }
+
+    #emailCientifico {
+        margin-left: 4%;
+        width: 180%;
+    }
+
+    #orcidCientifico {
+        margin-left: 4%;
+        margin-bottom: 1%;
+        width: 180%;
+    }
+
+    #profesionCientifico {
+        margin-left: 4%;
+        width: 180%;
+    }
+
+    #passwordCientifico {
+        margin-left: 4%;
+        width: 180%;
+    }
+
+    #radio-buttons-organismo {
+        width: 80%;
+    }
+
+    .form-organismo-field {
+        width: 50%;
+    }
+
+    #codigoDIR3 {
+        margin-left: 5%;
+        width: 180%;
+    }
+
+    #NIF {
+        margin-left: 5%;
+        width: 180%;
+    }
+
+    #nombreOrganismo {
+        margin-left: 5%;
+        width: 180%;
+    }
+
+    #emailOrganismo {
+        margin-left: 5%;
+        width: 180%;
+    }
+
+    #localidadOrganismo {
+        margin-left: 5%;
+        width: 180%;
+    }
+
+    #passwordOrganismo {
+        margin-left: 5%;
+        width: 180%;
+    }
+
+}

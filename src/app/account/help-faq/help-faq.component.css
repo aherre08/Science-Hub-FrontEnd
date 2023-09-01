@@ -351,118 +351,30 @@ hr {
     white-space: pre-line;
 }
 
-
-
-
-
-
-/* Estilos para móvil S */
-@media (max-width: 320px) {
-    .header {
-        min-height: 90px;
-    }
-
-    .links {
-        min-height: 90px;
-    }
-
-    .btn-link {
-        font-size: 25px;
-    }
-
-    h4 {
-        margin-top: 10%;
-        font-size: 30px;
-    }
-
-    hr {
-        margin-bottom: 10%;
-        ;
-    }
-
-    #contentPanel {
-        margin-top: 10%;
-    }
-
-    #centerPanel {
-        min-height: 1800px;
-    }
-
-    .form-publicacion-field {
-        margin-left: 5%;
-        margin-bottom: 10%;
-        font-size: 30px;
-    }
-
-    #crearButton {
-        margin-left: 40%;
-        min-width: 200px;
-        font-size: 25px;
-    }
-}
-
-/*Estilos para Móvil L*/
-@media (max-width: 426px) {
-
-    .header {
-        min-height: 90px;
-    }
-
-    .links {
-        min-height: 90px;
-    }
-
-    .btn-link {
-        font-size: 25px;
-    }
-
-    h4 {
-        margin-top: 10%;
-        font-size: 30px;
-    }
-
-    hr {
-        margin-bottom: 10%;
-        ;
-    }
-
-    #contentPanel {
-        margin-top: 10%;
-    }
-
-    #centerPanel {
-        min-height: 1150px;
-    }
-
-    .form-publicacion-field {
-        margin-left: 5%;
-        margin-bottom: 10%;
-        font-size: 30px;
-    }
-
-    #crearButton {
-        margin-left: 40%;
-        min-width: 200px;
-        font-size: 25px;
-    }
-}
-
-/*Estilos para Tablets (772px X 776px, Zoom: 75%)*/
-@media (max-width: 772px) and (max-height:776px) {
-    .header {
-        max-height: 100px;
-    }
-
+/*Estilos para Portátiles L (1440px X 776px)*/
+@media (max-width: 1440px) and (max-height:776px) {
     body {
-        width: 850px;
-        min-height: 2300px;
+        height: 776px;
     }
 
+    .user-panel {
+        margin-right: 2%;
+    }
 
+    #menuContent {
+        width: 1250px;
+        height: 710px;
+    }
+
+    #centerPanel {
+        height: 600px;
+        max-width: 1150px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
 }
 
-
-/*Estilos para Portátiles estándar (1024px X 776px, Zoom: 75%)*/
+/*Estilos para Portátiles estándar (1024px X 776px)*/
 @media (max-width: 1024px) and (max-height:776px) {
     #menuContent {
         position: solid;
@@ -491,11 +403,6 @@ hr {
         text-overflow: ellipsis;
     }
 
-    .links {
-        justify-content: start;
-
-    }
-
     .btn-link {
         width: 150px;
         overflow: hidden;
@@ -514,43 +421,23 @@ hr {
 }
 
 
+/*Estilos para Tablets (772px X 776px)*/
+@media (max-width: 772px) and (max-height:776px) {
 
-/*Estilos para Portátiles L (1440px X 776px, Zoom: 75%)*/
-@media (max-width: 1440px) and (max-height:776px) {
+    .header {
+        width: 772px;
+    }
+
     body {
-        height: 776px;
+        min-height: 776px;
+        width: 772px;
     }
 
-    .user-panel {
-        margin-right: 2%;
+    #container {
+        width: 700px;
     }
 
-    #menuContent {
-        width: 1250px;
-        height: 710px;
-    }
-
-
-
-    .form {
-        display: flex;
-        flex-direction: column;
-    }
-
-
-    #centerPanel {
-        height: 600px;
-        max-width: 1150px;
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-
-
-    #tituloPublicacion {
-        max-width: 500px;
-    }
-
-    #descripcionPublicacion {
-        max-width: 500px;
+    #cientificoPanel {
+        width: 855px;
     }
 }

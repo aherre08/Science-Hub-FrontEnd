@@ -357,204 +357,80 @@ hr {
 }
 
 
-/* Estilos para móvil S */
-@media (max-width: 320px) {
+/*Estilos para Portátiles L (1440px X 776px)*/
+@media (max-width: 1440px) and (max-height:776px) {
     .header {
-        min-height: 90px;
-    }
-
-    .links {
-        min-height: 90px;
-    }
-
-    .btn-link {
-        font-size: 25px;
-    }
-
-    h4 {
-        margin-top: 10%;
-        font-size: 30px;
-    }
-
-    hr {
-        margin-bottom: 10%;
-        ;
-    }
-
-    #contentPanel {
-        margin-top: 10%;
-    }
-
-    #centerPanel {
-        min-height: 1800px;
-    }
-
-    .form-publicacion-field {
-        margin-left: 5%;
-        margin-bottom: 10%;
-        font-size: 30px;
-    }
-
-    #crearButton {
-        margin-left: 40%;
-        min-width: 200px;
-        font-size: 25px;
-    }
-}
-
-/*Estilos para Móvil L*/
-@media (max-width: 426px) {
-
-    .header {
-        min-height: 90px;
-    }
-
-    .links {
-        min-height: 90px;
-    }
-
-    .btn-link {
-        font-size: 25px;
-    }
-
-    h4 {
-        margin-top: 10%;
-        font-size: 30px;
-    }
-
-    hr {
-        margin-bottom: 10%;
-        ;
-    }
-
-    #contentPanel {
-        margin-top: 10%;
-    }
-
-    #centerPanel {
-        min-height: 1150px;
-    }
-
-    .form-publicacion-field {
-        margin-left: 5%;
-        margin-bottom: 10%;
-        font-size: 30px;
-    }
-
-    #crearButton {
-        margin-left: 40%;
-        min-width: 200px;
-        font-size: 25px;
-    }
-}
-
-/*Estilos para Tablets (772px X 776px, Zoom: 75%)*/
-@media (max-width: 772px) and (max-height:776px) {
-    .header {
+        width: 1440px;
         max-height: 100px;
     }
 
     body {
-        width: 850px;
-        min-height: 2300px;
+        width: 1440px;
+        min-height: 776px;
     }
 
-
+    #centerPanel {
+        margin-left: 10%;
+    }
 }
-
 
 /*Estilos para Portátiles estándar (1024px X 776px, Zoom: 75%)*/
 @media (max-width: 1024px) and (max-height:776px) {
-    #menuContent {
-        position: solid;
-        max-width: 150px;
-        height: 710px;
-
+    .header {
+        width: 1024px;
+        max-height: 100px;
     }
 
-    #SHLogoSubMenu {
-        max-width: 120px;
-        margin-left: 3%;
-    }
-
-    .accordion {
-        max-width: 100%;
-    }
-
-    .panel {
-        max-width: 100%;
-    }
-
-    .submenu-link {
-        max-width: 90%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    .links {
-        justify-content: start;
-
+    body {
+        width: 1024px;
+        min-height: 776px;
     }
 
     .btn-link {
         width: 150px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: white;
-
     }
 
     .btn-link:hover {
         width: 155px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    }
+
+    #centerPanel {
+        width: 850px;
+    }
+
+    .form-publicacion-field {
+        margin-left: 2%;
     }
 }
 
 
+/*Estilos para Tablets (772px X 776px)*/
+@media (max-width: 772px) and (max-height:776px) {
+    .header {
+        width: 772px;
+        max-height: 100px;
+    }
 
-/*Estilos para Portátiles L (1440px X 776px, Zoom: 75%)*/
-@media (max-width: 1440px) and (max-height:776px) {
     body {
-        height: 776px;
+        width: 772px;
+        min-height: 776px;
     }
-
-    .user-panel {
-        margin-right: 2%;
-    }
-
-    #menuContent {
-        width: 1250px;
-        height: 710px;
-    }
-
-    #hrSubMenu {
-        width: 50px;
-
-    }
-
-    .form {
-        display: flex;
-        flex-direction: column;
-    }
-
 
     #centerPanel {
-        height: 600px;
-        max-width: 1150px;
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 2%;
+        width: 750px;
     }
 
+    .form-publicacion-field {
+        margin-left: 2%;
+    }
 
     #tituloPublicacion {
-        max-width: 500px;
+        width: 70%;
     }
 
     #descripcionPublicacion {
-        max-width: 500px;
+        width: 90%;
     }
+
 }
