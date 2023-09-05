@@ -129,7 +129,6 @@ export class SearchProjectComponent {
 
     this.organizationService.obtenerProyecto(idProyecto).subscribe(
       (response)=> {
-        console.log('Proyecto encontrado con éxito:', response);
         (document.getElementById('idProyecto') as HTMLInputElement).value = '';
 
         // Actualizar los elementos <span> con la información del proyecto

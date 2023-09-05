@@ -367,14 +367,14 @@ tr:hover {
 }
 
 
-/*Estilos para Portátiles L (1440px X 776px, Zoom: 75%)*/
+/*Estilos para Portátiles L (1440px X 776px)*/
 @media (max-width: 1440px) and (max-height:776px) {
     .table-container-organismos {
         width: 600px;
     }
 }
 
-/*Estilos para Portátiles estándar (1024px X 776px, Zoom: 75%)*/
+/*Estilos para Portátiles estándar (1024px X 776px)*/
 @media (max-width: 1024px) and (max-height:776px) {
     .header {
         width: 1024px;
@@ -418,7 +418,7 @@ tr:hover {
     }
 }
 
-/*Estilos para Tablets y dispositivos más pequeños (772px X 776px, Zoom: 75%)*/
+/*Estilos para Tablets (772px X 776px)*/
 @media (max-width: 772px) and (max-height:776px) {
     .header {
         width: 772px;

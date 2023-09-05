@@ -41,7 +41,7 @@ export class EditPublicationComponent {
           this.descripcionPublicacion = data.description;
           this.especialidadPublicacion = data.expertise;
           this.stringExperiencia = data.profExperience;
-          console.log(this.stringExperiencia);
+          
           
           const regexAños = /(\d+)\s*años?/;
           const regexMeses = /(\d+)\s*mes(?:es)?/;
@@ -53,31 +53,25 @@ export class EditPublicationComponent {
           let matchAños = this.stringExperiencia.match(regexAños);
           if (matchAños) {
             this.expYearsPublicacion = parseInt(matchAños[1]);
-            console.log(`Se detectaron ${this.expYearsPublicacion} años.`);
           }
 
           let matchMeses = this.stringExperiencia.match(regexMeses);
           if (matchMeses) {
             this.expMonthsPublicacion = parseInt(matchMeses[1]);
-            console.log(`Se detectaron ${this.expMonthsPublicacion} meses.`);
           }
 
           let matchAñoyMeses = this.stringExperiencia.match(regexAñoyMeses);
           if (matchAñoyMeses) {
             this.expYearsPublicacion = parseInt(matchAñoyMeses[1] || matchAñoyMeses[3]);
             this.expMonthsPublicacion = parseInt(matchAñoyMeses[2] || matchAñoyMeses[4]);
-            console.log(`Se detectaron ${this.expYearsPublicacion} años y ${this.expMonthsPublicacion} meses.`);
           }
 
           let matchAñosMeses = this.stringExperiencia.match(regexAñosMeses);
           if (matchAñosMeses) {
             this.expYearsPublicacion = parseInt(matchAñosMeses[1] || matchAñosMeses[3]);
             this.expMonthsPublicacion = parseInt(matchAñosMeses[2] || matchAñosMeses[4]);
-            console.log(`Se detectaron ${this.expYearsPublicacion} años y ${this.expMonthsPublicacion} meses.`);
           }
 
-          console.log("AÑO(s) -------->" + this.expYearsPublicacion);
-          console.log("MES(es) -------->" + this.expMonthsPublicacion);
         });
       }
     });
@@ -215,8 +209,6 @@ export class EditPublicationComponent {
       updateLife: ""
     }
 
-    console.log("LA PUBLICACION EDITADA ES:", JSON.stringify(nuevaPublicacion, null, 2));
-
     Swal.fire({
       icon: 'question',
       title: '¿Seguro que quieres editar esta publicación?',
@@ -227,7 +219,7 @@ export class EditPublicationComponent {
       if (result.isConfirmed) {
         this.scientistService.editarPublicacion(this.publicationId, nuevaPublicacion ).subscribe(
           (data: Publicacion) => {
-            console.log("Se ha editado la publicacion satisfactoriamente");
+  
             Swal.fire({
               icon: 'success',
               title: '¡Publicación editada con éxito!',

@@ -138,7 +138,6 @@ export class CreatePublicationComponent implements OnInit{
 
     const profExpertise = this.ajustarExperiencia(experienciaAños + " años y " + experienciaMeses + " meses");
 
-    console.log("PROFEXPERTISE ----->" + profExpertise);
     const idScientist = this.userService.getOrcid();
     
 
@@ -151,8 +150,6 @@ export class CreatePublicationComponent implements OnInit{
       "active": true
     };
 
-    console.log("LA NUEVA PUBLICACION ES:", JSON.stringify(nuevaPublicacion, null, 2));
-
 
     Swal.fire({
       icon: 'question',
@@ -164,7 +161,7 @@ export class CreatePublicationComponent implements OnInit{
       if (result.isConfirmed) {
         this.scientistService.realizarPublicacion(nuevaPublicacion).subscribe(
           (response) => {
-            console.log('Publicación creada con éxito:', response);
+            
             Swal.fire({
               icon: 'success',
               title: '¡Publicación realizada con éxito!',

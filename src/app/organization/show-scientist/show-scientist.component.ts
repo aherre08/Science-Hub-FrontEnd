@@ -35,7 +35,6 @@ export class ShowScientistComponent {
     this.route.paramMap.subscribe(params => {
       
       const orcid = params.get('orcid');
-      console.log(orcid);
       
       if(orcid){ this.orcid = orcid; }
       
@@ -44,7 +43,7 @@ export class ShowScientistComponent {
         
 
         this.organizationService.obtenerCientifico(orcid).subscribe(data => {
-          console.log(data);
+
           this.scientistId = data.id;
           this.name = data.name;
           this.email = data.email;

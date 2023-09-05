@@ -119,7 +119,6 @@ export class RegisterComponent implements OnInit {
       //1º. Registrar usuario en Firebase
       const userCredential = await this.afAuth.createUserWithEmailAndPassword(emailElement.value, passwordElement.value);
       uid = userCredential.user?.uid;
-      console.log('Científico registrado:', userCredential.user);
       
       if(form){form.reset();}
 
@@ -134,9 +133,7 @@ export class RegisterComponent implements OnInit {
 
         const jsonUser = JSON.stringify(formUser);
 
-        console.log(jsonUser);
-
-        await fetch('http://localhost:8080/api/project/usuario', {
+        await fetch('http://localhost:8080/api/searchProject/user', {
           method: 'POST',
           body: jsonUser,
           headers: {
@@ -166,9 +163,7 @@ export class RegisterComponent implements OnInit {
 
         const jsonData = JSON.stringify(formData);
 
-        console.log(jsonData);
-
-        await fetch('http://localhost:8080/api/project/cientifico', {
+        await fetch('http://localhost:8080/api/searchProject/scientist', {
           method: 'POST',
           body: jsonData,
           headers: {
@@ -290,7 +285,7 @@ export class RegisterComponent implements OnInit {
   
           console.log(jsonUser);
   
-          await fetch('http://localhost:8080/api/project/usuario', {
+          await fetch('http://localhost:8080/api/searchProject/user', {
             method: 'POST',
             body: jsonUser,
             headers: {
@@ -321,7 +316,7 @@ export class RegisterComponent implements OnInit {
           const jsonData = JSON.stringify(formDataPublic);
           console.log(jsonData);
           
-          await fetch('http://localhost:8080/api/project/organismo', {
+          await fetch('http://localhost:8080/api/searchProject/organization', {
             method: 'POST',
             body: jsonData,
             headers: {
@@ -439,7 +434,7 @@ export class RegisterComponent implements OnInit {
   
           console.log(jsonUser);
   
-          await fetch('http://localhost:8080/api/project/usuario', {
+          await fetch('http://localhost:8080/api/searchProject/user', {
             method: 'POST',
             body: jsonUser,
             headers: {
@@ -470,7 +465,7 @@ export class RegisterComponent implements OnInit {
           const jsonData = JSON.stringify(formDataPrivate);
           console.log(jsonData);
   
-          await fetch('http://localhost:8080/api/project/organismo', {
+          await fetch('http://localhost:8080/api/searchProject/organization', {
             method: 'POST',
             body: jsonData,
             headers: {

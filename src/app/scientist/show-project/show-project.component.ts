@@ -54,7 +54,7 @@ export class ShowProjectComponent {
         this.projectId = parseInt(projectId);
 
         this.scientistService.obtenerProyecto(parseInt(projectId)).subscribe(data => {
-          console.log(data);
+    
           this.tituloProyecto = data.title;
           this.descripcionProyecto = data.description;
           this.capacidadProyecto = data.capacity;
@@ -153,9 +153,6 @@ export class ShowProjectComponent {
 
       const available = this.userService.getAvailable();
 
-      console.log("THIS.PROJECTID: " + this.projectId);
-      console.log("USERSERVICE.GETIDPROJECT(): " + this.userService.getIdProject());
-
       if((this.userService.getIdProject() === this.projectId) && (available == false)){
         this.esMiProyecto = true;
         participoButton.textContent = "¡Ya estás participando en este proyecto!";
@@ -193,7 +190,7 @@ export class ShowProjectComponent {
       if (result.isConfirmed) {
         this.scientistService.apuntarEnProyecto(orcid, this.projectId).subscribe(
           (response) => {
-            console.log("EL CIENTIFICO CON ORCID: " + orcid + "PARTICIPA EN EL PROYECTO " + this.projectId);
+  
             this.userService.setIdProject(this.projectId);
             this.userService.setAvailable(false);
 

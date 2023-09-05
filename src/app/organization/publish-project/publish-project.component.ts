@@ -136,7 +136,6 @@ export class PublishProjectComponent {
     }
 
     const duration = this.ajustarDuracion(duracionAños + " años y " + duracionMeses + " meses");
-    console.log("DURACION ----->" + duration);
     const idOrganization = this.userService.getOrgId();
     
 
@@ -151,8 +150,6 @@ export class PublishProjectComponent {
       "active": true
     };
 
-    console.log(nuevoProyecto);
-
     Swal.fire({
       icon: 'question',
       title: '¿Seguro que quieres publicar un proyecto?',
@@ -163,7 +160,7 @@ export class PublishProjectComponent {
       if (result.isConfirmed) {
         this.organizationService.publicarProyecto(nuevoProyecto).subscribe(
           (response) => {
-            console.log('Proyecto publicado con éxito:', response);
+  
             (document.getElementById('tituloProyecto') as HTMLInputElement).value = '';
             (document.getElementById('descripcionProyecto') as HTMLTextAreaElement).value = '';
             (document.getElementById('capacidadProyecto') as HTMLInputElement).value = '2';

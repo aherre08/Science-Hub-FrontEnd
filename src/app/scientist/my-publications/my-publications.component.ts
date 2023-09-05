@@ -182,7 +182,6 @@ export class MyPublicationsComponent implements OnInit {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Publicación eliminada con éxito.');
                 window.location.reload();
               }
             });

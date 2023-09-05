@@ -11,23 +11,22 @@ import { Organismo, Proyecto } from '../scientist/search-organization/search-org
 })
 export class AccountService {
 
-  private apiUrl = 'http://localhost:8080/api/project';
+  private apiUrl = 'http://localhost:8080/api/searchProject';
 
   constructor(private http: HttpClient, private afAuth: AngularFireAuth) { }
 
   obtenerProyectoAsociadoACientifico(orcid:string):Observable<Proyecto>{
-    return this.http.get<Proyecto>(this.apiUrl+ '/cientifico/project/'+ orcid);
+    return this.http.get<Proyecto>(this.apiUrl+ '/scientist/project/'+ orcid);
   }
 
   login(email: string, password: string): Observable<any> {
     return from(this.afAuth.signInWithEmailAndPassword(email, password)).pipe(
       switchMap((userCredential) => {
-        // Verificar si el userCredential.user es null o no
+        
         if (userCredential.user) {
           const uid = userCredential.user.uid;
-          console.log("UID" + uid);
           const url = `${this.apiUrl}/login/${uid}`;
-          console.log("URL" + url);
+      
           return this.http.get(url).pipe(
             catchError((error: any) => {
               console.error('Error en la petición GET:', error);
@@ -46,12 +45,12 @@ export class AccountService {
   } 
 
   editarPerfilCientifico(idCientifico:number, cientifico:Cientifico){
-    const url = `${this.apiUrl}/cientifico/${idCientifico}`;
+    const url = `${this.apiUrl}/scientist/${idCientifico}`;
     return this.http.put<Cientifico>(url, cientifico);
   }
 
   editarPerfilOrganismo(idOrganismo:number, organismo:Organismo){
-    const url = `${this.apiUrl}/organismo/${idOrganismo}`;
+    const url = `${this.apiUrl}/organization/${idOrganismo}`;
     return this.http.put<Cientifico>(url, organismo);
   }
 }

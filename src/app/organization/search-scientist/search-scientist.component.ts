@@ -129,7 +129,6 @@ export class SearchScientistComponent {
 
     this.organizationService.obtenerCientifico(orcid).subscribe(
       (response)=> {
-        console.log('Científico encontrado con éxito:', response);
 
         //Resetear el ORCID escrito
         (document.getElementById('orcidCientifico') as HTMLInputElement).value = '';

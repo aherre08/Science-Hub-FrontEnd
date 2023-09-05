@@ -36,9 +36,9 @@ export class HelpFaqComponent {
     this.setupAccordionListeners();
 
     
-    if(this.userService.getOrcid() != ''){ // Es científico
+    if(this.userService.getOrcid() != ''){ 
       this.esCientifico = true;
-    }else{ // Es organismo
+    }else{
       this.esCientifico = false;
     }
 

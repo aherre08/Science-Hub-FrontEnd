@@ -181,7 +181,6 @@ export class MyProjectsComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Proyecto eliminado con éxito.');
                 window.location.reload();
               }
             });

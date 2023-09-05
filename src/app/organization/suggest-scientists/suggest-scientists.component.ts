@@ -148,7 +148,6 @@ export class SuggestScientistsComponent {
     
     this.organizationService.recomendarCientificos(idProyecto).subscribe(
       (response: any) => {
-        console.log(response);
         this.encontrados = true;
         this.buscados = true;
         this.cientificos = response.content;
@@ -178,7 +177,6 @@ export class SuggestScientistsComponent {
     
     this.organizationService.recomendarCientificos(searchTerm).subscribe(
       (response: any) => {
-        console.log(response);
         this.encontrados = true;
         this.buscados = true;
         this.cientificos = response.content;

@@ -44,9 +44,9 @@ export class LoginComponent implements OnInit {
       
       this.accountService.obtenerProyectoAsociadoACientifico(orcid).subscribe(
         (proyectoObtenido: Proyecto) => {
-          console.log("PROYECTO OBTENIDO:", proyectoObtenido);
+          
           this.userService.setIdProject(proyectoObtenido.id);
-          console.log("IDPROJECT GUARDADO ---->" + this.userService.getIdProject());
+          
         },
         error => {
           console.error('Error al obtener el proyecto:', error);
@@ -104,7 +104,6 @@ export class LoginComponent implements OnInit {
 
       this.accountService.login(email, password).subscribe(
         async (response: LoginResponse) => {
-          console.log("Respuesta recibida: ", response);
   
            // Científico u Organismo
             const userType = response.userType;
@@ -115,7 +114,7 @@ export class LoginComponent implements OnInit {
               this.userService.setUserId(idUser);
             
               try {
-                const response = await fetch('http://localhost:8080/api/project/cientifico/' + idUser, {
+                const response = await fetch('http://localhost:8080/api/searchProject/scientist/' + idUser, {
                   method: 'GET',
                   headers: {
                     'Content-Type': 'application/json'
@@ -125,7 +124,6 @@ export class LoginComponent implements OnInit {
                 if (response.ok) {
                   
                   const data = await response.json();
-                  console.log('Respuesta del servidor:', data);
                   
                   // Reset de atributos de Organismo
                   this.userService.setOrgId('');
@@ -160,7 +158,7 @@ export class LoginComponent implements OnInit {
               this.userService.setUserId(idUser);
     
               try {
-                const response = await fetch('http://localhost:8080/api/project/organismo/' + idUser, {
+                const response = await fetch('http://localhost:8080/api/searchProject/organization/' + idUser, {
                   method: 'GET',
                   headers: {
                     'Content-Type': 'application/json'
@@ -170,7 +168,6 @@ export class LoginComponent implements OnInit {
                 if (response.ok) {
                   
                   const data = await response.json();
-                  console.log('Respuesta del servidor:', data);
                   
                   //Reset de los atributos de Científico
                   this.userService.setOrcid('');

@@ -481,7 +481,7 @@ tr:hover {
 
 }
 
-/*Estilos para Tablets (772px X 776px, Zoom: 75%)*/
+/*Estilos para Tablets (772px X 776px)*/
 @media (max-width: 772px) and (max-height:776px) {
     .header {
         width: 772px;

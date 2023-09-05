@@ -40,7 +40,6 @@ export class MyProjectComponent {
         if(this.projectId == 0){this.encontrado = false;}
         else{
           this.encontrado = true;
-          console.log(data);
           
           this.tituloProyecto = data.title;
           this.descripcionProyecto = data.description;
@@ -146,7 +145,7 @@ export class MyProjectComponent {
       if (result.isConfirmed) {
         this.scientistService.dejarDeParticiparEnProyecto(orcid, this.projectId).subscribe(
           (response) => {
-            console.log("EL CIENTIFICO CON ORCID: " + orcid + "DEJA DE PARTICIPAR EN EL PROYECTO " + this.projectId);
+            
             this.userService.setIdProject(0);
             this.userService.setAvailable(true);
 

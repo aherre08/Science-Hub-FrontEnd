@@ -185,7 +185,6 @@ export class ListUsersComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Científico eliminado con éxito.');
                 window.location.reload();
               }
             });
@@ -224,7 +223,6 @@ export class ListUsersComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Organismo eliminado con éxito.');
                 window.location.reload();
               }
             });
@@ -264,7 +262,6 @@ export class ListUsersComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Científico reactivado con éxito.');
                 window.location.reload();
               }
             });
@@ -303,7 +300,6 @@ export class ListUsersComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Organismo reactivado con éxito.');
                 window.location.reload();
               }
             });

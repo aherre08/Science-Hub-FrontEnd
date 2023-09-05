@@ -130,7 +130,6 @@ export class SearchPublicationComponent {
 
     this.scientistService.obtenerPublicacion(idPublicacion).subscribe(
       (response)=> {
-        console.log('Publicación encontrada con éxito:', response);
         (document.getElementById('idPublicacion') as HTMLInputElement).value = '';
 
         // Actualizar los elementos <span> con la información de la publicación

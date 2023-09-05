@@ -374,7 +374,7 @@ hr {
     }
 }
 
-/*Estilos para Portátiles estándar (1024px X 776px, Zoom: 75%)*/
+/*Estilos para Portátiles estándar (1024px X 776px)*/
 @media (max-width: 1024px) and (max-height:776px) {
     .header {
         width: 1024px;

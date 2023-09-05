@@ -43,7 +43,7 @@ export class EditUserComponent {
         this.userId = parseInt(userId);
 
         this.adminService.obtenerCientifico(parseInt(userId)).subscribe(data => {
-          console.log(data);
+          
           this.orcid = data.orcid;
           this.userUuid = data.userUuid;
           this.name = data.name;
@@ -174,9 +174,6 @@ export class EditUserComponent {
       active: this.active
     }
     
-
-    console.log("EL CIENTIFICO EDITADO ES:", JSON.stringify(nuevoCientifico, null, 2));
-
     Swal.fire({
       icon: 'question',
       title: '¿Seguro que quieres editar este científico?',
@@ -187,7 +184,7 @@ export class EditUserComponent {
       if (result.isConfirmed) {
         this.adminService.editarCientifico(this.userId, nuevoCientifico ).subscribe(
           (data: any) => {
-            console.log("Se ha editado el científico satisfactoriamente");
+  
             Swal.fire({
               icon: 'success',
               title: '¡Científico editado con éxito!',
@@ -233,9 +230,6 @@ export class EditUserComponent {
       area: this.area,
       active: this.active
     }
-    
-
-    console.log("EL ORGANISMO EDITADO ES:", JSON.stringify(nuevoOrganismo, null, 2));
 
     Swal.fire({
       icon: 'question',
@@ -247,7 +241,7 @@ export class EditUserComponent {
       if (result.isConfirmed) {
         this.adminService.editarOrganismo(this.userId, nuevoOrganismo ).subscribe(
           (data: any) => {
-            console.log("Se ha editado el organismo satisfactoriamente");
+  
             Swal.fire({
               icon: 'success',
               title: '¡Organismo editado con éxito!',

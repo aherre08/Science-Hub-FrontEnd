@@ -41,8 +41,6 @@ export class EditProjectComponent {
 
         this.adminService.obtenerProyecto(parseInt(projectId)).subscribe(data => {
           
-          console.log(data);
-          
           this.tituloProyecto = data.title;
           this.idOrganization = data.idOrganization;
           this.descripcionProyecto = data.description;
@@ -223,8 +221,6 @@ export class EditProjectComponent {
       updateLife: ""
     }
 
-    console.log("EL PROYECTO EDITADO ES:", JSON.stringify(nuevoProyecto, null, 2));
-
     Swal.fire({
       icon: 'question',
       title: '¿Seguro que quieres editar este proyecto?',
@@ -235,7 +231,7 @@ export class EditProjectComponent {
       if (result.isConfirmed) {
         this.adminService.editarProyecto(this.projectId, nuevoProyecto ).subscribe(
           (data: Proyecto) => {
-            console.log("Se ha editado el proyecto satisfactoriamente");
+  
             Swal.fire({
               icon: 'success',
               title: '¡Proyecto editado con éxito!',

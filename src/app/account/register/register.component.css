@@ -248,7 +248,7 @@ input[type="radio"]:checked+label {
     width: 253px;
 }
 
-/* Media queries para pantallas más pequeñas */
+
 @media (max-width: 595px) {
 
     .card {

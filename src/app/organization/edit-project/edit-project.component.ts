@@ -212,8 +212,6 @@ export class EditProjectComponent {
       updateLife: ""
     }
 
-    console.log("EL PROYECTO EDITADO ES:", JSON.stringify(nuevoProyecto, null, 2));
-
     Swal.fire({
       icon: 'question',
       title: '¿Seguro que quieres editar este proyecto?',
@@ -224,7 +222,6 @@ export class EditProjectComponent {
       if (result.isConfirmed) {
         this.organizationService.editarProyecto(this.projectId, nuevoProyecto ).subscribe(
           (data: Proyecto) => {
-            console.log("Se ha editado el proyecto satisfactoriamente");
             Swal.fire({
               icon: 'success',
               title: '¡Proyecto editado con éxito!',

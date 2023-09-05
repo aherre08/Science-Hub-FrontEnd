@@ -101,9 +101,7 @@ export class ListPublicationsComponent {
   cargarPublicaciones() {
     this.adminService.obtenerTodasPublicaciones().subscribe(
       (data: any) => {
-        console.log(data.content);
         this.publicaciones = data.content;
-        console.log(this.publicaciones);
       },
       error => {
         console.error('Error al obtener las publicaciones:', error);
@@ -181,7 +179,6 @@ export class ListPublicationsComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Publicación eliminada con éxito.');
                 window.location.reload();
               }
             });
@@ -220,7 +217,6 @@ export class ListPublicationsComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Publicación reactivada con éxito.');
                 window.location.reload();
               }
             });

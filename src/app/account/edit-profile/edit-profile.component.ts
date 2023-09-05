@@ -26,9 +26,9 @@ export class EditProfileComponent {
     this.setupAccordionListeners();
 
     
-    if(this.userService.getOrcid() != ''){ // Es científico
+    if(this.userService.getOrcid() != ''){ 
       this.esCientifico = true;
-    }else{ // Es organismo
+    }else{ 
       this.esCientifico = false;
     }
 
@@ -129,8 +129,6 @@ export class EditProfileComponent {
         active: true
       };
   
-      console.log("EL CIENTIFICO EDITADO ES:", JSON.stringify(cientificoEditado, null, 2));
-  
       Swal.fire({
         icon: 'question',
         title: '¿Seguro que quieres editar tu perfil?',
@@ -143,7 +141,7 @@ export class EditProfileComponent {
             () => {
               this.userService.setName(nombre);
               this.userService.setProfession(profesion);
-              console.log("Se ha editado el perfil satisfactoriamente");
+              
               Swal.fire({
                 icon: 'success',
                 title: '¡Perfil editado con éxito!',
@@ -191,8 +189,6 @@ export class EditProfileComponent {
         active: true
       };
   
-      console.log("EL ORGANISMO EDITADO ES:", JSON.stringify(organismoEditado, null, 2));
-  
       Swal.fire({
         icon: 'question',
         title: '¿Seguro que quieres editar tu perfil?',
@@ -205,7 +201,7 @@ export class EditProfileComponent {
             () => {
               this.userService.setName(nombre);
               this.userService.setLocation(localidad);
-              console.log("Se ha editado el perfil satisfactoriamente");
+  
               Swal.fire({
                 icon: 'success',
                 title: '¡Perfil editado con éxito!',

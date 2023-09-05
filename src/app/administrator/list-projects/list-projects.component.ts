@@ -178,7 +178,6 @@ export class ListProjectsComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Proyecto eliminado con éxito.');
                 window.location.reload();
               }
             });
@@ -217,7 +216,6 @@ export class ListProjectsComponent {
               confirmButtonText: 'Vale'
             }).then((result) => {
               if (result.isConfirmed) {
-                console.log('Proyecto reactivado con éxito.');
                 window.location.reload();
               }
             });
